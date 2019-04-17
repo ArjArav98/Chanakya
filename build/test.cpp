@@ -1,6 +1,7 @@
 #include<iostream>
-#include"../src/mrcricket"
 using namespace std;
+
+#include"../src/strings.h"
 
 int main() {
 	String string = "Hello World!";
