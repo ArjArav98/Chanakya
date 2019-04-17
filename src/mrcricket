@@ -1,0 +1,5 @@
+#include<iostream>
+using namespace std;
+
+#include"strings"
+using namespace mrcricket::strings;
