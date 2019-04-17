@@ -6,6 +6,11 @@ class String {
 	bool allocated;
 
 public:
+
+	/*==============================*/
+	/* CONSTRUCTORS AND DESTRUCTORS */
+	/*==============================*/
+
 	String() {
 		string = NULL;
 		allocated = false;
@@ -16,23 +21,34 @@ public:
 		allocated = false;
 	}
 
+	~String() {
+		eraseString();
+	}
+
+	/*================*/
 	/* PUBLIC METHODS */
+	/*================*/
 
 	int length() {
 		return getLength(string);
 	}
 
+	/*----------------------*/
 	/* OPERATOR OVERLOADING */
+	/*----------------------*/
 
+	/* Operator overloading for = operator. */
 	void operator =(const char* passedString) {
 		eraseString();
 		string = (char*) passedString;
 	}
 
+	/* Operator overloading for the [] operator. */
 	char operator [](int index) {
 		return string[index];
 	}
 
+	/* Operator overloading for the == operator. */
 	bool operator ==(const char* passedString) {
 		
 		//We first get the length of the first string.
@@ -53,6 +69,7 @@ public:
 
 	}
 
+	/* Second operator overloading for the == operator. The parameter is a String.*/
 	bool operator ==(String str) {
 	
 		//We first get the length of the first string.
@@ -76,7 +93,13 @@ public:
 	friend ostream &operator <<(ostream &out, String &str);
 	friend istream &operator >>(istream &in, String &str);
 
+	/*=================*/
 	/* PRIVATE METHODS */
+	/*=================*/
+
+	/*-----------------*/
+	/* Utility Methods */
+	/*-----------------*/
 
 	int getLength(char* string) {
 
@@ -94,6 +117,11 @@ public:
 
 };
 
+/*--------------------------------------*/
+/* Operator Overload - Friend Functions */
+/*--------------------------------------*/
+
+/* Operator overload for the << operator. */
 ostream &operator <<(ostream &out, String &str) {
 
 	for(int iter=0; iter<str.length(); iter++) {
@@ -104,6 +132,7 @@ ostream &operator <<(ostream &out, String &str) {
 
 }
 
+/* Operator overload for the >> operator. */
 istream &operator >>(istream &in, String &str) {
 
 	char* new_str = new char[STRSIZE];
