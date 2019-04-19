@@ -7,11 +7,6 @@ public:
 		next = NULL;
 	}
 
-	Node(String passedValue) {
-		value = passedValue;
-		next = NULL;
-	}
-
 	bool isNotLast() {
 		if(next == NULL) return false;
 		else return true;
@@ -51,19 +46,22 @@ public:
 	/* Add given value to end of list. */
 	void add(String value) {
 		Node* temp = new Node;
+		temp->value = *value;
+
+		Node* pos = head;
+		while(pos->next!=NULL) pos=pos->next;
+		pos->next = temp;
+	}
+
+	void add(const char* value) {
+		Node* temp = new Node;
 		temp->value = value;
 
 		Node* pos = head;
 		while(pos->next!=NULL) pos=pos->next;
-
 		pos->next = temp;
 	}
 
-	/* Overload previous function if a char* string is passed. */
-	void add(const char* value) {
-		String temp = value;
-		add(temp);
-	}
 
 	/* Searches for given value in list of keywords. */
 	Node* search(String value) {

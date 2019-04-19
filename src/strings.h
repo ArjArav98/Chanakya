@@ -17,8 +17,11 @@ public:
 	}
 
 	String(const char* passedString) {
-		string = (char*) passedString;
-		allocated = false;
+		int len = getLength((char*) passedString), iter;
+		string = new char[len];
+		
+		for(iter=0; iter<len; iter++) string[iter] = passedString[iter];
+		allocated = true;
 	}
 
 	~String() {
@@ -40,7 +43,12 @@ public:
 	/* Operator overloading for = operator. */
 	void operator =(const char* passedString) {
 		eraseString();
-		string = (char*) passedString;
+
+		int len = getLength((char*) passedString), iter;
+		string = new char[len];
+		
+		for(iter=0; iter<len; iter++) string[iter] = passedString[iter];
+		allocated = true;
 	}
 
 	/* Operator overloading for = operator with String parameter. */
@@ -122,8 +130,9 @@ public:
 
 	void eraseString() {
 		if(allocated == true) {
-			delete string;
 			allocated = false;
+			delete string;
+			string = NULL;
 		}
 	}
 

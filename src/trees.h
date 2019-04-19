@@ -42,20 +42,23 @@ public:
 
 	/* We add a node with the given characteristics to a specified parent node. */
 	void add(String parentId, String id, String value, Keywords keywords) {
-
+		cout<<"this is workkkinnggg\n";
 		/* We first create a new node. */
 		TreeNode* temp = new TreeNode;
 		
 		temp->id = id;
 		temp->value = value;
+		cout<<"this is working\n";
 		temp->keywords.copy(keywords);
 
+		cout<<"this is working1234\n";
 		/* We then 'get' the specified parent node. */
 		TreeNode* parent = getNode(parentId);
-	
+		cout<<"this is working2\n";
+		
 		/* If the parent doesn't exist, we come out of the func. */
 		if(parent == NULL) return;
-
+		
 		/* We check for children and then add the child node. */
 		if(parent->children == NULL) {
 			parent->children = temp;
@@ -98,7 +101,7 @@ private:
 	void thanosSnap(TreeNode* root) {
 		if(root->children != NULL) thanosSnap(root->children);
 		if(root->next != NULL) thanosSnap(root->next);
-		
+	
 		delete root;
 	}
 	
