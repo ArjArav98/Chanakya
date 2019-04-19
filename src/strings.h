@@ -43,6 +43,17 @@ public:
 		string = (char*) passedString;
 	}
 
+	/* Operator overloading for = operator with String parameter. */
+	void operator =(String passedString) {
+		eraseString();
+
+		int len = passedString.length();
+		string = new char[len];
+		int iter;
+
+		for(iter=0; iter<len; iter++) string[iter] = passedString[iter]; 
+	}
+
 	/* Operator overloading for the [] operator. */
 	char operator [](int index) {
 		return string[index];

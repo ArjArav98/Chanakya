@@ -18,7 +18,13 @@ public:
 	}
 };
 
-class List {
+/*==========*/
+/* Keywords */
+/*==========*/
+
+/* Keywords is a list data-structure which holds the list of keywords. */
+
+class Keywords {
 
 	Node* head;
 	Node* current;
@@ -29,12 +35,12 @@ public:
 	/* CONSTRUCTORS AND DESTRUCTORS */
 	/*==============================*/
 
-	List() {
+	Keywords() {
 		head = new Node;
 		current = head;
 	}
 
-	~List() {
+	~Keywords() {
 		thanosSnap();
 		head = new Node;
 	}
@@ -53,6 +59,20 @@ public:
 		while(pos->next!=NULL) pos=pos->next;
 
 		pos->next = temp;
+
+	}
+
+	/* Searches for given value in list of keywords. */
+	Node* search(String value) {
+
+		Node* pos = head->next;
+
+		while(pos!=NULL) {
+			if(pos->value == value) return pos;
+			pos = pos->next;
+		}
+
+		return NULL;
 
 	}
 
