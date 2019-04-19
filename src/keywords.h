@@ -42,16 +42,14 @@ public:
 
 	~Keywords() {
 		thanosSnap();
-		head = new Node;
 	}
 
-	/*================*/
-	/* PUBLIC METHODS */
-	/*================*/
+	/*==================*/
+	/* PUBLIC FUNCTIONS */
+	/*==================*/
 
 	/* Add given value to end of list. */
 	void add(String value) {
-
 		Node* temp = new Node;
 		temp->value = value;
 
@@ -59,7 +57,12 @@ public:
 		while(pos->next!=NULL) pos=pos->next;
 
 		pos->next = temp;
+	}
 
+	/* Overload previous function if a char* string is passed. */
+	void add(const char* value) {
+		String temp = value;
+		add(temp);
 	}
 
 	/* Searches for given value in list of keywords. */
@@ -74,6 +77,16 @@ public:
 
 		return NULL;
 
+	}
+
+	void copy(Keywords keywords) {
+		thanosSnap();
+		head = new Node;
+
+		while(keywords.iterates()) {
+			String value = keywords.currentValue();
+			add(value);
+		}
 	}
 
 	/*---------------------*/
@@ -95,11 +108,12 @@ public:
 	String currentValue() {
 		return current->value;	
 	}
-
+	
 	/*------------------*/
 	/* Utility Functions*/
 	/*------------------*/
 
+private:
 	/* Destroys and erases all nodes. */
 	void thanosSnap() {
 		while(head!=NULL) {
@@ -107,6 +121,7 @@ public:
 			head = head->next;
 			delete temp;
 		}
+		current = head = NULL;
 	}
 
 };

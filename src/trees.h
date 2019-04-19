@@ -1,25 +1,9 @@
-#include<iostream>
-using namespace std;
-
-#include"strings.h"
-#include"lists.h"
-
-//We need to remove this before we make this into a library.
-
-// The tree must have these following things
-// A unique name (string)
-// value (only if lead node)
-// leaf node or not (boolean)
-// A list of keywords with which to identify it
-// A list of children which might lead to other branches
-
 class TreeNode {
 
 public:
 	String id;
 	String value;
 
-	bool isLeaf;
 	Keywords keywords;
 	
 	TreeNode* children;
@@ -57,15 +41,14 @@ public:
 	/*==================*/
 
 	/* We add a node with the given characteristics to a specified parent node. */
-	void add(String parentId, String id, String value, bool isLeaf, Keywords keywords) {
+	void add(String parentId, String id, String value, Keywords keywords) {
 
 		/* We first create a new node. */
 		TreeNode* temp = new TreeNode;
 		
 		temp->id = id;
 		temp->value = value;
-		temp->isLeaf = isLeaf;
-		temp->keywords = keywords;
+		temp->keywords.copy(keywords);
 
 		/* We then 'get' the specified parent node. */
 		TreeNode* parent = getNode(parentId);
@@ -88,10 +71,6 @@ public:
 
 private:
 
-	/*===================*/
-	/* PRIVATE FUNCTIONS */
-	/*===================*/
-
 	/*-------------------*/
 	/* Utility Functions */
 	/*-------------------*/
@@ -102,11 +81,11 @@ private:
 		TreeNode* current = root;
 
 		if(current->id == id) return current;
-		else if(current->children != NULL) {
+		if(current->children != NULL) {
 			TreeNode* temp = getNode(current->children->id);
 			if(temp != NULL) return temp;
 		}
-		else if(current->next != NULL) {
+		if(current->next != NULL) {
 			TreeNode* temp = getNode(current->next->id);
 			if(temp != NULL) return temp;
 		}
@@ -118,18 +97,10 @@ private:
 	/* We destroy all the nodes in the tree. */
 	void thanosSnap(TreeNode* root) {
 		if(root->children != NULL) thanosSnap(root->children);
-		else if(root->next != NULL) thanosSnap(root->next);
-		else delete root;
+		if(root->next != NULL) thanosSnap(root->next);
+		
+		delete root;
 	}
 	
 
 };
-
-int main() {	
-
-	Tree tree;
-
-	cout<<tree
-
-	return 0;
-}

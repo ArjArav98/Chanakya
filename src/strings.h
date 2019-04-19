@@ -49,8 +49,9 @@ public:
 
 		int len = passedString.length();
 		string = new char[len];
-		int iter;
+		allocated = true;
 
+		int iter;
 		for(iter=0; iter<len; iter++) string[iter] = passedString[iter]; 
 	}
 
