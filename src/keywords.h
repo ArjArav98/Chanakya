@@ -1,6 +1,6 @@
 class Node {
 public:
-	String value;
+	string value;
 	Node* next;
 
 	Node() {
@@ -44,16 +44,7 @@ public:
 	/*==================*/
 
 	/* Add given value to end of list. */
-	void add(String value) {
-		Node* temp = new Node;
-		temp->value = *value;
-
-		Node* pos = head;
-		while(pos->next!=NULL) pos=pos->next;
-		pos->next = temp;
-	}
-
-	void add(const char* value) {
+	void add(string value) {
 		Node* temp = new Node;
 		temp->value = value;
 
@@ -62,9 +53,8 @@ public:
 		pos->next = temp;
 	}
 
-
 	/* Searches for given value in list of keywords. */
-	Node* search(String value) {
+	Node* search(string value) {
 
 		Node* pos = head->next;
 
@@ -82,7 +72,7 @@ public:
 		head = new Node;
 
 		while(keywords.iterates()) {
-			String value = keywords.currentValue();
+			string value = keywords.currentValue();
 			add(value);
 		}
 	}
@@ -103,7 +93,7 @@ public:
 		}
 	}
 
-	String currentValue() {
+	string currentValue() {
 		return current->value;	
 	}
 	
@@ -111,12 +101,12 @@ public:
 	/* Utility Functions*/
 	/*------------------*/
 
-private:
 	/* Destroys and erases all nodes. */
 	void thanosSnap() {
 		while(head!=NULL) {
 			Node* temp = head;
 			head = head->next;
+			cout<<"this is the keyword --> "<<(void*)temp<<endl;
 			delete temp;
 		}
 		current = head = NULL;

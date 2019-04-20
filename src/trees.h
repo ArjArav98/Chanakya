@@ -1,10 +1,10 @@
 class TreeNode {
 
 public:
-	String id;
-	String value;
+	string id;
+	string value;
 
-	Keywords keywords;
+	Keywords* keywords;
 	
 	TreeNode* children;
 	TreeNode* next;
@@ -12,6 +12,11 @@ public:
 	TreeNode() {
 		children = NULL;
 		next = NULL;
+		keywords = new Keywords;
+	}
+
+	~TreeNode(){
+		delete keywords;
 	}
 
 };
@@ -41,20 +46,16 @@ public:
 	/*==================*/
 
 	/* We add a node with the given characteristics to a specified parent node. */
-	void add(String parentId, String id, String value, Keywords keywords) {
-		cout<<"this is workkkinnggg\n";
+	void add(string parentId, string id, string value, Keywords* keywords) {
 		/* We first create a new node. */
 		TreeNode* temp = new TreeNode;
 		
 		temp->id = id;
 		temp->value = value;
-		cout<<"this is working\n";
-		temp->keywords.copy(keywords);
+		temp->keywords->copy(*keywords);
 
-		cout<<"this is working1234\n";
 		/* We then 'get' the specified parent node. */
 		TreeNode* parent = getNode(parentId);
-		cout<<"this is working2\n";
 		
 		/* If the parent doesn't exist, we come out of the func. */
 		if(parent == NULL) return;
@@ -79,7 +80,7 @@ private:
 	/*-------------------*/
 
 	/* We return the node with the given parent ID. */
-	TreeNode* getNode(String id) {
+	TreeNode* getNode(string id) {
 		
 		TreeNode* current = root;
 
