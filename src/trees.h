@@ -1,23 +1,13 @@
+typedef vector<string> Keywords;
+
 class TreeNode {
 
 public:
 	string id;
 	string value;
 
-	Keywords* keywords;
-	
-	TreeNode* children;
-	TreeNode* next;
-
-	TreeNode() {
-		children = NULL;
-		next = NULL;
-		keywords = new Keywords;
-	}
-
-	~TreeNode(){
-		delete keywords;
-	}
+	Keywords keywords;
+	vector<TreeNode> children;	
 
 };
 
@@ -25,20 +15,14 @@ class Tree {
 
 public:
 
-	TreeNode* root;
+	TreeNode root;
 
 	/*==============================*/
 	/* CONSTRUCTORS AND DESTRUCTORS */
 	/*==============================*/
 
 	Tree() {
-		root = new TreeNode;
-		root->id = "root";
-	}
-
-	~Tree() {
-		thanosSnap(root);
-		root = NULL;
+		root.id = "root";
 	}
 
 	/*==================*/
@@ -46,30 +30,22 @@ public:
 	/*==================*/
 
 	/* We add a node with the given characteristics to a specified parent node. */
-	void add(string parentId, string id, string value, Keywords* keywords) {
+	void add(string parentId, string id, string value, Keywords keywords) {
 		/* We first create a new node. */
-		TreeNode* temp = new TreeNode;
+		TreeNode temp;
 		
-		temp->id = id;
-		temp->value = value;
-		temp->keywords->copy(*keywords);
+		temp.id = id;
+		temp.value = value;
+		temp.keywords = keywords;
 
 		/* We then 'get' the specified parent node. */
-		TreeNode* parent = getNode(parentId);
+		TreeNode* parent = getNode(parentId, root);
 		
 		/* If the parent doesn't exist, we come out of the func. */
 		if(parent == NULL) return;
 		
-		/* We check for children and then add the child node. */
-		if(parent->children == NULL) {
-			parent->children = temp;
-		}
-		else {
-			TreeNode* pos = parent->children;
-			while(pos->next!=NULL) pos = pos->next;
-			pos->next = temp;
-		}
-
+		/* We then add the child to the children of the parent. */
+		parent->children.push_back(temp);
 	}
 
 
@@ -80,31 +56,25 @@ private:
 	/*-------------------*/
 
 	/* We return the node with the given parent ID. */
-	TreeNode* getNode(string id) {
+	TreeNode* getNode(string id, TreeNode root) {
 		
-		TreeNode* current = root;
+		if(root.id == id) {
+			TreeNode* result = &root;
+			return result;
+		}
+		else if(root.children.size() == 0);
+		else if(root.children.size() != 0) {
+	
+			int childrenLength = root.children.size();
+			for(int iter=0; iter<childrenLength; iter++) {
+				TreeNode* result = getNode(id, root.children[iter]);
+				if(result != NULL) return result;
+			}
 
-		if(current->id == id) return current;
-		if(current->children != NULL) {
-			TreeNode* temp = getNode(current->children->id);
-			if(temp != NULL) return temp;
 		}
-		if(current->next != NULL) {
-			TreeNode* temp = getNode(current->next->id);
-			if(temp != NULL) return temp;
-		}
-		
+
 		return NULL;
 
 	}
-
-	/* We destroy all the nodes in the tree. */
-	void thanosSnap(TreeNode* root) {
-		if(root->children != NULL) thanosSnap(root->children);
-		if(root->next != NULL) thanosSnap(root->next);
-	
-		delete root;
-	}
-	
 
 };
