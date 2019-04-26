@@ -45,7 +45,7 @@ public:
 	/* CONSTRUCTORS AND DESTRUCTORS */
 	/*==============================*/
 
-	Tree() {
+	InformationTree() {
 		root.id = "root";
 	}
 

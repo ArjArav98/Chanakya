@@ -3,12 +3,12 @@
 #include<vector>
 using namespace std;
 
-#include"trees.h"
+#include"infotrees.h"
 #include"stringmatcher.h"
 
 int main(){
 
-	Tree tree;
+	InformationTree tree;
 
 	tree.add("root","child","nothing");
 	tree.add("root","child1","nothing");
