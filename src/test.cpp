@@ -4,6 +4,7 @@
 using namespace std;
 
 #include"trees.h"
+#include"stringmatcher.h"
 
 int main(){
 

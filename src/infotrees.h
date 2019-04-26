@@ -35,7 +35,7 @@ public:
 	}
 };
 
-class Tree {
+class InformationTree {
 
 public:
 
