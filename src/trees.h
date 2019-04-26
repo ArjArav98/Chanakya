@@ -1,14 +1,16 @@
-typedef vector<string> Keywords;
-
 class TreeNode {
-
 public:
 	string id;
 	string value;
 
-	Keywords keywords;
+	vector<string> keywords;
 	vector<TreeNode> children;	
 
+	TreeNode() {}
+
+	TreeNode(string passed_id) {
+		id = passed_id;
+	}
 };
 
 class Tree {
@@ -30,22 +32,19 @@ public:
 	/*==================*/
 
 	/* We add a node with the given characteristics to a specified parent node. */
-	void add(string parentId, string id, string value, Keywords keywords) {
+	void add(string parentId, string id, string value) {
 		/* We first create a new node. */
-		TreeNode temp;
-		
-		temp.id = id;
+		TreeNode temp(id);
 		temp.value = value;
-		temp.keywords = keywords;
 
 		/* We then 'get' the specified parent node. */
-		TreeNode* parent = getNode(parentId, root);
+		TreeNode parent = getNode(parentId, root);
 		
 		/* If the parent doesn't exist, we come out of the func. */
-		if(parent == NULL) return;
+		if(parent.id == "NODE_IS_NULL") return;
 		
 		/* We then add the child to the children of the parent. */
-		parent->children.push_back(temp);
+		parent.children.push_back(temp);
 	}
 
 
@@ -56,24 +55,24 @@ private:
 	/*-------------------*/
 
 	/* We return the node with the given parent ID. */
-	TreeNode* getNode(string id, TreeNode root) {
+	TreeNode getNode(string id, TreeNode root) {
 		
 		if(root.id == id) {
-			TreeNode* result = &root;
-			return result;
+			return root;
 		}
 		else if(root.children.size() == 0);
 		else if(root.children.size() != 0) {
 	
 			int childrenLength = root.children.size();
 			for(int iter=0; iter<childrenLength; iter++) {
-				TreeNode* result = getNode(id, root.children[iter]);
-				if(result != NULL) return result;
+				TreeNode result = getNode(id, root.children[iter]);
+				if(result.id != "NODE_IS_NULL") return result;
 			}
 
 		}
 
-		return NULL;
+		TreeNode temp("NODE_IS_NULL");
+		return temp;
 
 	}
 

@@ -9,11 +9,7 @@ int main(){
 
 	Tree tree;
 
-	Keywords keywords;
-	string name="arjun";
-	keywords.push_back(name);
-
-	tree.add("root","child","nothing",keywords);
+	tree.add("root","child","nothing");
 
 	return 0;
 }
