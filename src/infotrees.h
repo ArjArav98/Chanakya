@@ -53,11 +53,10 @@ public:
 	/* USER FUNCTIONS */
 	/*================*/
 
-	/* We add a node with the given characteristics to a specified parent node. */
-	void add(string parentId, string id, string value) {
+	/* Creates a node with given id and adds to given parent node. */
+	void add(string parentId, string id) {
 		/* We first create a new node. */
 		TreeNode temp(id);
-		temp.value = value;
 
 		/* We then 'get' the specified parent node. */
 		TreeNode* parent = getNode(parentId, root);
@@ -67,6 +66,14 @@ public:
 	
 		/* We then add the child to the children of the parent. */
 		parent->children.push_back(temp);
+	}
+
+	/* Sets value to node with given id. */
+	void setValue(string id, string value) {
+		TreeNode* parent = getNode(id,root);
+		if(parent == NULL) return;
+
+		parent->value = value;
 	}
 
 	/*-------------------*/
