@@ -16,15 +16,6 @@ public:
 		id = passed_id;
 	}
 
-	/*================*/
-	/* USER FUNCTIONS */
-	/*================*/
-
-	/* Adds a keyword to the keywords vector. */
-	void addKeyword(string keyword) {
-		keywords.push_back(keyword);
-	}
-
 	/*--------------------*/
 	/* OPERATOR OVERLOADS */
 	/*--------------------*/
@@ -70,10 +61,18 @@ public:
 
 	/* Sets value to node with given id. */
 	void setValue(string id, string value) {
-		TreeNode* parent = getNode(id, &root);
-		if(parent == NULL) return;
+		TreeNode* node = getNode(id, &root);
+		if(node == NULL) return;
 
-		parent->value = value;
+		node->value = value;
+	}
+
+	/* Adds a keyword to the node. */
+	void addKeyword(string id, string keyword) {
+		TreeNode* node = getNode(id, &root);
+		if(node == NULL) return;
+
+		node->keywords.push_back(keyword);
 	}
 
 	/*-------------------*/
@@ -114,6 +113,16 @@ public:
 		}
 
 		if(len != 0) cout<<"\b\b.\n\n";
+
+		cout<<"The keywords are :- ";
+		int len1 = passed_root.keywords.size();
+		if(len1 == 0) cout<<"none.\n\n";
+		
+		for(int iter=0; iter<len1; iter++) {
+			cout<<passed_root.keywords[iter]<<", ";
+		}
+
+		if(len1 != 0) cout<<"\b\b.\n\n";
 
 		for(int iter=0; iter<len; iter++) {
 			print(passed_root.children[iter]);
