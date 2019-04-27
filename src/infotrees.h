@@ -59,7 +59,7 @@ public:
 		TreeNode temp(id);
 
 		/* We then 'get' the specified parent node. */
-		TreeNode* parent = getNode(parentId, root);
+		TreeNode* parent = getNode(parentId, &root);
 
 		/* If the parent doesn't exist, we come out of the func. */
 		if(parent == NULL) return;
@@ -70,7 +70,7 @@ public:
 
 	/* Sets value to node with given id. */
 	void setValue(string id, string value) {
-		TreeNode* parent = getNode(id,root);
+		TreeNode* parent = getNode(id, &root);
 		if(parent == NULL) return;
 
 		parent->value = value;
@@ -81,19 +81,17 @@ public:
 	/*-------------------*/
 
 	/* We return the node with the given parent ID. */
-	TreeNode* getNode(string id, TreeNode passed_root) {
+	TreeNode* getNode(string id, TreeNode* passed_root) {
 		
-		TreeNode temp_root = passed_root;
-
-		if(temp_root.id == id) {
-			return &temp_root;
+		if(passed_root->id == id) {
+			return passed_root;
 		}
-		else if(temp_root.children.size() == 0);
-		else if(temp_root.children.size() != 0) {
+		else if(passed_root->children.size() == 0);
+		else if(passed_root->children.size() != 0) {
 	
-			int childrenLength = temp_root.children.size();
+			int childrenLength = passed_root->children.size();
 			for(int iter=0; iter<childrenLength; iter++) {
-				TreeNode* result = getNode(id, temp_root.children[iter]);
+				TreeNode* result = getNode(id, &passed_root->children[iter]);
 				if(result != NULL) return result;
 			}
 

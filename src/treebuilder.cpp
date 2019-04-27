@@ -1,7 +1,7 @@
 #include<iostream>
-#include<fstream>
 #include<string>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 #include"infotrees.h"
@@ -37,7 +37,6 @@ public:
 			}
 
 		}
-		infotree.print(infotree.root);
 
 	}
 
