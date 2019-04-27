@@ -36,8 +36,8 @@ public:
 				infotree.setValue(current_node,value);
 			}
 
-
 		}
+		infotree.print(infotree.root);
 
 	}
 

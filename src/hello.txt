@@ -2,10 +2,6 @@ dad < root
 sister < root
 mom < root
 
-dad = aravind
-mom = meera
-sister = aishu
-
 dad.age < dad
 mom.age < mom
 sister.age < sister

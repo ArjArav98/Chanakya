@@ -63,7 +63,7 @@ public:
 
 		/* If the parent doesn't exist, we come out of the func. */
 		if(parent == NULL) return;
-	
+		
 		/* We then add the child to the children of the parent. */
 		parent->children.push_back(temp);
 	}
@@ -83,15 +83,17 @@ public:
 	/* We return the node with the given parent ID. */
 	TreeNode* getNode(string id, TreeNode passed_root) {
 		
-		if(passed_root.id == id) {
-			return &root;
+		TreeNode temp_root = passed_root;
+
+		if(temp_root.id == id) {
+			return &temp_root;
 		}
-		else if(passed_root.children.size() == 0);
-		else if(passed_root.children.size() != 0) {
+		else if(temp_root.children.size() == 0);
+		else if(temp_root.children.size() != 0) {
 	
-			int childrenLength = passed_root.children.size();
+			int childrenLength = temp_root.children.size();
 			for(int iter=0; iter<childrenLength; iter++) {
-				TreeNode* result = getNode(id, passed_root.children[iter]);
+				TreeNode* result = getNode(id, temp_root.children[iter]);
 				if(result != NULL) return result;
 			}
 
