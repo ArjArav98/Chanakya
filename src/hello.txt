@@ -1,9 +1,0 @@
-mom < root
-dad < root
-sister = root
-
-mom < root
-
-dad : root root root ~~
-
-sister = hello
