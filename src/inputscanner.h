@@ -1,28 +1,30 @@
-#include<iostream>
-#include<string>
-#include<vector>
-using namespace std;
-
 class InputScanner {
 
-public:
+	/* Removes punctuation and redundant spaces in the string. */
 	string removePunctuation(string original_question) {
 		string new_question;
 		int originalLen = original_question.length();
 
 		for(int iter=0; iter<originalLen; iter++) {
 			char current = original_question[iter];
-
-			if(current >= '!' && current <= '/') break;
-			else if(current >= ':' && current <= '@') break;
-			else if(current >= '[' && current <= '`') break;
-			else if(current >= '{' && current <= '~') break;
+	
+			/* We remove punctuation and redundant spaces. */
+			if(current == ' ' && original_question[iter-1] == ' ');
+			else if(current >= '!' && current <= '/');
+			else if(current >= ':' && current <= '@');
+			else if(current >= '[' && current <= '`');
+			else if(current >= '{' && current <= '~');
 			else new_question.push_back(current);
 		}
 
 		return new_question;
 	}
 
+	/*===================*/
+	/* UTILITY FUNCTIONS */
+	/*===================*/
+
+	/* Removes leading and trailing whitespaces from strings. */
 	string trimString(string original_question) {
 		string new_string;
 		int originalLen = original_question.length();
@@ -33,18 +35,25 @@ public:
 		if(leadingSpaceExists || trailingSpaceExists) {
 			
 			for(int iter=0; iter<originalLen; iter++) {
-				if(iter!=0 && iter!=(originalLen-1)) {
-					new_string.push_back( original_question[iter] );
-				}
 				if(iter==0 && leadingSpaceExists) continue;
 				else if(iter==(originalLen-1) && trailingSpaceExists) continue;
+				else new_string.push_back( original_question[iter] );
 			}
 
-		}
+			return new_string;
 
-		return new_string;
+		}
+		else return original_question;
+
 	}
 
+public:
+
+	/*================*/
+	/* USER FUNCTIONS */
+	/*================*/
+
+	/* Gets the string and then splits it into a vector of words. */
 	vector<string> getLine(string statement) {
 		
 		string question;
@@ -54,9 +63,9 @@ public:
 		getline(cin, question);
 
 		if(question.empty()) return questionSplit;
-		
+	
+		question.assign(trimString(question));
 		question.assign(removePunctuation(question));
-		//question.assign(trimString(question));
 
 		int start=0, len=question.length();
 
@@ -75,16 +84,3 @@ public:
 	}
 
 };
-
-int main(){ 
-
-	InputScanner in;
-	vector<string> words = in.getLine("Question --> ");
-	
-	int len = words.size();
-
-	for(int iter=0; iter<len; iter++)
-		cout<<words[iter]<<endl;
-
-	return 0;
-}
