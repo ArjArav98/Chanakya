@@ -12,8 +12,11 @@ using namespace std;
 #include"../include/treebuilder.h"
 #include"../include/inputvalidate.h"
 #include"../include/inputscanner.h"
+#include"../include/utilities.h"
 
 int main(){
+
+	
 
 	return 0;
 }
