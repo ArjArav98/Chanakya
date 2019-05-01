@@ -15,8 +15,8 @@ private:
 	/* FUNCTIONS */
 	/*===========*/
 
-	/* Each line is matched to 3 RegExps and is invalid if even one doesn't  match. */
-	/* If even one line is invalid, this function returns false. */
+	/* Each line is matched to 3 RegExps and is valid if even one matches. */
+	/* If even one line is valid, this function returns true. */
 	bool linesAreValid() {
 
 		fstream file(filename);

@@ -56,6 +56,7 @@ public:
 
 		}
 
+		file.close();
 		return infotree;
 
 	}
