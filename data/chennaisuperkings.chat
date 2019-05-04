@@ -1,0 +1,47 @@
+matches < root
+team < root
+
+matches : who|whom motm man match highest kkr rcb srh dc .
+team : who|whom is captain vice owner|coach chinna thala.
+
+kkr1 < matches
+rcb1 < matches
+srh1 < matches
+dc1 < matches
+
+kkr1 : kkr kolkata knight riders .
+rcb1 : rcb royal challengers bangalore .
+srh1 : srh hyderabad sunrisers .
+dc1 : dc delhi capitals .
+
+kkrmotm < kkr1
+kkrmotm : man of the match motm .
+kkrmotm = Tahir
+
+rcbmotm < rcb1
+rcbmotm : man of the match motm .
+rcbmotm = Bhajji
+
+srhmotm < srh1
+srhmotm : man of the match motm .
+srhmotm = Warner
+
+dcmotm < dc1
+dcmotm : man of the match motm .
+dcmotm = watson
+
+owner < team
+owner : owner .
+owner = SriniMama
+
+captain < team
+captain : captain .
+captain = MSDhoni
+
+vice < team
+vice : vice .
+vice = Raina
+
+coach < team
+coach : coach .
+coach = fleming 
