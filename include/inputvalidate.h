@@ -11,7 +11,7 @@ public:
 		filename = passed_filename;
 		inputIsValid = inputLinesAreValid();
 
-		config_filename = "prog.config";
+		config_filename = "../config/prog.config";
 		configIsValid = configLinesAreValid();
 	}
 

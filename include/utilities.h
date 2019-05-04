@@ -1,3 +1,8 @@
+#include<iostream>
+#include<string>
+#include<fstream>
+using namespace std;
+
 /*===================*/
 /* UTILITY FUNCTIONS */
 /*===================*/
@@ -31,12 +36,33 @@ string getConfigProperty(string property) {
 
 }
 
+/* Prints a menu with the name, field of chatbot. */
 void menu() {
 
-	cout<<"==============\n";
-	cout<<"   CHANAKYA\n";
-	cout<<"==============\n\n";
+	//We retrieve the name from the config file.
+	string name = getConfigProperty("name");
+	int len = name.length();
 
-	cout<<"";
+	//The designs for printing the name.
+	cout<<endl;
+	for(int iter=0; iter<len+8; iter++) cout<<"=";
+	cout<<endl;
+	for(int iter=0; iter<4; iter++) cout<<" ";
+	cout<<name;
+	for(int iter=0; iter<4; iter++) cout<<" ";
+	cout<<endl;
+	for(int iter=0; iter<len+8; iter++) cout<<"=";
+	cout<<endl<<endl;
 
+	//We retrieve the field from the config file an print it.
+	cout<<name<<": Hey there!\n";
+	cout<<name<<": I'm "<<name<<" and I'm a chatbot designed to be an expert in the field of ";
+	cout<<"'"<<getConfigProperty("field")<<"'. \n";
+	cout<<name<<": Ask me anything!\n\n";
+
+}
+
+int main() {
+	menu();
+	return 0;
 }
