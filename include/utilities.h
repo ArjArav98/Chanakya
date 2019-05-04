@@ -1,8 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-using namespace std;
-
 /*===================*/
 /* UTILITY FUNCTIONS */
 /*===================*/
@@ -60,9 +55,4 @@ void menu() {
 	cout<<"'"<<getConfigProperty("field")<<"'. \n";
 	cout<<name<<": Ask me anything!\n\n";
 
-}
-
-int main() {
-	menu();
-	return 0;
 }

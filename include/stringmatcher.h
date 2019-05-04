@@ -105,3 +105,26 @@ public:
 	}
 
 };
+
+class error404 {
+
+	/* Returns true if none of the children's keywords match with the sentence. */
+	bool exists(TreeNode node, int finalScore) {
+
+		int maxKeywords = -1;
+		int childrenLen = node.children.size();
+
+		/* We find out the max keywords present amongst the children nodes. */
+		for(int iter=0; iter<childrenLen; iter++) {
+			if(node.children[iter].keywords.size() > maxKeywords) {
+				maxKeywords = node.children[iter].keywords.size();
+			}
+		}
+
+		/* Since a non match is a negative, if no of negatives equal max keywords, then error. */
+		if( (finalScore < 0) && ((-finalScore) >= maxKeywords) ) return true;
+		else return false;
+
+	}
+
+};
