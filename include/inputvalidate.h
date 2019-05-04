@@ -68,14 +68,14 @@ private:
 		
 			if(!regex_match(line,expression)) {
 				if(!regex_match(line,expression_two)) {
-					file.close();
+					filename.close();
 					return false;
 				}
 			}
 			getline(filename, line);
 		}
 
-		file.close();
+		filename.close();
 		return true;
 
 	}

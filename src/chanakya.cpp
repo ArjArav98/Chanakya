@@ -16,7 +16,54 @@ using namespace std;
 
 int main(){
 
-	
+	/*-------------*/
+	/* We get the knowledge file and validate the syntax. */
+	string knowledge_file = getConfigProperty("knowledge_file");
+	InputValidate ip(knowledge_file);
 
+	if(ip.inputIsValid && ip.configIsValid);
+	else {
+		cout<<"Error: Syntax for knowledge base or config file is wrong.\n";
+		return 0;
+	}
+
+	/*-------------*/
+	/* We build the tree using the knowledge file. */
+	TreeBuilder tbuilder(knowledge_file);
+	InformationTree infotree = tbuilder.generateTree();
+	TreeNode current_node = infotree.root;
+
+	/*-------------*/
+	/* We display the menu needed for the chatbot. */
+	string name = getConfigProperty("name");
+	menu();
+
+	/*-------------*/
+	/* We run the loop until we break it when reaching a leaf node. */
+	while(true) {
+
+		//We get the sentence as a vector of strings.
+		InputScanner in;
+		vector<string> sentence = in.getLine("You: ");
+
+		//We exit if 0th element of vector is exit.
+		if(sentence[0] == "bye") break;
+
+		//We iterate over the children in the current node.
+		int childrenLen = current_node.children.size();
+		int maxScore = -1000;
+
+		for(int iter=0; iter<childrenLen; iter++) {
+			//If the score > maxScore, then that should be our next node.
+			StringMatcher sm;
+			int score = sm.getComparisonScore(current_node.children[iter].keywords, sentence);
+			if(score > maxScore) current_node = current_node.children[iter];
+		}
+
+		if(current_node.children.size() == 0) cout<<name<<": "<<current_node.value<<".\n\n";
+
+	}
+
+	cout<<name<<": Bye!\n";
 	return 0;
 }
