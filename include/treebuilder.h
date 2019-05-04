@@ -18,7 +18,7 @@ public:
 	InformationTree generateTree() {
 
 		/* We open the file in a filestream. */
-		fstream file(filename);
+		fstream file(filename.c_str());
 		
 		/* Loop until file ends. */
 		while(!file.eof()) {

@@ -24,7 +24,7 @@ private:
 	/* If even one line is valid, this function returns true. */
 	bool inputLinesAreValid() {
 
-		fstream file(filename);
+		fstream file(filename.c_str());
 		string line;
 
 		/* This expression checks for adding nodes and assigning values. */
@@ -37,7 +37,7 @@ private:
 		/* Gets a line from file and assigns to string. */
 		getline(file, line);
 
-		while(!file.eof()) {
+		while(true) {
 			/* We check each of the three RegExps. */
 			if(!regex_match(line,expression)) {
 				if(!regex_match(line,expression_two)) {
@@ -48,6 +48,7 @@ private:
 				}
 			}
 			getline(file, line);
+			if(file.eof()) break;
 		}
 
 		file.close();
@@ -58,14 +59,13 @@ private:
 	/* Similarly, we validate the config source file. */
 	bool configLinesAreValid() {
 
-		fstream filename(config_filename);
+		fstream filename(config_filename.c_str());
 		string line;
 
-		regex expression("[.]+( )+=( )+[.]+\\.");
+		regex expression("[.]+( )+=( )+[.]+( )+\\.");
 		regex expression_two("( )*");
 
-		while(!filename.eof()) {
-		
+		while(true) {
 			if(!regex_match(line,expression)) {
 				if(!regex_match(line,expression_two)) {
 					filename.close();
@@ -73,6 +73,7 @@ private:
 				}
 			}
 			getline(filename, line);
+			if(filename.eof()) break;
 		}
 
 		filename.close();

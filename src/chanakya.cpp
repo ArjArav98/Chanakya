@@ -21,7 +21,7 @@ int main(){
 	string knowledge_file = getConfigProperty("knowledge_file");
 	InputValidate ip(knowledge_file);
 
-	if(ip.inputIsValid && ip.configIsValid);
+	if(ip.inputIsValid);
 	else {
 		cout<<"Error: Syntax for knowledge base or config file is wrong.\n";
 		return 0;
@@ -39,7 +39,7 @@ int main(){
 	menu();
 
 	/*-------------*/
-	/* We run the loop until we break it when reaching a leaf node. */
+	/* The loop for asking questions. */
 	while(true) {
 
 		//We get the sentence as a vector of strings.
@@ -49,18 +49,34 @@ int main(){
 		//We exit if 0th element of vector is exit.
 		if(sentence[0] == "bye") break;
 
-		//We iterate over the children in the current node.
-		int childrenLen = current_node.children.size();
-		int maxScore = -1000;
+		/*---------------*/
+		/* The loop for searching for the node. */
+		while(true) {
+			//We iterate over the children in the current node.
+			int childrenLen = current_node.children.size();
+			int maxScore = -1000;
+			TreeNode temp_node;
 
-		for(int iter=0; iter<childrenLen; iter++) {
-			//If the score > maxScore, then that should be our next node.
-			StringMatcher sm;
-			int score = sm.getComparisonScore(current_node.children[iter].keywords, sentence);
-			if(score > maxScore) current_node = current_node.children[iter];
+			for(int iter=0; iter<childrenLen; iter++) {
+				//If the score > maxScore, then that should be our next node.
+				StringMatcher sm;
+				int score = sm.getComparisonScore(current_node.children[iter].keywords, sentence);
+				if(score > maxScore) { 
+					temp_node = current_node.children[iter];
+					maxScore = score;
+				}
+			}
+
+			current_node = temp_node;
+
+			if(current_node.children.size() == 0) {
+				cout<<name<<": "<<current_node.value<<".\n\n";
+				break;
+			}
+
 		}
 
-		if(current_node.children.size() == 0) cout<<name<<": "<<current_node.value<<".\n\n";
+		current_node = infotree.root;
 
 	}
 

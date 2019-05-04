@@ -2,7 +2,7 @@ matches < root
 team < root
 
 matches : who|whom motm man match highest kkr rcb srh dc .
-team : who|whom is captain vice owner|coach chinna thala.
+team : who|whom is captain vice owner|coach chinna thala .
 
 kkr1 < matches
 rcb1 < matches
@@ -44,4 +44,4 @@ vice = Raina
 
 coach < team
 coach : coach .
-coach = fleming 
+coach = fleming
