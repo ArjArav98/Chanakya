@@ -38,9 +38,7 @@ void menu() {
 	string name = getConfigProperty("name");
 	
 	//We retrieve the field from the config file an print it.
-	cout<<name<<": Hey there!\n";
-	cout<<name<<": I'm "<<name<<" and I'm a chatbot designed to be an expert in the field of ";
-	cout<<"'"<<getConfigProperty("field")<<"'. \n";
-	cout<<name<<": Ask me anything!\n\n";
+	cout<<endl<<name<<": Hey there! I'm "<<getConfigProperty("name")<<"!\n";
+	cout<<"Ask me anything about '"<<getConfigProperty("field")<<"'!\n\n";
 
 }

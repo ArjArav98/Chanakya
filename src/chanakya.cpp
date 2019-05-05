@@ -57,8 +57,8 @@ int main(){
 			int maxScore = -1000;
 			TreeNode temp_node;
 
+			//We get the comparisonScore for each node's keywords and the sentence.
 			for(int iter=0; iter<childrenLen; iter++) {
-				//If the score > maxScore, then that should be our next node.
 				StringMatcher sm;
 				int score = sm.getComparisonScore(current_node.children[iter].keywords, sentence);
 				if(score > maxScore) { 
@@ -69,6 +69,7 @@ int main(){
 
 			current_node = temp_node;
 
+			//If the node has no children, then it is leaf node.
 			if(current_node.children.size() == 0) {
 				cout<<name<<": "<<current_node.value<<".\n\n";
 				break;
@@ -76,10 +77,11 @@ int main(){
 
 		}
 
+		//We reset the current_node to the infotree root.
 		current_node = infotree.root;
 
 	}
 
-	cout<<name<<": Bye!\n";
+	cout<<name<<": Bye!\n\n";
 	return 0;
 }
