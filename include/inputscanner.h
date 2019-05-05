@@ -20,6 +20,41 @@ class InputScanner {
 		return new_question;
 	}
 
+	/* Checks if there are upper-case characters. */
+	bool upperCaseExists(string original) {
+		int len = original.length();
+
+		for(int iter=0; iter<len; iter++) {
+			if(original[iter] >= 'A' && original[iter] <= 'Z') return true;
+		}
+
+		return false;
+	}
+
+	/* Makes every character lower-case. */
+	string toLowerCase(string original_question) {
+		
+		if(upperCaseExists(original_question)) {
+			
+			int len = original_question.length();
+			int difference = 'a' - 'A';
+			string new_question;
+
+			for(int iter=0;iter<len; iter++) {
+				/* If uppercase, we add the difference and push to new string. */
+				if(original_question[iter] >= 'A' && original_question[iter] <= 'Z') {
+					new_question.push_back(original_question[iter] + difference);
+				}
+				else new_question.push_back(original_question[iter]);
+			}
+
+			return new_question;
+
+		}
+
+		return original_question;
+	}
+
 	/*===================*/
 	/* UTILITY FUNCTIONS */
 	/*===================*/
@@ -66,6 +101,7 @@ public:
 	
 		question.assign(trimString(question));
 		question.assign(removePunctuation(question));
+		question.assign(toLowerCase(question));
 
 		int start=0, len=question.length();
 
