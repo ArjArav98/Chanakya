@@ -28,7 +28,7 @@ srhmotm = Warner
 
 dcmotm < dc1
 dcmotm : man of the match motm .
-dcmotm = watson
+dcmotm = Watson
 
 owner < team
 owner : owner .
@@ -44,4 +44,8 @@ vice = Raina
 
 coach < team
 coach : coach .
-coach = fleming
+coach = Fleming
+
+company < team
+company : company owns|own .
+company = India-Cements
