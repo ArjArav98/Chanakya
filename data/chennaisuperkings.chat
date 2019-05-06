@@ -16,36 +16,36 @@ dc1 : dc delhi capitals .
 
 kkrmotm < kkr1
 kkrmotm : man of the match motm .
-kkrmotm = Tahir
+kkrmotm = Imran Tahir .
 
 rcbmotm < rcb1
 rcbmotm : man of the match motm .
-rcbmotm = Bhajji
+rcbmotm = Harbhajan Singh .
 
 srhmotm < srh1
 srhmotm : man of the match motm .
-srhmotm = Warner
+srhmotm = David Warner .
 
 dcmotm < dc1
 dcmotm : man of the match motm .
-dcmotm = Watson
+dcmotm = Shane Watson .
 
 owner < team
 owner : owner .
-owner = SriniMama
+owner = N Srinivasan .
 
 captain < team
 captain : captain .
-captain = MSDhoni
+captain = Mahendra Singh Dhoni .
 
 vice < team
-vice : vice .
-vice = Raina
+vice : vice captain .
+vice = Suresh Raina .
 
 coach < team
 coach : coach .
-coach = Fleming
+coach = Stephen Fleming .
 
 company < team
 company : company owns|own .
-company = India-Cements
+company = India Cements .
