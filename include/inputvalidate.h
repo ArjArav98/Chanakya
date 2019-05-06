@@ -28,9 +28,9 @@ private:
 		string line;
 
 		/* This expression checks for adding nodes and assigning values. */
-		regex expression("[a-zA-Z0-9-_\\.]+( )+[<=]( )+[a-zA-Z0-9-_\\.]+( )*");
+		regex expression("[a-zA-Z0-9-_\\.]+( )+<( )+[a-zA-Z0-9-_\\.]+( )*");
 		/* This expression checks for adding keywords to nodes. */
-		regex expression_two("[a-zA-Z0-9-_\\.]+( )+:(( )+.+)+( )+\\.( )*");
+		regex expression_two("[a-zA-Z0-9-_\\.]+( )+[:=](( )+.+)+( )+\\.( )*");
 		/* This expression checks for an empty line. */
 		regex expression_three("( )*");
 

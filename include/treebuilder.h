@@ -49,8 +49,18 @@ public:
 			}
 			/* If the operatore is '=', meaning assigning values. */
 			else if(op == "=") {
-				string value;
-				file >> value;
+				char character;
+				string value = "";
+				int iter = -1;
+				
+				while(true) {
+					file >> character;
+					if((character == '.') && (iter > -1) && (value[iter] == ' ')) break;
+					
+					value.push_back(character);
+					iter++;
+				}
+
 				infotree.setValue(current_node,value);
 			}
 
