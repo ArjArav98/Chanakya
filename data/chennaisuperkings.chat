@@ -9,26 +9,58 @@ rcb1 < matches
 srh1 < matches
 dc1 < matches
 
-kkr1 : kkr kolkata knight riders .
-rcb1 : rcb royal challengers bangalore .
-srh1 : srh hyderabad sunrisers .
-dc1 : dc delhi capitals .
+kkr1 : kkr kolkata knight riders first .
+rcb1 : rcb royal challengers bangalore first .
+srh1 : srh hyderabad sunrisers first .
+dc1 : dc delhi capitals first .
 
 kkrmotm < kkr1
 kkrmotm : man of the match motm .
 kkrmotm = Imran Tahir .
 
+kkr1result < kkr1
+kkr1result : won|result|lost|happened .
+kkr1result = CSK won the match by 6 wickets .
+
+kkr1venue < kkr1
+kkr1venue : venue|where|place .
+kkr1venue = Chepauk .
+
 rcbmotm < rcb1
 rcbmotm : man of the match motm .
 rcbmotm = Harbhajan Singh .
 
-srhmotm < srh1
-srhmotm : man of the match motm .
-srhmotm = David Warner .
+rcb1result < rcb1
+rcb1result : won|result|lost|happened .
+rcb1result = CSK won the match by 7 wickets .
+
+rcb1venue < rcb1
+rcb1venue : venue|where|place .
+rcb1venue = Chepauk .
+
+srh1motm < srh1
+srh1motm : man of the match motm .
+srh1motm = David Warner .
+
+srh1result < srh1
+srh1result : won|result|lost|happened .
+srh1result = SRH won the match by 7 wickets .
+
+srh1venue < srh1
+srh1venue : venue|where|place .
+srh1venue = Hyderabad .
 
 dcmotm < dc1
 dcmotm : man of the match motm .
 dcmotm = Shane Watson .
+
+dc1result < dc1
+dc1result : won|result|lost|happened .
+dc1result = CSK won the match by 6 wickets .
+
+dc1venue < dc1
+dc1venue : venue|where|place .
+dc1venue = New Delhi .
 
 owner < team
 owner : owner .
@@ -45,6 +77,14 @@ vice = Suresh Raina .
 coach < team
 coach : coach .
 coach = Stephen Fleming .
+
+battingcoach < team
+battingcoach : batting|bat coach .
+battingcoach = Mike Hussey .
+
+bowlingcoach < team
+bowlingcoach : bowling|bowl coach .
+bowling coach = L Balaji .
 
 company < team
 company : company owns|own .
