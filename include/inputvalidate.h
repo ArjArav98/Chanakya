@@ -6,8 +6,10 @@ class InputValidate {
 public:
 	bool inputIsValid;
 	bool configIsValid;
+	int file_line;
 
 	InputValidate(string passed_filename) {
+		file_line = 1;
 		filename = passed_filename;
 		inputIsValid = inputLinesAreValid();
 
@@ -48,6 +50,7 @@ private:
 				}
 			}
 			getline(file, line);
+			file_line++;
 			if(file.eof()) break;
 		}
 

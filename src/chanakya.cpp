@@ -23,7 +23,8 @@ int main(){
 
 	if(ip.inputIsValid);
 	else {
-		cout<<"Error: Syntax for knowledge base or config file is wrong.\n";
+		cout<<"Error: Syntax for knowledge base or config file is wrong ";
+		cout<<"(Line "<<ip.file_line<<").\n";
 		return 0;
 	}
 

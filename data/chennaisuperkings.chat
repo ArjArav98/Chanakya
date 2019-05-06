@@ -84,7 +84,7 @@ battingcoach = Mike Hussey .
 
 bowlingcoach < team
 bowlingcoach : bowling|bowl coach .
-bowling coach = L Balaji .
+bowlingcoach = L Balaji .
 
 company < team
 company : company owns|own .
