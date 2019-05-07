@@ -1,9 +1,16 @@
 # Chanakya
-Chanakya is a simple yet elaborate chatbot that is currently being built from scratch in C++. Based on the Artificial Intelligence concept of 'Expert Systems', the objective of the chatbot is for it to be one that is well-versed only in a *single domain* (i.e, for example, in **Indian History** or **Star Wars** or **IPL Cricket Statistics**). This would make this chatbot ideal for situations which require specialised assistance or domain-related knowledge.
+Based on the Artificial Inteligence concept of Expert Systems, Chanakya is a completely ***scalable*** and ***customisable*** yet simple chatbot built wholly from scratch in C++.
 
-Chanakya is a chatbot whose specialised knowledge in any field is derived from information stored in a knowledge base. The information in this knowledge base can be completely built from scratch by **you**! This can be done using a simple, unique syntax that I created just for this purpose.
+  * The objective is that, any single point in time, the chatbot can be an expert only in a **single** domain.
+  * This domain could be anything (*Star Wars*, *Indian History*, etc) and can be completely customised by **you**!
+  * This makes Chanakya ideal for situations which require a *specialised* artificial assistant.
 
-## Etymology
+Chanakya's knowledge is retrieved from information stored in a **knowledge base**.
+  
+  * This knowledge base can be built by **you**, the user, and as mentioned earlier, can store information related to any domain.
+  * The syntax for building the knowledge base is new, simple and was developed for this purpose. More below on usage and deployment.
+
+#### Etymology
 
 It's named after **Chanakya** (371 BC - 283 BC), an ancient Indian teacher and royal advisor. Known with being a person who could *answer* the most ardous of questions, he is credited with playing an important role in the establishment of the Mauryan Empire. 
 
