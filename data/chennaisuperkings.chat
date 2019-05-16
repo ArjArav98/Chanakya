@@ -2,21 +2,27 @@ matches < root
 team < root
 
 matches : who|whom motm man match highest kkr rcb srh dc .
-team : who|whom is captain vice owner|coach chinna thala .
+team : who|whom is captain vice owner|coach chinna thalia company tech .
 
 kkr1 < matches
 rcb1 < matches
 srh1 < matches
 dc1 < matches
+rr1 < matches
+mi1 < matches
+kxip1 < matches
 
 kkr1 : kkr kolkata knight riders first .
 rcb1 : rcb royal challengers bangalore first .
 srh1 : srh hyderabad sunrisers first .
 dc1 : dc delhi capitals first .
+rr1 : rr rajasthan royals first .
+mi1 : mi mumbai indians first .
+kxip1 : kxip kings xi punjab first .
 
 kkrmotm < kkr1
 kkrmotm : man of the match motm .
-kkrmotm = Imran Tahir .
+kkrmotm = Deepak Chahar .
 
 kkr1result < kkr1
 kkr1result : won|result|lost|happened .
@@ -25,6 +31,10 @@ kkr1result = CSK won the match by 6 wickets .
 kkr1venue < kkr1
 kkr1venue : venue|where|place .
 kkr1venue = Chepauk .
+
+kkr1date < kkr1
+kkr1date : when|date|month|day .
+kkr1date = 9th April, 2019 .
 
 rcbmotm < rcb1
 rcbmotm : man of the match motm .
@@ -41,6 +51,10 @@ rcb1venue = Chepauk .
 srh1motm < srh1
 srh1motm : man of the match motm .
 srh1motm = David Warner .
+
+srh1date < srh1
+srh1date : when|date|month|day .
+srh1date = 17th April, 2019 .
 
 srh1result < srh1
 srh1result : won|result|lost|happened .
@@ -61,6 +75,42 @@ dc1result = CSK won the match by 6 wickets .
 dc1venue < dc1
 dc1venue : venue|where|place .
 dc1venue = New Delhi .
+
+dc1date < dc1
+dc1date : when|date|month|day .
+dc1date = 26th March, 2019 .
+
+rr1motm < rr1
+rr1motm : man of the match motm .
+rr1motm = MS Dhoni .
+
+rr1result < rr1
+rr1result : won|result|lost|happened .
+rr1result = CSK won the match by 8 runs .
+
+rr1venue < rr1
+rr1venue : venue|where|place .
+rr1venue = Chepauk .
+
+rr1date < rr1
+rr1date : when|date|month|day .
+rr1date = 31st March, 2019 .
+
+kxip1motm < kxip1
+kxip1motm : man of the match motm .
+kxip1motm = Harbhajan Singh .
+
+kxip1date < kxip1
+kxip1date : when|date|month|day .
+kxip1date = 6th April, 2019 .
+
+kxip1result < kxip1
+kxip1result : won|result|lost|happened .
+kxip1result = CSK won by 22 runs .
+
+kxip1venue < kxip1
+kxip1venue : venue|where|place .
+kxip1venue = Chepauk .
 
 owner < team
 owner : owner .
@@ -89,3 +139,7 @@ bowlingcoach = L Balaji .
 company < team
 company : company owns|own .
 company = India Cements .
+
+techpartner < team
+techpartner : tech company partner .
+techpartner = Tekplay .
