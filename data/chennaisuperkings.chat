@@ -1,24 +1,48 @@
 matches < root
 team < root
+stats < root
 
-matches : who|whom motm man match highest kkr rcb srh dc .
-team : who|whom is captain vice owner|coach chinna thalia company tech .
+matches : who|whom|when|where won|lost|happened|happen motm|man match highest kkr|rcb|srh|dc|mi|rr|kxip mumbai|delhi|kolkata|rajasthan|punjab|hyderabad|bangalore playoffs|playoff|qualifier|qualifiers|final|finals .
+team : who|whom captain|vice|owner|coach chinna|thala company|sponsor|partner tech|main|shirt|food|drinks .
+stats : highest|leading run|runs wicket|wickets score|scorer|take|taker 2019|season .
 
 kkr1 < matches
+kkr2 < matches
 rcb1 < matches
+rcb2 < matches
 srh1 < matches
+srh2 < matches
 dc1 < matches
+dc2 < matches
 rr1 < matches
+rr2 < matches
 mi1 < matches
+mi2 < matches
 kxip1 < matches
+kxip2 < matches
+q1 < matches
+q2 < matches
+final < matches
 
-kkr1 : kkr kolkata knight riders first .
-rcb1 : rcb royal challengers bangalore first .
-srh1 : srh hyderabad sunrisers first .
-dc1 : dc delhi capitals first .
-rr1 : rr rajasthan royals first .
-mi1 : mi mumbai indians first .
-kxip1 : kxip kings xi punjab first .
+kkr1 : kkr kolkata knight riders first chennai|chepauk|home .
+rcb1 : rcb royal challengers bangalore first chennai|chepauk|home .
+srh1 : srh hyderabad sunrisers first hyderabad|away .
+dc1 : dc delhi capitals first feroz|delhi|away .
+rr1 : rr rajasthan royals first chennai|chepauk|home .
+mi1 : mi mumbai indians first away|mumbai|wankhede .
+kxip1 : kxip kings xi punjab first chennai|chepauk|home .
+
+kkr2 : kkr kolkata knight riders second kolkata|eden|away .
+rcb2 : rcb royal challengers bangalore second bangalore|chinnaswamy|away .
+srh2 : srh hyderabad sunrisers second chennai|chepauk|home .
+dc2 : dc delhi capitals second chennai|chepauk|home .
+rr2 : rr rajasthan royals second jaipur|away .
+mi2 : mi mumbai indians second chennai|chepauk|home .
+kxip2 : kxip kings xi punjab second punjab|mohali|away .
+
+q1 : 1 mumbai indians qualifier|playoff|playoffs chepauk|home .
+q2 : 2 delhi capitals qualifier|playoff|playoffs visakhapatnam|away .
+final : mumbai indians finals|final|playoff|playoffs away .
 
 kkrmotm < kkr1
 kkrmotm : man of the match motm .
@@ -36,6 +60,22 @@ kkr1date < kkr1
 kkr1date : when|date|month|day .
 kkr1date = 9th April, 2019 .
 
+kkr2motm < kkr2
+kkr2motm : man of the match motm .
+kkr2motm = Ravindra Jadeja .
+
+kkr2result < kkr2
+kkr2result : won|result|lost|happened .
+kkr2result = CSK won the match by 5 wickets .
+
+kkr2venue < kkr2
+kkr2venue : venue|where|place .
+kkr2venue = Eden Gardens .
+
+kkr2date < kkr2
+kkr2date : when|date|month|day .
+kkr2date = 14th April, 2019 .
+
 rcbmotm < rcb1
 rcbmotm : man of the match motm .
 rcbmotm = Harbhajan Singh .
@@ -47,6 +87,26 @@ rcb1result = CSK won the match by 7 wickets .
 rcb1venue < rcb1
 rcb1venue : venue|where|place .
 rcb1venue = Chepauk .
+
+rcb1date < rcb1
+rcb1date : when|date|month|day .
+rcb1date = 23rd March, 2019 .
+
+rcb2motm < rcb2
+rcb2motm : man of the match motm .
+rcb2motm = Parthiv Patel .
+
+rcb2result < rcb2
+rcb2result : won|result|lost|happened .
+rcb2result = RCB won the match by 1 run .
+
+rcb2venue < rcb2
+rcb2venue : venue|where|place .
+rcb2venue = Bangalore .
+
+rcb2date < rcb2
+rcb2date : when|date|month|day .
+rcb2date = 21st April, 2019 .
 
 srh1motm < srh1
 srh1motm : man of the match motm .
@@ -64,6 +124,22 @@ srh1venue < srh1
 srh1venue : venue|where|place .
 srh1venue = Hyderabad .
 
+srh2motm < srh2
+srh2motm : man of the match motm .
+srh2motm = Shane Watson .
+
+srh2date < srh2
+srh2date : when|date|month|day .
+srh2date = 23rd April, 2019 .
+
+srh2result < srh2
+srh2result : won|result|lost|happened .
+srh2result = CSK won the match by 6 wickets .
+
+srh2venue < srh2
+srh2venue : venue|where|place .
+srh2venue = Chepauk .
+
 dcmotm < dc1
 dcmotm : man of the match motm .
 dcmotm = Shane Watson .
@@ -79,6 +155,22 @@ dc1venue = New Delhi .
 dc1date < dc1
 dc1date : when|date|month|day .
 dc1date = 26th March, 2019 .
+
+dc2motm < dc2
+dc2motm : man of the match motm .
+dc2motm = MS Dhoni .
+
+dc2result < dc2
+dc2result : won|result|lost|happened .
+dc2result = CSK won the match by 80 runs .
+
+dc2venue < dc2
+dc2venue : venue|where|place .
+dc2venue = Chepauk .
+
+dc2date < dc2
+dc2date : when|date|month|day .
+dc2date = 1st May, 2019 .
 
 rr1motm < rr1
 rr1motm : man of the match motm .
@@ -96,6 +188,22 @@ rr1date < rr1
 rr1date : when|date|month|day .
 rr1date = 31st March, 2019 .
 
+rr2motm < rr2
+rr2motm : man of the match motm .
+rr2motm = MS Dhoni .
+
+rr2result < rr2
+rr2result : won|result|lost|happened .
+rr2result = CSK won the match by 4 wickets .
+
+rr2venue < rr2
+rr2venue : venue|where|place .
+rr2venue = Jaipur .
+
+rr2date < rr2
+rr2date : when|date|month|day .
+rr2date = 11th April, 2019 .
+
 kxip1motm < kxip1
 kxip1motm : man of the match motm .
 kxip1motm = Harbhajan Singh .
@@ -112,16 +220,112 @@ kxip1venue < kxip1
 kxip1venue : venue|where|place .
 kxip1venue = Chepauk .
 
+kxip2motm < kxip2
+kxip2motm : man of the match motm .
+kxip2motm = KL Rahul .
+
+kxip2date < kxip2
+kxip2date : when|date|month|day .
+kxip2date = 5th May, 2019 .
+
+kxip2result < kxip2
+kxip2result : won|result|lost|happened .
+kxip2result = KXIP won by 6 wickets .
+
+kxip2venue < kxip2
+kxip2venue : venue|where|place .
+kxip2venue = Mohali .
+
+mi1motm < mi1
+mi1motm : man of the match motm .
+mi1motm = Hardik Pandya .
+
+mi1date < mi1
+mi1date : when|date|month|day .
+mi1date = 3rd April, 2019 .
+
+mi1result < mi1
+mi1result : won|result|lost|happened .
+mi1result = MI won by 37 runs .
+
+mi1venue < mi1
+mi1venue : venue|where|place .
+mi1venue = Mumbai .
+
+mi2motm < mi2
+mi2motm : man of the match motm .
+mi2motm = Rohit Sharma .
+
+mi2date < mi2
+mi2date : when|date|month|day .
+mi2date = 26th April, 2019 .
+
+mi2result < mi2
+mi2result : won|result|lost|happened .
+mi2result = MI won by 46 runs .
+
+mi2venue < mi2
+mi2venue : venue|where|place .
+mi2venue = Chepauk .
+
+q1motm < q1
+q1motm : man of the match motm .
+q1motm = Suryakumar Yadav .
+
+q1result < q1
+q1result : won|result|lost|happened .
+q1result = MI won by 6 wickets .
+
+q1venue < q1
+q1venue : venue|where|place .
+q1venue = Chepauk .
+
+q1date < q1
+q1date : when|date|month|day .
+q1date = 7th April, 2019 .
+
+q2motm < q2
+q2motm : man of the match motm .
+q2motm = Faf du Plessis .
+
+q2result < q2
+q2result : won|result|lost|happened .
+q2result = CSK won by 6 wickets .
+
+q2venue < q2
+q2venue : venue|where|place .
+q2venue = Vishakapatnam .
+
+q2date < q2
+q2date : when|date|month|day .
+q2date = 10th April, 2019 .
+
+finalmotm < final
+finalmotm : man of the match motm .
+finalmotm = Jasprit Bumrah .
+
+finalresult < final
+finalresult : won|result|lost|happened .
+finalresult = MI won by 1 run and lifted the trophy for the 4th time .
+
+finalvenue < final
+finalvenue : venue|where|place .
+finalvenue = Hyderabad .
+
+finaldate < final
+finaldate : when|date|month|day .
+finaldate = 12th May, 2019 .
+
 owner < team
-owner : owner .
+owner : owner srini mama .
 owner = N Srinivasan .
 
 captain < team
-captain : captain .
+captain : captain thala mahi .
 captain = Mahendra Singh Dhoni .
 
 vice < team
-vice : vice captain .
+vice : vice captain|thala chinna .
 vice = Suresh Raina .
 
 coach < team
@@ -137,9 +341,17 @@ bowlingcoach : bowling|bowl coach .
 bowlingcoach = L Balaji .
 
 company < team
-company : company owns|own .
+company : company|partner|sponsor|sponsors owns|own|main .
 company = India Cements .
 
 techpartner < team
-techpartner : tech company partner .
+techpartner : tech company|partner|sponsor|sponsors .
 techpartner = Tekplay .
+
+highestruns < stats
+highestruns : highest|most runs|run scored|scorer|score .
+highestruns = MS Dhoni (416 runs) was the highest run scorer for CSK .
+
+mostwickets < stats
+mostwickets : highest|most|leading wickets|wicket taken|took purple .
+mostwickets = Imran Tahir (26 wickets) was the leading wicket-taker for CSK .
