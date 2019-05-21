@@ -4,7 +4,7 @@ stats < root
 
 matches : who|whom|when|where|much|many won|lost|happened|happen|vs|score motm|man|match kkr|rcb|srh|dc|mi|rr|kxip mumbai|delhi|kolkata|rajasthan|punjab|hyderabad|bangalore playoffs|playoff|qualifier|qualifiers|final|finals .
 team : who|whom|which captain|vice|owner|coach|home|team|squad|players|overseas|foreign chinna|thala|chepauk company|sponsor|partner|ground tech|main|shirt|food|drinks .
-stats : highest|leading run|runs wicket|wickets score|scorer|take|taker 2019|season .
+stats : who|whom highest|leading|most run|runs wicket|wickets score|scorer|take|taker 2019|season .
 
 kkr1 < matches
 kkr2 < matches
@@ -24,21 +24,21 @@ q1 < matches
 q2 < matches
 final < matches
 
-kkr1 : kkr kolkata knight riders first chennai|chepauk|home .
-rcb1 : rcb royal challengers bangalore first chennai|chepauk|home .
-srh1 : srh hyderabad sunrisers first hyderabad|away .
-dc1 : dc delhi capitals first feroz|delhi|away .
-rr1 : rr rajasthan royals first chennai|chepauk|home .
-mi1 : mi mumbai indians first away|mumbai|wankhede .
-kxip1 : kxip kings xi punjab first chennai|chepauk|home .
+kkr1 : kkr kolkata knight riders first|home chennai|chepauk|home .
+rcb1 : rcb royal challengers bangalore first|home chennai|chepauk|home .
+srh1 : srh hyderabad sunrisers first|away hyderabad|away .
+dc1 : dc delhi capitals first|away feroz|delhi|away .
+rr1 : rr rajasthan royals first|home chennai|chepauk|home .
+mi1 : mi mumbai indians first|away away|mumbai|wankhede .
+kxip1 : kxip kings xi punjab first|home chennai|chepauk|home .
 
-kkr2 : kkr kolkata knight riders second kolkata|eden|away .
-rcb2 : rcb royal challengers bangalore second bangalore|chinnaswamy|away .
-srh2 : srh hyderabad sunrisers second chennai|chepauk|home .
-dc2 : dc delhi capitals second chennai|chepauk|home .
-rr2 : rr rajasthan royals second jaipur|away .
-mi2 : mi mumbai indians second chennai|chepauk|home .
-kxip2 : kxip kings xi punjab second punjab|mohali|away .
+kkr2 : kkr kolkata knight riders second|away kolkata|eden|away .
+rcb2 : rcb royal challengers bangalore second|away bangalore|chinnaswamy|away .
+srh2 : srh hyderabad sunrisers second|home chennai|chepauk|home .
+dc2 : dc delhi capitals second|home chennai|chepauk|home .
+rr2 : rr rajasthan royals second|away jaipur|away .
+mi2 : mi mumbai indians second|home chennai|chepauk|home .
+kxip2 : kxip kings xi punjab second|away punjab|mohali|away .
 
 q1 : 1 mi mumbai indians qualifier|playoff|playoffs chepauk|home .
 q2 : 2 dc delhi capitals qualifier|playoff|playoffs visakhapatnam|away .
@@ -168,6 +168,10 @@ dcmotm < dc1
 dcmotm : man of the match motm .
 dcmotm = Shane Watson .
 
+dc1fi < dc1
+dc1fi : score|hit|scoreboard|runs|wickets .
+dc1fi = DC - 147/6 (Dhawan 51, Bravo 3/33) and CSK - 150/4 (Watson 44, Mishra 2/35) .
+
 dc1result < dc1
 dc1result : won|result|lost|happened|vs .
 dc1result = CSK won the match by 6 wickets .
@@ -183,6 +187,10 @@ dc1date = 26th March, 2019 .
 dc2motm < dc2
 dc2motm : man of the match motm .
 dc2motm = MS Dhoni .
+
+dc2fi < dc2
+dc2fi : score|hit|scoreboard|runs|wickets .
+dc2fi = CSK - 179/4 (Raina 59, Suchith 2/28) and DC - 99 (Iyer 44, Tahir 4/12) .
 
 dc2result < dc2
 dc2result : won|result|lost|happened|vs .
@@ -200,6 +208,10 @@ rr1motm < rr1
 rr1motm : man of the match motm .
 rr1motm = MS Dhoni .
 
+rr1fi < rr1
+rr1fi : score|hit|scoreboard|runs|wickets .
+rr1fi = CSK - 175/5 (Dhoni 75*, Archer 2/17) and RR - 167/8 (Stokes 46, Chahar 2/19) .
+
 rr1result < rr1
 rr1result : won|result|lost|happened|vs .
 rr1result = CSK won the match by 8 runs .
@@ -215,6 +227,10 @@ rr1date = 31st March, 2019 .
 rr2motm < rr2
 rr2motm : man of the match motm .
 rr2motm = MS Dhoni .
+
+rr2fi < rr2
+rr2fi : score|hit|scoreboard|runs|wickets .
+rr2fi = RR - 151/7 (Stokes 28, Jadeja 2/20) and CSK - 155/6 (Dhoni 58, Stokes 2/39) .
 
 rr2result < rr2
 rr2result : won|result|lost|happened|vs .
@@ -232,6 +248,10 @@ kxip1motm < kxip1
 kxip1motm : man of the match motm .
 kxip1motm = Harbhajan Singh .
 
+kxip1fi < kxip1
+kxip1fi : score|hit|scoreboard|runs|wickets .
+kxip1fi = CSK - 160/3 (du Plessis 54, Ashwin 3/23) and KXIP - 138/5 (S Khan 67, Bhajji 2/17) .
+
 kxip1date < kxip1
 kxip1date : when|date|month|day .
 kxip1date = 6th April, 2019 .
@@ -247,6 +267,10 @@ kxip1venue = Chepauk .
 kxip2motm < kxip2
 kxip2motm : man of the match motm .
 kxip2motm = KL Rahul .
+
+kxip2fi < kxip2
+kxip2fi : score|hit|scoreboard|runs|wickets .
+kxip2fi = CSK - 170/5 (du Plessis 96, Curran 3/35) and KXIP - 173/4 (KL Rahul 71, Bhajji 3/57) .
 
 kxip2date < kxip2
 kxip2date : when|date|month|day .
@@ -264,6 +288,10 @@ mi1motm < mi1
 mi1motm : man of the match motm .
 mi1motm = Hardik Pandya .
 
+mi1fi < mi1
+mi1fi : score|hit|scoreboard|runs|wickets .
+mi1fi = MI - 170/5 (Yadav 59, Jadeja 1/10) and CSK - 133/8 (Jadhav 58, Pandya 3/20) .
+
 mi1date < mi1
 mi1date : when|date|month|day .
 mi1date = 3rd April, 2019 .
@@ -279,6 +307,10 @@ mi1venue = Mumbai .
 mi2motm < mi2
 mi2motm : man of the match motm .
 mi2motm = Rohit Sharma .
+
+mi2fi < mi2
+mi2fi : score|hit|scoreboard|runs|wickets .
+mi2fi = MI - 155/4 (Sharma 67, Santner 2/13) and CSK - 109 (Vijay 38, Malinga 4/37) .
 
 mi2date < mi2
 mi2date : when|date|month|day .
@@ -296,6 +328,10 @@ q1motm < q1
 q1motm : man of the match motm .
 q1motm = Suryakumar Yadav .
 
+q1fi < q1
+q1fi : score|hit|scoreboard|runs|wickets .
+q1fi = CSK - 131/4 (Rayudu 42*, Chahar 2/14) and MI - 132/4 (Yadav 71*, Tahir 2/33) .
+
 q1result < q1
 q1result : won|result|lost|happened|vs .
 q1result = MI won by 6 wickets .
@@ -312,6 +348,10 @@ q2motm < q2
 q2motm : man of the match motm .
 q2motm = Faf du Plessis .
 
+q2fi < q2
+q2fi : score|hit|scoreboard|runs|wickets .
+q2fi = DC - 147/9 (Pant 38, Bravo 2/19) and CSK - 151/4 (Watson 50, Boult 1/20) .
+
 q2result < q2
 q2result : won|result|lost|happened|vs .
 q2result = CSK won by 6 wickets .
@@ -327,6 +367,10 @@ q2date = 10th April, 2019 .
 finalmotm < final
 finalmotm : man of the match motm .
 finalmotm = Jasprit Bumrah .
+
+finfi < final
+finfi : score|hit|scoreboard|runs|wickets .
+finfi = MI - 149/8 (Pollard 41, Chahar 3/26) and CSK - 148/7 (Watson 80, Bumrah 2/14) .
 
 finalresult < final
 finalresult : won|result|lost|happened|vs .
