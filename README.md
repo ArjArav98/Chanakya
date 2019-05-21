@@ -1,5 +1,5 @@
 # Chanakya
-Chanakya is a simple yet completely customisable and scalable chatbot. Based on the AI concept of 'Expert Systems', Chanakya is written wholly from scratch in C++. 
+**Chanakya is a simple yet completely customisable and scalable chatbot.** Based on the AI concept of 'Expert Systems', Chanakya is written wholly from scratch in C++. 
 
   * When answering questions read from the user, the chatbot accesses a **large knowledge base**, present in its memory, to find the required information. 
   * The chatbot's field of expertise can be decided by ***you***, the developer!
@@ -11,6 +11,8 @@ Chanakya's knowledge base should be present as a text file with the extension ``
   * The knowledge base can be built on any single domain of expertise such as **Star Wars** or **Indian history** or even, say, the **2016 US Presidential elections**.
   * The file must always be present in the ```/data``` folder.
   * A sample knowledge base file is present in the above directory in this git. The subject of the file is **'Chennai Super King's 2019 IPL campaign'**.
+
+  ![csk-screenshot](https://github.com/ArjArav98/Chanakya/blob/master/img/chanakya-screen.png)
 
 ## Quickstart
 * Clone or download the repository to your machine.
