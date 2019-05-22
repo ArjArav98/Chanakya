@@ -21,8 +21,7 @@ int main(){
 	string knowledge_file = getConfigProperty("knowledge_file");
 	InputValidate ip(knowledge_file);
 
-	if(ip.inputIsValid);
-	else {
+	if(!ip.inputIsValid) {
 		cout<<"Error: Syntax for knowledge base or config file is wrong ";
 		cout<<"(Line "<<ip.file_line<<").\n";
 		return 0;
