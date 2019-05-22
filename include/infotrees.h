@@ -1,7 +1,7 @@
 class TreeNode {
 public:
-	string id;
-	string value;
+	string id; //ID of the node.
+	int valueIndex; //Index of required '=' sign.
 
 	vector<string> keywords;
 	vector<TreeNode> children;	
@@ -23,6 +23,55 @@ public:
 	bool operator ==(TreeNode node) {
 		if(id == node.id) return true;
 		else return false;
+	}
+
+	/*================*/
+	/* USER FUNCTIONS */
+	/*================*/
+
+
+	/* This function extracts and returns node value with help of valueIndex. */
+	string value() {
+
+		/* We get the name of the knowledge file from the config file. */
+		string filename = getConfigProperty("knowledge_file");
+
+		/* We open the file in a stream. */
+		fstream file(filename.c_str());
+		int valueIter = 0; //To keep track of '=' encountered.
+		string values = "";
+
+		/* We read until the eof has been encountered. */
+		while(!file.eof()) {
+			string keyword;
+			file >> keyword;
+
+			/* If '=' is encountered.*/
+			if(keyword == "=") {
+				valueIter++;
+
+				/* If this '=' number matches the one in valueIndex. */
+				if(valueIter == valueIndex) {
+					/* We append all strings read until dot in 'value'. */
+					while(true) {
+						file >> keyword;
+						if(keyword == ".") break;
+
+						values.append(keyword);
+						values.push_back(' ');
+					}
+
+					values.pop_back();
+					break;
+				}
+
+			}
+
+		}
+
+		file.close();
+		return values; 
+
 	}
 };
 
@@ -59,12 +108,12 @@ public:
 		parent->children.push_back(temp);
 	}
 
-	/* Sets value to node with given id. */
-	void setValue(string id, string value) {
+	/* Sets valueNumber to node with given id. */
+	void setValue(string id, int valueIndex) {
 		TreeNode* node = getNode(id, &root);
 		if(node == NULL) return;
 
-		node->value = value;
+		node->valueIndex = valueIndex;
 	}
 
 	/* Adds a keyword to the node. */

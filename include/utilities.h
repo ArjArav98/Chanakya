@@ -5,16 +5,15 @@
 /* Gets the value of the specified property from .config file. */
 string getConfigProperty(string property) {
 
-	fstream filename("../config/prog.config");
+	fstream file("../config/prog.config");
 
-	while(!filename.eof()) {
+	while(!file.eof()) {
 		string temp;
-		filename >> temp;
+		file >> temp;
 
 		if(property == temp) {
-
-			getline(filename, temp);
-			filename.close();
+			getline(file, temp);
+			file.close();
 
 			int len = temp.length();
 
@@ -26,7 +25,7 @@ string getConfigProperty(string property) {
 
 	}
 
-	filename.close();
+	file.close();
 	return property; //If nothing else is returned.
 
 }

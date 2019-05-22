@@ -6,13 +6,14 @@
 #include<regex>
 using namespace std;
 
+
 /* User-defined libraries. */
+#include"../include/utilities.h"
 #include"../include/infotrees.h"
 #include"../include/stringmatcher.h"
 #include"../include/treebuilder.h"
 #include"../include/inputvalidate.h"
 #include"../include/inputscanner.h"
-#include"../include/utilities.h"
 
 int main(){
 
@@ -72,7 +73,7 @@ int main(){
 
 			//If the node has no children, then it is leaf node.
 			if(current_node.children.size() == 0) {
-				cout<<name<<": "<<current_node.value<<".\n\n";
+				cout<<name<<": "<<current_node.value()<<".\n\n";
 				break;
 			}
 

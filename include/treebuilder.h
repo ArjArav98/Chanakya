@@ -19,7 +19,11 @@ public:
 
 		/* We open the file in a filestream. */
 		fstream file(filename.c_str());
-		
+
+		/* This keeps track of number of '=' signs in the file. */
+		/* This will act as a sort of index to retrieve the node values. */
+		int valueIndex = 0;
+
 		/* Loop until file ends. */
 		while(!file.eof()) {
 
@@ -47,21 +51,21 @@ public:
 				}
 
 			}
-			/* If the operatore is '=', meaning assigning values. */
-			else if(op == "=") {
-				string keyword;
-				string value = "";
-				
-				while(true) {
-					file >> keyword;
-					if(keyword == ".") break;
-					
-					value.append(keyword);
-					value.push_back(' ');;
-				}
+			/* If the operator is '=', meaning assigning values. */
+			else if(op == "=") {	
 
-				value.pop_back();
-				infotree.setValue(current_node,value);
+				/* Instead of retrieving values, we store only the '=' number, */
+				/* so that we can come back to the required '=' later and retrieve */
+				/* the actual values. This is done to save memory. */
+
+				valueIndex++;
+				infotree.setValue(current_node,valueIndex);
+
+				/* We then have to navigate to the end of the line. */
+				string word;
+				file >> word;
+
+				while(word != ".") file >> word; 
 			}
 
 		}
