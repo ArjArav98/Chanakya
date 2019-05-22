@@ -6,7 +6,6 @@
 #include<regex>
 using namespace std;
 
-
 /* User-defined libraries. */
 #include"../include/utilities.h"
 #include"../include/infotrees.h"

@@ -3,18 +3,15 @@ typedef vector<string> Words;
 class StringMatcher {
 
 public:
-	bool keywordHasAlternative(string keyword) {
-
+	bool keywordHasAlternative(const string &keyword) {
 		int len = keyword.length();
 		for(int iter=0; iter<len; iter++) {
 			if(keyword[iter]=='|') return true;
 		}
 		return false;
-
 	}
 
-	Words extractAlternatives(string keyword) {
-		
+	Words extractAlternatives(const string &keyword) {
 		Words alternatives;
 		int len = keyword.length();
 		int start = 0;
@@ -27,12 +24,10 @@ public:
 		}
 
 		alternatives.push_back( keyword.substr(start,len-start) );
-		return alternatives;
-		
+		return alternatives;	
 	}
 
-	int getComparisonScore(Words node_keywords, Words sentence_words) {
-		
+	int getComparisonScore(const Words &node_keywords, const Words &sentence_words) {	
 		int score = 0;
 
 		int sentenceLen = sentence_words.size();
