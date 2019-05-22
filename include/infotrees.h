@@ -1,3 +1,4 @@
+/* Class definition for each individual node in the tree. */
 class TreeNode {
 public:
 	string id; //ID of the node.
@@ -28,7 +29,6 @@ public:
 	/*================*/
 	/* USER FUNCTIONS */
 	/*================*/
-
 
 	/* This function extracts and returns node value with help of valueIndex. */
 	string value() {
@@ -75,6 +75,7 @@ public:
 	}
 };
 
+/* Class definiton for the tree itself. */
 class InformationTree {
 
 public:

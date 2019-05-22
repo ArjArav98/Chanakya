@@ -1,3 +1,4 @@
+/* Class which validates knowledge and config file syntax. */
 class InputValidate {
 
 	string filename;

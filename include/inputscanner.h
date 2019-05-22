@@ -1,3 +1,4 @@
+/* Class which reads input from the user and sanitises it. */
 class InputScanner {
 
 	/* Removes punctuation and redundant spaces in the string. */

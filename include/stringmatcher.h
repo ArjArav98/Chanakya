@@ -1,8 +1,10 @@
 typedef vector<string> Words;
 
+/* Class which compares strings inside nodes in the tree. */
 class StringMatcher {
 
 public:
+	/* Returns whether the param contains a '|' (alt.) or not. */
 	bool keywordHasAlternative(const string &keyword) {
 		int len = keyword.length();
 		for(int iter=0; iter<len; iter++) {
@@ -11,6 +13,7 @@ public:
 		return false;
 	}
 
+	/* Returns all alternatives from a given keyword. */
 	Words extractAlternatives(const string &keyword) {
 		Words alternatives;
 		int len = keyword.length();
@@ -27,6 +30,7 @@ public:
 		return alternatives;	
 	}
 
+	/* Compares the user sentence input with a node and returns a comparison score. */
 	int getComparisonScore(const Words &node_keywords, const Words &sentence_words) {	
 		int score = 0;
 

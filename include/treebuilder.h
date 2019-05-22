@@ -1,3 +1,4 @@
+/* Reads data from knowledge file and builds the tree.*/
 class TreeBuilder {
 	
 	string filename;
