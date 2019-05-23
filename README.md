@@ -5,25 +5,25 @@
   * The chatbot's field of expertise can be decided by ***you***, the developer!
   * By being written in C++ and accessing a local knowledge base, the chatbot is **extremely fast** and versatile.
 
-  ```
-  Chanakya: Hey there! I'm Chanakya!
-  Ask me anything about 'Star Wars - The Force Awakens'!
+    ```
+    Chanakya: Hey there! I'm Chanakya!
+    Ask me anything about 'Star Wars - The Force Awakens'!
   
-  You: who is the director?
-  Chanakya: JJ Abrams.
+    You: who is the director?
+    Chanakya: JJ Abrams.
   
-  You: when did the movie release?
-  Chanakya: The worldwide release was 25th December, 2015.
+    You: when did the movie release?
+    Chanakya: The worldwide release was 25th December, 2015.
   
-  You: name of daisy ridley's character?
-  Chanakya: Rey.
+    You: name of daisy ridley's character?
+    Chanakya: Rey.
   
-  You: han solo actor name
-  Chanakya: Harrison Ford.
+    You: han solo actor name
+    Chanakya: Harrison Ford.
   
-  You: bye
-  Chanakya: Bye!
-  ```
+    You: bye
+    Chanakya: Bye!
+    ```
 A sample exchange between the user and Chanakya with a **'Star Wars'** knowledge base. We can see that Chanakya **doesn't need perfect grammar** to understand what the user is asking.
 
 ### The Knowledge Base
