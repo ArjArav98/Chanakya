@@ -42,7 +42,21 @@ Chanakya's knowledge base should be present as a text file with the extension ``
 
   ```./a.out``` for Linux or Mac or ```chanakya``` for Windows.
 
-* **You now have a fully-functioning chatbot!** Since the sample domain is **'Chennai Super Kings' 2019 Season'**, you can ask questions like *'Who was the man of the match in the rcb v csk match?'* or *'Who is csk's batting coach?'*. Try different word combinations of the same question too.
+* **You now have a fully-functioning chatbot!** The sample domain is **'Chennai Super Kings' 2019 Season'**. If you don't know what to ask, you can consult the list of sample questions below.
+
+  ```
+  When did the finals happen?
+  Man of the match when csk played rcb?
+  Man of the match when csk played rcb at bangalore?
+  Highest run scorer for csk in this season?
+  Scoreboard of qualifier 1?
+  Who is csk's batting coach?
+  Drinks partner for csk?
+  Venue where the csk srh was played at the first time?
+  What happened when chennai played mumbai in the qualifier?
+  ```
+  You can try out different variations of the same question with different grammar to test out the chatbot's performance.
+
 * Feel free to point out mistakes or give any criticisms!
 
 ## Etymology
