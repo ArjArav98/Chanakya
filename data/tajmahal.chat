@@ -1,0 +1,43 @@
+history < root
+info < root
+intro < root
+
+history : when|date|year|who|why|reason built|constructed|construction|commissioned|shah|jahan|mumtaz|husband|wife|empress|emperor|queen|king .
+info : what|which|where|area|place architecture|architectural|design|materials|location|located|used|using .
+intro : about|information|info|introduction|introduce|brief|general|short .
+
+intr < intro
+intr : introduction|introduce .
+intr = The Taj Mahal is one of the seven wonders of the world. It is located in Agra, India. It was designated a UNESCO World Heritage Site in 1983. Ask Chanakya for more detailed information on the architecture, materials used, design and history of the Taj Mahal! Have fun .
+
+date < history
+date : when|date|year .
+date = The Taj Mahal was commissioned in 1631 and finished in 1643 .
+
+who < history
+who : built|build|constructed|commissioned|commission .
+who = The Taj Mahal was commissioned by Shah Jahan .
+
+why < history
+why : why|reason .
+why = Shah Jahan built the Taj Mahal in memory of his wife, Mumtaz Mahal, who tragically died while giving birth to a baby .
+
+shah < history
+shah : shah|jahan|emperor|king|husband .
+shah = Shah Jahan (1592-1666) was the fifth emperor of the Mughal dynasty and ruled most of northern India from 1628 to 1658. He was the son of the previous Mughal emperor, Jahangir. An able military commander, he is more known for his architectural achievements. He is considered to be one of the greatest Mughal emperors .
+
+mumtaz < history
+mumtaz : mumtaz|queen|empress|wife .
+mumtaz = Mumtaz Mahal (1593-1631) (born Arjumand Banu) was the Empress consort of the Mughal Empire from 1628 to 1631. She was married at the age of 19 to Prince Khurram, later Shah Jahan. She was the niece of Emperor Jahangir's wife, Nur Jahan. She mothered fourteen children with the Emperor. The Taj Mahal was built to commemorate Shah Jahan's love for her . 
+
+arch < info
+arch : architecture|architectural|design .
+arch = The Taj Mahal incorporates Persian and earlier Mughal architectural styles. It was built using white marble with inlaid semi-precious stones. This broke away from usual Mughal-era structures which were built with red sandstone .
+
+materials < info
+materials : materials|used|using .
+materials = Materials from all over India and Asia were transported to Agra. It is believed that over 10,000 elephants were used. Materials used included:- White Marble from Rajasthan, Jade and Crystal from China, Turquoise from Tibet, Lapis Lazuli from Afghanistan, Sapphire from Sri Lanka and Carnelian from Arabia .
+
+location < info
+location : location|located|area|place|city|town .
+location = It is located in the Indian city of Agra, on the southern bank of the Yamuna river .
