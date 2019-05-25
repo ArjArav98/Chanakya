@@ -38,6 +38,6 @@ void menu() {
 	
 	//We retrieve the field from the config file an print it.
 	cout<<endl<<name<<": Hey there! I'm "<<getConfigProperty("name")<<"!\n";
-	cout<<"Ask me anything about '"<<getConfigProperty("field")<<"'!\n\n";
+	cout<<"Enter 'help' for assistance. Ask me anything about '"<<getConfigProperty("field")<<"'!\n\n";
 
 }

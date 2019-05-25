@@ -1,10 +1,12 @@
 matches < root
 team < root
 stats < root
+help < root
 
 matches : who|whom|when|where|much|many won|lost|happened|happen|vs|score motm|man|match kkr|rcb|srh|dc|mi|rr|kxip mumbai|delhi|kolkata|rajasthan|punjab|hyderabad|bangalore playoffs|playoff|qualifier|qualifiers|final|finals .
 team : who|whom|which captain|vice|owner|coach|home|team|squad|players|overseas|foreign chinna|thala|chepauk company|sponsor|partner|ground tech|main|shirt|food|drinks .
 stats : who|whom highest|leading|most run|runs wicket|wickets score|scorer|take|taker 2019|season .
+help : help|h|helpme .
 
 kkr1 < matches
 kkr2 < matches
@@ -439,3 +441,5 @@ highestruns = MS Dhoni (416 runs) at an average of 42.20 .
 mostwickets < stats
 mostwickets : highest|most|leading wickets|wicket taken|took purple .
 mostwickets = Imran Tahir (26 wickets) .
+
+help = Not to worry. You can ask questions relating to information on CSK matches, dates, results, man of the matches and even team information like coaches, the captain, sponsors, etc .

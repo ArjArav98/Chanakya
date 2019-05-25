@@ -1,10 +1,12 @@
 history < root
 info < root
 intro < root
+help < root
 
 history : when|date|year|who|why|reason built|constructed|construction|commissioned|shah|jahan|mumtaz|husband|wife|empress|emperor|queen|king .
 info : what|which|where|area|place architecture|architectural|design|materials|location|located|used|using .
 intro : about|information|info|introduction|introduce|brief|general|short .
+help : help|h|helpme .
 
 intr < intro
 intr : introduction|introduce .
@@ -41,3 +43,5 @@ materials = Materials from all over India and Asia were transported to Agra. It 
 location < info
 location : location|located|area|place|city|town .
 location = It is located in the Indian city of Agra, on the southern bank of the Yamuna river .
+
+help = Not to worry. You can ask questions relating the history, architecture, materials used and location of the Taj Mahal. You can even get to know a bit about Shah Jahan and his beloved, Mumtaz Mahal .
