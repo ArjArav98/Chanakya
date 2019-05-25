@@ -1,7 +1,6 @@
 # Contents
 * [What is Chanakya?](#what-is-chanakya)
 * [Quickstart](#quickstart)
-* [How does Chanakya work?](#how-does-chanakya-work)
 * [Wait, what does 'Chanakya' mean?](#etymology)
 * [Tools](#tools)
 
@@ -73,17 +72,8 @@ A sample exchange between the user and Chanakya with a **'Star Wars'** knowledge
   ```
 * Feel free to point out mistakes or give any criticisms!
 
-## How does Chanakya work?
-
-### The Knowledge Base
-Chanakya's knowledge base should be present as a text file with the extension ```.chat```. The knowledge base can be built using a **unique syntax** created for this very purpose (more on that below). 
-
-  * The knowledge base can be built on any single domain of expertise such as **Star Wars** or **Indian history** or even, say, the **2016 US Presidential elections**.
-  * The file must always be present in the ```/data``` folder.
-  * A sample knowledge base file is present in the above directory in this git. The subject of the file is **'Chennai Super King's 2019 IPL campaign'**.
-
 ## Etymology
-It's named after **Chanakya** (371 BC - 283 BC), an ancient Indian teacher and royal advisor. Known with being a person who could *answer* the most ardous of questions, he is credited with playing an important role in the establishment of the Mauryan Empire. 
+It's named after **Chanakya** (371 BC - 283 BC), an ancient Indian teacher and royal advisor. Known for being a person who could *answer* the most ardous of questions, he is credited with playing an important role in the establishment of the Mauryan Empire. 
 
 ## Tools
 * Vim Editor
