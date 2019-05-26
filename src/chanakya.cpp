@@ -29,9 +29,9 @@ int main(){
 	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
 	string knowledge_file = getConfigProperty("knowledge_file");
-	InputValidate ip(knowledge_file);
+	KnowledgeValidate ip(knowledge_file);
 
-	if(!ip.inputIsValid) { /* If not valid, we display an error. */
+	if(!ip.knowledgeIsValid) { /* If not valid, we display an error. */
 		cout<<"Error: Syntax for knowledge base is wrong ";
 		cout<<"(Line "<<ip.file_line<<").\n";
 		return 0;

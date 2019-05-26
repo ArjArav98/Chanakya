@@ -1,17 +1,17 @@
-/* Class which validates knowledge and config file syntax. */
-class InputValidate {
+/* Class which validates knowledge file syntax. */
+class KnowledgeValidate {
 
 	string filename;
 
 public:
-	bool inputIsValid;
+	bool knowledgeIsValid;
 	int file_line;
 
-	InputValidate(string passed_filename) {
+	KnowledgeValidate(string passed_filename) {
 		file_line = 1;
 
 		filename = passed_filename;
-		inputIsValid = inputLinesAreValid();
+		knowledgeIsValid = knowledgeLinesAreValid();
 	}
 
 private:
@@ -21,7 +21,7 @@ private:
 
 	/* Each input line is matched to 3 RegExps and is valid if even one matches. */
 	/* If even one line is valid, this function returns true. */
-	bool inputLinesAreValid() {
+	bool knowledgeLinesAreValid() {
 
 		fstream file(filename.c_str());
 		string line;
@@ -74,7 +74,7 @@ private:
 	/* FUNCTIONS */
 	/*===========*/
 
-	/* For logic explanation, refer inputLinesAreValid() in InputValidate class. */
+	/* For logic explanation, refer knowledgeLinesAreValid() in KnowledgeValidate class. */
 	bool configLinesAreValid() {
 		fstream filename("../config/prog.config");
 		string line;
