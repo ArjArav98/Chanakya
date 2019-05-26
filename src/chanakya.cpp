@@ -17,16 +17,26 @@ using namespace std;
 int main(){
 
 	/*-------------*/
+	/* We validate the config file syntax. */
+	ConfigValidate cf;
+
+	if(!cf.configIsValid) { /* If invalid, we display an error. */
+		cout<<"Error: Syntax for config file is wrong ";
+		cout<<"(Line "<<cf.config_line<<").\n";
+		return 0;
+	}
+
+	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
 	string knowledge_file = getConfigProperty("knowledge_file");
 	InputValidate ip(knowledge_file);
 
-	if(!ip.inputIsValid) {
-		cout<<"Error: Syntax for knowledge base or config file is wrong ";
+	if(!ip.inputIsValid) { /* If not valid, we display an error. */
+		cout<<"Error: Syntax for knowledge base is wrong ";
 		cout<<"(Line "<<ip.file_line<<").\n";
 		return 0;
 	}
-
+	
 	/*-------------*/
 	/* We build the tree using the knowledge file. */
 	TreeBuilder tbuilder(knowledge_file);

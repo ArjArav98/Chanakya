@@ -2,20 +2,16 @@
 class InputValidate {
 
 	string filename;
-	string config_filename;
 
 public:
 	bool inputIsValid;
-	bool configIsValid;
 	int file_line;
 
 	InputValidate(string passed_filename) {
 		file_line = 1;
+
 		filename = passed_filename;
 		inputIsValid = inputLinesAreValid();
-
-		config_filename = "../config/prog.config";
-		configIsValid = configLinesAreValid();
 	}
 
 private:
@@ -60,14 +56,33 @@ private:
 
 	}
 
-	/* Similarly, we validate the config source file. */
-	bool configLinesAreValid() {
+};
 
-		fstream filename(config_filename.c_str());
+class ConfigValidate {
+
+public:
+	bool configIsValid;
+	int config_line;
+
+	ConfigValidate() {
+		config_line = 1;
+		configIsValid = configLinesAreValid();
+	}
+
+private:
+	/*===========*/
+	/* FUNCTIONS */
+	/*===========*/
+
+	/* For logic explanation, refer inputLinesAreValid() in InputValidate class. */
+	bool configLinesAreValid() {
+		fstream filename("../config/prog.config");
 		string line;
 
-		regex expression("[.]+( )+=( )+[.]+( )+\\.");
+		regex expression("(.)+( )+=( )+(.)+( )+\\.");
 		regex expression_two("( )*");
+
+		getline(filename, line);
 
 		while(true) {
 			if(!regex_match(line,expression)) {
@@ -77,6 +92,7 @@ private:
 				}
 			}
 			getline(filename, line);
+			config_line++;
 			if(filename.eof()) break;
 		}
 
