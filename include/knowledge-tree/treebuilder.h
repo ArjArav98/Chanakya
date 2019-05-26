@@ -55,7 +55,8 @@ public:
 				/* We simply read the file from this position. */
 				/* This saves memory! */
 
-				infotree.setValue(current_node, file.tellg());
+				int position = file.tellg();
+				infotree.setValue(current_node, position-1);
 
 				/* We then have to navigate to the end of the line. */
 				string word;
