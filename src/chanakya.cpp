@@ -7,12 +7,12 @@
 using namespace std;
 
 /* User-defined libraries. */
-#include"../include/utilities.h"
-#include"../include/infotrees.h"
-#include"../include/stringmatcher.h"
-#include"../include/treebuilder.h"
-#include"../include/inputvalidate.h"
-#include"../include/inputscanner.h"
+#include"../include/utilities/utilities.h"
+#include"../include/knowledge-tree/infotrees.h"
+#include"../include/knowledge-tree/stringmatcher.h"
+#include"../include/knowledge-tree/treebuilder.h"
+#include"../include/file-validation/inputvalidate.h"
+#include"../include/user-input/inputscanner.h"
 
 int main(){
 
