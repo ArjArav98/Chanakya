@@ -1,0 +1,53 @@
+intro < root
+info < root
+threat < root
+help < root
+
+intro : tell introduction|introduce|info|brief|short|about .
+info : where|which|what|how found|find|located|location|place|area|eat|prey|diet|food|reproduce|reproduction|birth|cubs|children|scientific|name|genus|species|family|sub|subfamily|class|order|phylum|kingdom .
+threat : what|done threat|danger|endangered|status|poaching|human|conserve|conserving|conservation|protection|protect|efforts|effort|population|numbers .
+help : help|h|helpme .
+
+intro = The Bengal Tiger is a mammal belonging to the Panthera Tigris family of Tigers. It is primarily found in the Sundarbans region of India, Bangladesh and in Nepal and Bhutan. It is listed as 'Endangered' in the IUCN Red List since 2008 .
+
+help = Not to worry! You can ask questions on the Bengal Tiger's diet, habitat, birting and mating patterns, scientific name, genus, kingdom, etc. You can also ask questions related to the conservation efforts for the tiger .
+
+where < info
+where : found|find|location|place|area|located .
+where = The Bengal Tiger is found in India, Bangladesh, Bhutan and Nepal .
+
+eat < info
+eat : eat|prey|diet|food .
+eat = The tiger is carnivorous. It prefers hunting large ungulates such as deer, chital, sambar and even water buffaloes. Medium-sized prey include wild boars and langurs. Due to human encroachment, it also preys on human livestock .
+
+rep < info
+rep : reproduce|reproduction|birth|cubs|children .
+rep = The Bengal Tiger has no definite mating and birth seasons. Males reach maturity at 3-5 years old and females at 3-4. Tiger cubs are born in caves or areas with tall grass. Their eyes and ears are closed. They begin to eat solid food at around 2 months of age and hunt at around 5-6 months of age. At 2-3 years, they start to separate from their family .
+
+scname < info
+scname : scientific|name .
+scname = Panthera tigris tigris .
+
+genus < info
+genus : genus .
+genus = Panthera .
+
+species < info
+species : species .
+species = Panthera tigris .
+
+family < info
+family : family|subfamily|sub|class|order|phylum|kingdom .
+family = Kingdom is Animalia. Phylum is Chordata. Class is Mammalia. Order is Carnivora. Family is Felidae. Subfamily is Pantherinae .
+
+status < threat
+status : status|endangered .
+status = The Bengal Tiger has been endangered as per the IUCN Red List from 2008. Human encroachment, deforestation, poaching and habitat deforestation have led to this .
+
+conserve < threat
+conserve : conserve|conserving|conservation|protection|efforts|protect|help .
+conserve = There have been multiple conservation efforts, the most famous being, Project Tiger in India. The Indian government has set up 8 new tiger reserves to combat the endangerment of tigers .
+
+pop < threat
+pop : population|numbers .
+pop = There are 2,226 individuals in India, 440 in Bangladesh, 163-253 in Nepal and 103 in Bhutan .
