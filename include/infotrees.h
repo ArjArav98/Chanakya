@@ -2,7 +2,7 @@
 class TreeNode {
 public:
 	string id; //ID of the node.
-	int valueIndex; //Index of required '=' sign.
+	int valuePosition; //Position of value in file.
 
 	vector<string> keywords;
 	vector<TreeNode> children;	
@@ -38,36 +38,25 @@ public:
 
 		/* We open the file in a stream. */
 		fstream file(filename.c_str());
-		int valueIter = 0; //To keep track of '=' encountered.
+		
+		/* One string for storing values and another for reading. */
 		string values = "";
+		string keyword;
 
-		/* We read until the eof has been encountered. */
-		while(!file.eof()) {
-			string keyword;
+		/* The cursor is set at position where value is present in file.*/
+		file.seekg(valuePosition);
+		file >> keyword;
+
+		/* The loop iterates until a dot is read. */
+		while(true) {
 			file >> keyword;
+			if(keyword == ".") break;
 
-			/* If '=' is encountered.*/
-			if(keyword == "=") {
-				valueIter++;
-
-				/* If this '=' number matches the one in valueIndex. */
-				if(valueIter == valueIndex) {
-					/* We append all strings read until dot in 'value'. */
-					while(true) {
-						file >> keyword;
-						if(keyword == ".") break;
-
-						values.append(keyword);
-						values.push_back(' ');
-					}
-
-					values.pop_back();
-					break;
-				}
-
-			}
-
+			values.append(keyword); /* String appended to values string. */
+			values.push_back(' '); /* We add a space after each word. */
 		}
+
+		values.pop_back(); /* We pop out trailing space character. */
 
 		file.close();
 		return values; 
@@ -110,11 +99,11 @@ public:
 	}
 
 	/* Sets valueNumber to node with given id. */
-	void setValue(string id, int valueIndex) {
+	void setValue(string id, int valuePosition) {
 		TreeNode* node = getNode(id, &root);
 		if(node == NULL) return;
 
-		node->valueIndex = valueIndex;
+		node->valuePosition = valuePosition;
 	}
 
 	/* Adds a keyword to the node. */
