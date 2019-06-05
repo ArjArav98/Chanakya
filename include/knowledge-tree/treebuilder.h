@@ -39,24 +39,29 @@ public:
 			}
 			/* If the operator is ':', meaning adding keywords. */
 			else if(op == ":") {
-				string keyword;
-				file >> keyword;
+				
+				/* Instead of storing keywords, we store file cursor pos. */
+				/* We read file from this pos when retrieving keywords. */
+				/* This saves memory! */
 
-				while(keyword != ".") {
-					infotree.addKeyword(current_node, keyword);
-					file >> keyword;
-				}
+				int position = file.tellg();
+				infotree.setKeywordPosition(current_node, position-1);
 
+				/* We then have to navigate to the end of the line. */
+				string word;
+				file >> word;
+
+				while(word != ".") file >> word;
 			}
 			/* If the operator is '=', meaning assigning values. */
 			else if(op == "=") {	
 
 				/* Instead of storing values, we store the file cursor pos. */
-				/* We simply read the file from this position. */
+				/* We read file from this pos when retrieving values. */
 				/* This saves memory! */
 
 				int position = file.tellg();
-				infotree.setValue(current_node, position-1);
+				infotree.setValuePosition(current_node, position-1);
 
 				/* We then have to navigate to the end of the line. */
 				string word;

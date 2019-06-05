@@ -1,10 +1,11 @@
 /* Class definition for each individual node in the tree. */
 class TreeNode {
-public:
-	string id; //ID of the node.
-	int valuePosition; //Position of value in file.
 
-	vector<string> keywords;
+public:
+	int valuePosition; //Position of value in file.
+	int keywordPosition; //Position of keywords in file.
+
+	string id; //ID of this node.
 	vector<TreeNode> children;	
 
 	/*==============*/
@@ -35,8 +36,6 @@ public:
 
 		/* We get the name of the knowledge file from the config file. */
 		string filename = getConfigProperty("knowledge_file");
-
-		/* We open the file in a stream. */
 		fstream file(filename.c_str());
 		
 		/* One string for storing values and another for reading. */
@@ -62,6 +61,34 @@ public:
 		return values; 
 
 	}
+
+	vector<string> keywords() {
+
+		/* We get the name of the knowledge file from the config file. */
+		string filename = getConfigProperty("knowledge_file");
+		fstream file(filename.c_str());
+		
+		/* Vector for storing values and string for reading. */
+		vector<string> node_keywords;
+		string keyword;
+
+		/* The cursor is set at position where value is present in file.*/
+		file.seekg(keywordPosition);
+		file >> keyword;
+
+		/* The loop iterates until a dot is read. */
+		while(true) {
+			file >> keyword;
+			if(keyword == ".") break;
+
+			node_keywords.push_back(keyword);
+		}
+
+		file.close();
+		return node_keywords;
+
+	}
+
 };
 
 /* Class definiton for the tree itself. */
@@ -98,20 +125,20 @@ public:
 		parent->children.push_back(temp);
 	}
 
-	/* Sets valueNumber to node with given id. */
-	void setValue(string id, int valuePosition) {
+	/* Sets valuePosition to position in file. */
+	void setValuePosition(string id, int valuePosition) {
 		TreeNode* node = getNode(id, &root);
 		if(node == NULL) return;
 
 		node->valuePosition = valuePosition;
 	}
 
-	/* Adds a keyword to the node. */
-	void addKeyword(string id, string keyword) {
+	/* Sets keywordPosition to position in file. */
+	void setKeywordPosition(string id, int keywordPosition) {
 		TreeNode* node = getNode(id, &root);
 		if(node == NULL) return;
 
-		node->keywords.push_back(keyword);
+		node->keywordPosition = keywordPosition;
 	}
 
 	/*-------------------*/
@@ -139,7 +166,8 @@ public:
 
 	}
 
-	void print(TreeNode passed_root) {
+	/* Debugging function. */
+	/* void print(TreeNode passed_root) {
 		
 		cout<<"The parent is "<<passed_root.id<<endl;
 		cout<<"The children are :- ";
@@ -167,6 +195,6 @@ public:
 			print(passed_root.children[iter]);
 		}
 
-	}
+	} */
 
 };

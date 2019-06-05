@@ -52,25 +52,28 @@ int main(){
 	/* The loop for asking questions. */
 	while(true) {
 
-		//We get the sentence as a vector of strings.
+		/* We get the sentence as a vector of strings. */
 		InputScanner in;
 		vector<string> sentence = in.getLine("You: ");
 
-		//We exit if 0th element of vector is exit.
-		if(sentence[0] == "bye") break;
+		/* If nothing is entered, we 'continue'. */
+		/* If 'bye' is entered, we exit the loop. */
+		if(sentence.size() == 0) continue;
+		else if(sentence[0] == "bye") break;
 
 		/*---------------*/
 		/* The loop for searching for the node. */
 		while(true) {
-			//We iterate over the children in the current node.
+
+			/* We iterate over the children in the current node. */
 			int childrenLen = current_node.children.size();
 			int maxScore = -1000;
 			TreeNode temp_node;
 
-			//We get the comparisonScore for each node's keywords and the sentence.
+			/* We get the comparisonScore for each node's keywords and the sentence. */
 			for(int iter=0; iter<childrenLen; iter++) {
 				StringMatcher sm;
-				int score = sm.getComparisonScore(current_node.children[iter].keywords, sentence);
+				int score = sm.getComparisonScore(current_node.children[iter].keywords(), sentence);
 				if(score > maxScore) { 
 					temp_node = current_node.children[iter];
 					maxScore = score;
@@ -79,7 +82,7 @@ int main(){
 
 			current_node = temp_node;
 
-			//If the node has no children, then it is leaf node.
+			/* If the node has no children, then it is leaf node. */
 			if(current_node.children.size() == 0) {
 				cout<<name<<": "<<current_node.value()<<".\n\n";
 				break;
@@ -87,7 +90,7 @@ int main(){
 
 		}
 
-		//We reset the current_node to the infotree root.
+		/* We reset the current_node to the infotree root. */
 		current_node = infotree.root;
 
 	}
