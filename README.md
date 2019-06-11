@@ -10,6 +10,7 @@
   * When answering questions read from the user, the chatbot accesses a **large knowledge base**, present in its memory, to find the required information. 
   * The chatbot's field of expertise can be decided by ***you***, the developer!
   * By being written in C++ and accessing a local knowledge base, the chatbot is **extremely fast** and versatile.
+  * Ideal for implementing in situations where chatbots specialised in a single-domain are required such as information guides, shop assistants, educational bots, etc.
 
     ```
     Chanakya: Hey there! I'm Chanakya!
