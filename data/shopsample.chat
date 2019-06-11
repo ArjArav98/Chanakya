@@ -1,0 +1,50 @@
+startmenu < root
+startmenu : introduction|intro|brief|about|help tell|what .
+startmenu = We are a bookstore located in XYZ, Wakanda. We sell books in many genres such as adventure/action, crime, mystery and fantasy. Choose the genre you would like to browse .
+
+adventure < root
+adventure : adventure|action .
+adventure = The store contains books in this genre from authors Tom Clancy and Michael Crichton. Enter the names of an author to view a list of his/her books .
+
+crime < root
+crime : crime|murder|kill|violence .
+crime = The store contains books in this genre from author John Grisham. Enter the names of an author to view a list of his/her books .
+
+mystery < root
+mystery : mystery|mysteries|case|detective|puzzle .
+mystery = The store contains books in this genre from authors such as Arthur Conan Doyle and Dan Brown. Enter the names of an author to view a list of his/her books . 
+
+fantasy < root
+fantasy : fantasy|magic|monster|monsters .
+fantasy = The store contains books in this genre from authors JK Rowling and George RR Martin. Enter the namesof an author to view a list of his/her books .
+
+books < root
+books : tom|clancy|michael|crichton|john|grisham|arthur|conan|doyle|dan|brown|jk|rowling|george|rr|martin .
+
+clancy < books
+clancy : tom|clancy .
+clancy = The Hunt For Red October (1984), Patriot Games (1987), Clear and Present Danger (1989) .
+
+crichton < books
+crichton : michael|crichton .
+crichton = Jurassic Park (1990), Timeline(1999) and Sphere (1987) .
+
+grisham < books
+grisham : john|grisham .
+grisham = The Firm (1991), The Pelican Brief (1992) .
+
+doyle < books
+doyle : arthur|conan|doyle .
+doyle = Sherlock Holmes - The Complete Collection (1893-1920) .
+
+brown < books
+brown : dan|brown .
+brown = Da Vinci Code (2003) .
+
+rowling < books
+rowling : jk|rowling .
+rowling = Harry Potter and the Deathly Hallows (2007) .
+
+rrmartin < books
+rrmartin : george|rr|martin .
+rrmartin = A Dance of Dragons (2011) .
