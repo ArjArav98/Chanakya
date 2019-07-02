@@ -1,16 +1,18 @@
 # Contents
 * [What is Chanakya?](#what-is-chanakya)
+* [Where can it be used?](#where-can-it-be-used)
 * [Quickstart](#quickstart)
+* [Any planned features?](#planned-features)
 * [Wait, what does 'Chanakya' mean?](#etymology)
 * [Tools](#tools)
 
 ## What is Chanakya?
-**Chanakya is a simple yet completely customisable, scalable and lightweight chatbot.** Based on the AI concept of 'Expert Systems', Chanakya is written wholly from scratch in C++. 
+**Chanakya is a simple yet completely customisable, scalable and lightweight chatbot.** It is written wholly in C++ and is inspired by the AI concept of 'Expert Systems'. Chanakya has a simple mechanism:- It takes questions from the user, consults a local knowledge base and returns a result. I've listed down some of Chanakya's major features and differences from other chatbots.
 
-  * When answering questions read from the user, the chatbot accesses a **large knowledge base**, present in its memory, to find the required information. 
-  * The chatbot's field of expertise can be decided by ***you***, the developer!
-  * By being written in C++ and accessing a local knowledge base, the chatbot is **extremely fast** and versatile.
-  * Ideal for implementing in situations where chatbots specialised in a single-domain are required such as **information guides**, **shop assistants**, **educational bots**, etc.
+* Chanakya's field of expertise can be ***completely customised*** by you, the user! Using a simple syntax that I created for this purpose, you can create knowledge bases for Chanakya on any topic.
+* It is ***extremely scalable***. The knowledge base can be increased or decreased with very little impact on performance.
+* Chanakya is a ***lightweight*** application and consumes very little memory and CPU time!
+* It returns fast and accurate results even if the grammar and semantics of the question aren't exactly correct.
 
     ```
     Chanakya: Hey there! I'm Chanakya!
@@ -32,6 +34,13 @@
     Chanakya: Bye!
     ```
 A sample exchange between the user and Chanakya with a **'Star Wars'** knowledge base. We can see that Chanakya **doesn't need perfect grammar** to understand what the user is asking.
+
+## Where can it be used?
+Right now, Chanakya isn't really a production-grade application. However, I am planning to develop a web API which will be able to take questions from a webpage and then return a result. In any case, Chanakya has a wide variety of use-cases in day-to-day life.
+
+* An **educational** and interactive bot for children to learn about various topics and subjects. For example, the 'Bengal Tiger' knowledge base which I've created could be used to let children learn more about the animal and its eating and living habits.
+* An **interactive tour guide**. Chanakya could be installed at any monument or heritage site and be used to educate visitors about the place.
+* An **e-commerce shopkeeper** which could potentially help customers locate or find a product of their choice amongst the items in a shop.
 
 ## Quickstart
 * Clone or download the repository to your machine.
@@ -73,14 +82,17 @@ A sample exchange between the user and Chanakya with a **'Star Wars'** knowledge
   ```
 * Feel free to point out mistakes or give any criticisms!
 
+## Any planned features?
+Here's a list of some of the features I'd like to implement in the future in no particular order.
+
+* **Word Stemming** - This might help conserve space when adding keywords for a particular branch in the knowledge base.
+* **Web API** - An API which can help webpages utilise Chanakya with a simple function call.
+* **Approximate Spellings** - In case the spelling of a word is wrong, then an approximation of what the correct word might be can be done.
+* **Documentation** - A proper documentation for Chanakya's logic, code and usage.
+
 ## Etymology
 It's named after **Chanakya** (371 BC - 283 BC), an ancient Indian teacher and royal advisor. Known for being a person who could *answer* the most ardous of questions, he is credited with playing an important role in the establishment of the Mauryan Empire. 
 
 ## Tools
 * Vim Editor
 * Clang C++ Compiler
-
-## Work In Progress
-Chanakya is still a work in progress.
-* It is always being refined to make it more efficient and fast.
-* I'm also thinking about creating a web API so that it can be used in websites. 
