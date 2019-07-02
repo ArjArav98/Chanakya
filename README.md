@@ -89,6 +89,7 @@ Here's a list of some of the features I'd like to implement in the future in no 
 * **Web API** - An API which can help webpages utilise Chanakya with a simple function call.
 * **Approximate Spellings** - In case the spelling of a word is wrong, then an approximation of what the correct word might be can be done.
 * **Documentation** - A proper documentation for Chanakya's logic, code and usage.
+* **Context** - Adding 'context' to conversations with Chanakya.
 
 ## Etymology
 It's named after **Chanakya** (371 BC - 283 BC), an ancient Indian teacher and royal advisor. Known for being a person who could *answer* the most ardous of questions, he is credited with playing an important role in the establishment of the Mauryan Empire. 
