@@ -24,7 +24,7 @@
     You: when did the movie release?
     Chanakya: The worldwide release was 25th December, 2015.
   
-    You: name of daisy ridley's character?
+    You: name of daisy ridley character?
     Chanakya: Rey.
   
     You: han solo actor name
