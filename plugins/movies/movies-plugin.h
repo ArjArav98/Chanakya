@@ -20,7 +20,20 @@ class Movies: Plugin {
 		if(options[0] != 20) { /* If there is a valid answer... */
 			
 			saveHTMLFromURL(getRequestURL(options));
-			vector<string> films = getDataFromHTML();
+			vector<string> unfilteredFilms = getDataFromHTML();
+
+			/* We will filter according to year, if option is present. */
+			vector<string> films;
+			if(options[1] != 0) { /* if a year is present. */
+				int noOfFilms = unfilteredFilms.size();
+				for(int iter=0; iter<noOfFilms; iter++) {
+					/* if a year is found....*/
+					if(unfilteredFilms[iter].find(to_string(options[1])) != string::npos) {
+						films.push_back(unfilteredFilms[iter]);
+					}
+				}
+			}
+			else films = unfilteredFilms;
 
 			/* We format the starting according to the given mode. */
 			if(onlyPlugins) cout<<name<<": The top films in the ";
@@ -46,8 +59,13 @@ class Movies: Plugin {
 			else if(options[0] == 17) cout<<"'Western'";
 			else if(options[0] == 18) cout<<"'All'";
 			else if(options[0] == 19) cout<<("year "+to_string(options[1]));
+			else;
 
-			cout<<" are shown below, along with the year of their release. Information is sourced live from Rotten Tomatoes.\n";
+			/* If year is present, we fill in the year. */
+			if(options[1] != 0) cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
+			else cout<<"genre are shown below, along with the year of their release. ";
+
+			cout<<"Information is sourced live from Rotten Tomatoes.\n";
 
 			formatTextIntoCols(2,films);
 			cout<<"\n";
@@ -57,7 +75,9 @@ class Movies: Plugin {
 
 	private:
 	vector<int> parseOptionsFromInput(vector<string> input) {
-		
+
+		/* The first option is genre. Second is year and third is oscar-winning. */
+
 		string genres[] = {"adventure","action", "animation","art","international","classic","comedy","documentary","drama","horror","kids","family","musical","dance","music","mystery","suspense","thriller","romance","science","sci","fantasy","special","sports","fitness","game","television","western","all"};
 		int genreOptions[] = {1,1,2,3,3,4,5,6,7,8,9,9,10,10,10,11,11,11,12,13,13,13,14,15,15,15,16,17,18};
 		int noOfGenres = 29;
@@ -73,24 +93,28 @@ class Movies: Plugin {
 					break;
 				}
 			}
-			if (options.size() != 0) { /* If a genre exists, then return the options. */
-				options.push_back(2020);
-				return options;
-			}
+			if (options.size() != 0) break; /* If a genre exists, then break. */
 		}
+
+		if(options.size() == 0) options.push_back(18); /* If no genres, then we suggest 'all'. */
 
 		/* If no genre existed, then we search for the year. */
 		for(int iter=0; iter<size; iter++) {
 			if(isYear(input[iter])) {
-				options.push_back(19);
 				options.push_back(stoi(input[iter]));
 				return options;
 			}
 		}
 
-		/* If no year or genre is present, then we give a no-result. */
-		options.push_back(20);
-		options.push_back(2020);
+		if(options.size() == 1) options.push_back(0); /* If no year, then we suggest all. */
+
+		/* We search to see if any awards were given to the movie. */
+		/*size = input.size();
+		for(int iter=0; iter<size; iter++) {
+			if(input[iter] == "oscar" || input[iter] == "oscars") options.push_back(1);
+		}
+
+		if(options.size() == 2) options.push_back(0);*/ /* If no awards, then all. */
 
 		return options;
 	}
@@ -117,7 +141,7 @@ class Movies: Plugin {
 		else if(options[0] == 18) return "https://www.rottentomatoes.com/top/bestofrt/";
 		else if(options[0] == 19) return "https://www.rottentomatoes.com/top/bestofrt/?year="+to_string(options[1]);
 
-}
+	}
 
 	void saveHTMLFromURL(string url) {
 		string cmd = "curl -s " + url + " > data.txt";
@@ -152,75 +176,6 @@ class Movies: Plugin {
 		
 		file.close();
 		return movies;
-	}
-
-	/* UTILITIES FUNCTIONS */
-
-	private:
-	string removeHTMLTagsFromText(string text) {
-		
-		int length = text.length();
-		int flag = 0;
-
-		string newWord = "";
-
-		for(int iter=0; iter<length; iter++) {
-			if(flag == 2) flag = 0;
-			if(text[iter] == '<') flag = 1;
-			if(text[iter] == '>') flag = 2;
-			if(flag == 0) newWord += text[iter];
-			else if(flag == 1);
-		}
-
-		return newWord;
-	}
-
-	bool isYear(string word) {
-		if(word.length() != 4) return false;
-		else {
-			for(int iter=0; iter<4; iter++) {
-				if((word[iter] < '0') || (word[iter] > '9')) return false;
-			}
-			return true;
-		}
-	}
-
-	void formatTextIntoCols(int columns, vector<string> input) {
-
-		/* We declare the largestLengths and init to 0. */
-		int* largestLengths = new int[columns];
-		for(int iter=0; iter<columns; iter++) largestLengths[iter] = 0;
-
-		int colIter = 0;
-		int size = input.size();
-
-		/* We get the largest lengths for all the columns. */
-		for(int iter=0; iter<size; iter++, colIter++) {
-			if(input[iter].length() > largestLengths[colIter]) largestLengths[colIter] = input[iter].length();
-			if(colIter == (columns-1)) colIter = -1;
-		}
-
-		/* We make every length larger by 2 for padding. */
-		for(int iter=0; iter<columns; iter++) largestLengths[iter] += 2;
-
-		/* We now do the printing. */
-		colIter = 0;
-		cout<<"\n";
-
-		for(int iter=0; iter<size; iter++, colIter++) {
-			
-			cout<<" "<<input[iter]; /* We print the text. */
-			
-			int remainingSpaces = largestLengths[colIter] - input[iter].length();
-			for(int jiter=0; jiter<remainingSpaces; jiter++) cout<<" "; /* We print the spaces. */
-
-			if(colIter == (columns-1)) {
-				colIter = -1;
-				cout<<endl;
-			}
-		}
-
-		delete[] largestLengths;
 	}
 
 };
