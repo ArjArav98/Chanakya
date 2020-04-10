@@ -85,6 +85,7 @@ int main(){
 			/* If the node has no children, then it is leaf node. */
 			if(current_node.children.size() == 0) {
 				cout<<name<<": "<<current_node.value()<<".\n\n";
+				//Need to put the plugins code here. Should be just one line or something.
 				break;
 			}
 
