@@ -120,13 +120,13 @@ class Movies: Plugin {
 }
 
 	void saveHTMLFromURL(string url) {
-		string cmd = "curl -s " + url + " >> movies.txt";
+		string cmd = "curl -s " + url + " > data.txt";
 		system(cmd.c_str());
 	}	
 
 	vector<string> getDataFromHTML() {
 		
-		ifstream file("movies.txt");
+		ifstream file("data.txt");
 		string word;
 		string movie = "";
 
@@ -205,6 +205,8 @@ class Movies: Plugin {
 
 		/* We now do the printing. */
 		colIter = 0;
+		cout<<"\n";
+
 		for(int iter=0; iter<size; iter++, colIter++) {
 			
 			cout<<" "<<input[iter]; /* We print the text. */
