@@ -3,6 +3,7 @@
 class Movies: Plugin {
 
 	public:
+	/* We basically check whether this is the right plugin to be called. */
 	int getInputComparisonScore(vector<string> input) {
 		int length = input.size();
 
@@ -13,6 +14,7 @@ class Movies: Plugin {
 		return 0;
 	}
 
+	/* Takes the data (movies vector) given and displays it in a formatted way. */
 	void displayAnswer(vector<string> input, string name, bool onlyPlugins) {
 
 		vector<int> options = parseOptionsFromInput(input);
@@ -20,20 +22,7 @@ class Movies: Plugin {
 		if(options[0] != 20) { /* If there is a valid answer... */
 			
 			saveHTMLFromURL(getRequestURL(options));
-			vector<string> unfilteredFilms = getDataFromHTML();
-
-			/* We will filter according to year, if option is present. */
-			vector<string> films;
-			if(options[1] != 0) { /* if a year is present. */
-				int noOfFilms = unfilteredFilms.size();
-				for(int iter=0; iter<noOfFilms; iter++) {
-					/* if a year is found....*/
-					if(unfilteredFilms[iter].find(to_string(options[1])) != string::npos) {
-						films.push_back(unfilteredFilms[iter]);
-					}
-				}
-			}
-			else films = unfilteredFilms;
+			vector<string> films = getDataFromHTML();
 
 			/* We format the starting according to the given mode. */
 			if(onlyPlugins) cout<<name<<": The top films in the ";
@@ -42,47 +31,42 @@ class Movies: Plugin {
 			/* We fill in the genres. */
 			if(options[0] == 1) cout<<"'Adventure & Action'";
 			else if(options[0] == 2) cout<<"'Animation'";
-			else if(options[0] == 3) cout<<"'Art House and International'";
-			else if(options[0] == 4) cout<<"'Classics'";
-			else if(options[0] == 5) cout<<"'Comedy'";
-			else if(options[0] == 6) cout<<"'Documentary'";
-			else if(options[0] == 7) cout<<"'Drama'";
-			else if(options[0] == 8) cout<<"'Horror'";
-			else if(options[0] == 9) cout<<"'Kids & Family'";
-			else if(options[0] == 10) cout<<"'Musicals and Performing Arts'";
-			else if(options[0] == 11) cout<<"'Mystery, Suspense and Thriller'";
-			else if(options[0] == 12) cout<<"'Romance'";
-			else if(options[0] == 13) cout<<"'Sci-Fi & Fantasy'";
-			else if(options[0] == 14) cout<<"'Special Interests'";
-			else if(options[0] == 15) cout<<"'Sports & Fitness'";
-			else if(options[0] == 16) cout<<"'Television Movies'";
-			else if(options[0] == 17) cout<<"'Western'";
-			else if(options[0] == 18) cout<<"'All'";
-			else if(options[0] == 19) cout<<("year "+to_string(options[1]));
-			else if(options[0] == 21) cout<<"'Best Picture - Oscars'";
-			else if(ootions[0] == 22) cout<<"'Tamil'";
+			else if(options[0] == 3) cout<<"'Comedy'";
+			else if(options[0] == 4) cout<<"'Drama'";
+			else if(options[0] == 5) cout<<"'Horror'";
+			else if(options[0] == 6) cout<<"'Kids & Family'";
+			else if(options[0] == 7) cout<<"'Music & Musicals'";
+			else if(options[0] == 8) cout<<"'Mystery'";
+			else if(options[0] == 9) cout<<"'Suspense & Thriller'";
+			else if(options[0] == 10) cout<<"'Romance'";
+			else if(options[0] == 11) cout<<"'Sci-Fi'";
+			else if(options[0] == 12) cout<<"'Sports'";
+			else if(options[0] == 13) cout<<"'War'";
+			else if(options[0] == 16) cout<<"'All'";
+			else if(options[0] == 14) cout<<"'Oscar-Winning - Best Feature Film' genre. These films would have won only the year later, as the Academy Awards mostly feature films made the previous year. Movies from this ";
+			else if(options[0] == 15) cout<<"'Kollywood/Tamil'";
+			else if(options[0] == 17) cout<<"'BAFTA-Winning - Best Feature Film'";
 			else;
 
 			/* If year is present, we fill in the year. */
 			if(options[1] != 0) cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
 			else cout<<" genre are shown below, along with the year of their release. ";
 
-			cout<<"Information is sourced live from Rotten Tomatoes.\n";
-
-			formatTextIntoCols(2,films);
+			cout<<" Information is sourced live from criticker.com!\n";
+			formatTextIntoCols(2,films); //We format the movie titles into two columns.
 			cout<<"\n";
 		}
 
 	}
 
 	private:
+	/* Given the vector input, we parse options (parameters) for the URL requests. */
 	vector<int> parseOptionsFromInput(vector<string> input) {
 
 		/* The first option is genre (awards are genres too). Second option is year. */
-
-		string genres[] = {"adventure","action", "animation","art","international","classic","comedy","documentary","drama","horror","kids","family","musical","dance","music","mystery","suspense","thriller","romance","science","sci","fantasy","special","sports","fitness","game","television","western","all","oscars","oscar","award","awards","tamil","kollywood"};
-		int genreOptions[] = {1,1,2,3,3,4,5,6,7,8,9,9,10,10,10,11,11,11,12,13,13,13,14,15,15,15,16,17,18,21,21,21,21,22,22};
-		int noOfGenres = 35;
+		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","all","oscars","oscar","award","awards","tamil","kollywood","bafta"};
+		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,16,14,14,14,14,15,15,17};
+		int noOfGenres = 30;
 
 		vector<int> options;
 
@@ -97,8 +81,7 @@ class Movies: Plugin {
 			}
 			if (options.size() != 0) break; /* If a genre exists, then break. */
 		}
-
-		if(options.size() == 0) options.push_back(18); /* If no genres, then we suggest 'all'. */
+		if(options.size() == 0) options.push_back(16); /* If no genres, then we suggest 'all'. */
 
 		/* If no genre existed, then we search for the year. */
 		for(int iter=0; iter<size; iter++) {
@@ -107,43 +90,55 @@ class Movies: Plugin {
 				return options;
 			}
 		}
-
 		if(options.size() == 1) options.push_back(0); /* If no year, then we suggest all. */
+		
 		return options;
 	}
 
+	/* Using the options (parameters) given, we formulate the request URL. */
 	string getRequestURL(vector<int> options) {
 
-		if(options[0] == 1) return "https://www.rottentomatoes.com/top/bestofrt/top_100_action__adventure_movies/";
-		else if(options[0] == 2) return "https://www.rottentomatoes.com/top/bestofrt/top_100_animation_movies/";
-		else if(options[0] == 3) return "https://www.rottentomatoes.com/top/bestofrt/top_100_art_house__international_movies/";
-		else if(options[0] == 4) return "https://www.rottentomatoes.com/top/bestofrt/top_100_classics_movies/";
-		else if(options[0] == 5) return "https://www.rottentomatoes.com/top/bestofrt/top_100_comedy_movies/";
-		else if(options[0] == 6) return "https://www.rottentomatoes.com/top/bestofrt/top_100_documentary_movies/";
-		else if(options[0] == 7) return "https://www.rottentomatoes.com/top/bestofrt/top_100_drama_movies/";
-		else if(options[0] == 8) return "https://www.rottentomatoes.com/top/bestofrt/top_100_horror_movies/";
-		else if(options[0] == 9) return "https://www.rottentomatoes.com/top/bestofrt/top_100_kids__family_movies/";
-		else if(options[0] == 10) return "https://www.rottentomatoes.com/top/bestofrt/top_100_musical__performing_arts_movies/";
-		else if(options[0] == 11) return "https://www.rottentomatoes.com/top/bestofrt/top_100_mystery__suspense_movies/";
-		else if(options[0] == 12) return "https://www.rottentomatoes.com/top/bestofrt/top_100_romance_movies/";
-		else if(options[0] == 13) return "https://www.rottentomatoes.com/top/bestofrt/top_100_science_fiction__fantasy_movies/";
-		else if(options[0] == 14) return "https://www.rottentomatoes.com/top/bestofrt/top_100_special_interest_movies/";
-		else if(options[0] == 15) return "https://www.rottentomatoes.com/top/bestofrt/top_100_sports__fitness_movies/";
-		else if(options[0] == 16) return "https://www.rottentomatoes.com/top/bestofrt/top_100_television_movies/";
-		else if(options[0] == 17) return "https://www.rottentomatoes.com/top/bestofrt/top_100_western_movies/";
-		else if(options[0] == 18) return "https://www.rottentomatoes.com/top/bestofrt/";
-		else if(options[0] == 19) return "https://www.rottentomatoes.com/top/bestofrt/?year="+to_string(options[1]);
-		else if(options[0] == 21) return "https://www.criticker.com/films/?filter=e3139zod";
-		else if(options[0] == 22) return "'https://www.criticker.com/films/?filter=e3075&p=1' 'https://www.criticker.com/films/?filter=e3075&p=2' 'https://www.criticker.com/films/?filter=e3075&p=3' 'https://www.criticker.com/films/?filter=e3075&p=4'";
+		string baseURL = "'https://www.criticker.com/films/?filter=";
 
-		return "";
+		if(options[0] == 1) baseURL.append("gy12x13zi1zf1900zt2030zor'"); //action
+		else if(options[0] == 2) baseURL.append("gy18zi1zf1900zt2030zor'"); //animated
+		else if(options[0] == 3) baseURL.append("gy2zi1zf1900zt2030zor'"); //comedy
+		else if(options[0] == 4) baseURL.append("gy3zi1zf1900zt2030zor'"); //drama
+		else if(options[0] == 5) baseURL.append("gy15zi1zf1900zt2030zor'"); //horror
+		else if(options[0] == 6) baseURL.append("gy10zi1zf1900zt2030zor'"); //kids
+		else if(options[0] == 7) baseURL.append("gy41x9zi1zf1900zt2030zor'"); //music
+		else if(options[0] == 8) baseURL.append("gy17zi1zf1900zt2030zor'"); //mystery
+		else if(options[0] == 9) baseURL.append("gy6zi1zf1900zt2030zor'"); //thriller/suspense
+		else if(options[0] == 10) baseURL.append("gy1zi1zf1900zt2030zor'"); //romance
+		else if(options[0] == 11) baseURL.append("gy5zi1zf1900zt2030zor'"); //scifi
+		else if(options[0] == 12) baseURL.append("gy34zi1zf1900zt2030zor'"); //sport
+		else if(options[0] == 13) baseURL.append("gy14zi1zf1900zt2030zor'"); //war
+		else if(options[0] == 14) baseURL.append("f1900zt2030ze3139zod'"); //oscar
+		else if(options[0] == 15) baseURL.append("f1900zt2030ze3075zor'"); //tamil
+		else if(options[0] == 16) baseURL.append("i1zf1900zt2030zor'"); //all
+		else if(options[0] == 17) baseURL.append("f1900zt2030ze10797zod'"); //bafta
+		else;
+
+		/* For year, we replace year in URL with our own. */
+		if(options[1] != 0 && options[0] == 14) {
+			baseURL.replace(baseURL.find("1900"),4,to_string(options[1]-1));
+			baseURL.replace(baseURL.find("2030"),4,to_string(options[1]-1));
+		}
+		else if(options[1] != 0) {
+			baseURL.replace(baseURL.find("1900"),4,to_string(options[1]));
+			baseURL.replace(baseURL.find("2030"),4,to_string(options[1]));
+		}
+		
+		return baseURL;
 	}
 
+	/* We save the request response HTML to a file. */
 	void saveHTMLFromURL(string url) {
 		string cmd = "curl -s " + url + " > data.txt";
 		system(cmd.c_str());
 	}	
 
+	/* We parse the response HTML in the file to get our data (movie vectors). */
 	vector<string> getDataFromHTML() {
 		
 		ifstream file("data.txt");
@@ -155,19 +150,7 @@ class Movies: Plugin {
 		while(!file.eof()) {
 			file>>word;
 			
-			if(word == "articleLink\">") {
-				file>>word;
-				movie += word + " ";
-				
-				while(!file.eof() && word != "</td>") {	
-					file>>word;
-					movie += word + " ";
-				}
-
-				movies.push_back(removeHTMLTagsFromText(movie));
-				movie = "";
-			}
-			else if(word == "class='fl_titlelist_link'") {
+			if(word == "class='fl_titlelist_link'") {
 
 				int flag = 0;
 				char character;
