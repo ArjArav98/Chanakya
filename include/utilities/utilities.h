@@ -66,7 +66,7 @@ string removeHTMLTagsFromText(string text) {
 		if(text[iter] == '<') flag = 1;
 		if(text[iter] == '>') flag = 2;
 		if(flag == 0) newWord += text[iter];
-		else if(flag == 1);
+		else if(flag == 1){ }
 	}
 
 	return newWord;

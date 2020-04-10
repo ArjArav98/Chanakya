@@ -59,11 +59,13 @@ class Movies: Plugin {
 			else if(options[0] == 17) cout<<"'Western'";
 			else if(options[0] == 18) cout<<"'All'";
 			else if(options[0] == 19) cout<<("year "+to_string(options[1]));
+			else if(options[0] == 21) cout<<"'Best Picture - Oscars'";
+			else if(ootions[0] == 22) cout<<"'Tamil'";
 			else;
 
 			/* If year is present, we fill in the year. */
 			if(options[1] != 0) cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
-			else cout<<"genre are shown below, along with the year of their release. ";
+			else cout<<" genre are shown below, along with the year of their release. ";
 
 			cout<<"Information is sourced live from Rotten Tomatoes.\n";
 
@@ -76,11 +78,11 @@ class Movies: Plugin {
 	private:
 	vector<int> parseOptionsFromInput(vector<string> input) {
 
-		/* The first option is genre. Second is year and third is oscar-winning. */
+		/* The first option is genre (awards are genres too). Second option is year. */
 
-		string genres[] = {"adventure","action", "animation","art","international","classic","comedy","documentary","drama","horror","kids","family","musical","dance","music","mystery","suspense","thriller","romance","science","sci","fantasy","special","sports","fitness","game","television","western","all"};
-		int genreOptions[] = {1,1,2,3,3,4,5,6,7,8,9,9,10,10,10,11,11,11,12,13,13,13,14,15,15,15,16,17,18};
-		int noOfGenres = 29;
+		string genres[] = {"adventure","action", "animation","art","international","classic","comedy","documentary","drama","horror","kids","family","musical","dance","music","mystery","suspense","thriller","romance","science","sci","fantasy","special","sports","fitness","game","television","western","all","oscars","oscar","award","awards","tamil","kollywood"};
+		int genreOptions[] = {1,1,2,3,3,4,5,6,7,8,9,9,10,10,10,11,11,11,12,13,13,13,14,15,15,15,16,17,18,21,21,21,21,22,22};
+		int noOfGenres = 35;
 
 		vector<int> options;
 
@@ -107,15 +109,6 @@ class Movies: Plugin {
 		}
 
 		if(options.size() == 1) options.push_back(0); /* If no year, then we suggest all. */
-
-		/* We search to see if any awards were given to the movie. */
-		/*size = input.size();
-		for(int iter=0; iter<size; iter++) {
-			if(input[iter] == "oscar" || input[iter] == "oscars") options.push_back(1);
-		}
-
-		if(options.size() == 2) options.push_back(0);*/ /* If no awards, then all. */
-
 		return options;
 	}
 
@@ -140,7 +133,10 @@ class Movies: Plugin {
 		else if(options[0] == 17) return "https://www.rottentomatoes.com/top/bestofrt/top_100_western_movies/";
 		else if(options[0] == 18) return "https://www.rottentomatoes.com/top/bestofrt/";
 		else if(options[0] == 19) return "https://www.rottentomatoes.com/top/bestofrt/?year="+to_string(options[1]);
+		else if(options[0] == 21) return "https://www.criticker.com/films/?filter=e3139zod";
+		else if(options[0] == 22) return "'https://www.criticker.com/films/?filter=e3075&p=1' 'https://www.criticker.com/films/?filter=e3075&p=2' 'https://www.criticker.com/films/?filter=e3075&p=3' 'https://www.criticker.com/films/?filter=e3075&p=4'";
 
+		return "";
 	}
 
 	void saveHTMLFromURL(string url) {
@@ -160,7 +156,6 @@ class Movies: Plugin {
 			file>>word;
 			
 			if(word == "articleLink\">") {
-
 				file>>word;
 				movie += word + " ";
 				
@@ -172,6 +167,23 @@ class Movies: Plugin {
 				movies.push_back(removeHTMLTagsFromText(movie));
 				movie = "";
 			}
+			else if(word == "class='fl_titlelist_link'") {
+
+				int flag = 0;
+				char character;
+
+				while(true) {
+					file.get(character);
+					if(character == '<') break;
+					if(flag == 1) movie.push_back(character);
+					if(character == '>') flag = 1;	
+				}
+
+				movies.push_back(movie);
+				movie = "";
+			
+			}
+
 		}
 		
 		file.close();
