@@ -13,6 +13,7 @@ using namespace std;
 #include"../include/knowledge-tree/treebuilder.h"
 #include"../include/file-validation/inputvalidate.h"
 #include"../include/user-input/inputscanner.h"
+#include"../include/plugins/plugins.h"
 
 int main(){
 
@@ -48,6 +49,10 @@ int main(){
 	string name = getConfigProperty("name");
 	menu();
 
+	/***************/
+	/* We declare the plugins modules. */
+	Plugins plugins;
+
 	/*-------------*/
 	/* The loop for asking questions. */
 	while(true) {
@@ -64,6 +69,13 @@ int main(){
 		/*---------------*/
 		/* The loop for searching for the node. */
 		while(true) {
+
+			/* If off-topic, then we break from loop. */
+			if(plugins.areOffTopic(sentence)) {
+				plugins.displayAnswers(sentence,name,true);
+				cout<<"\n";
+				break;
+			}
 
 			/* We iterate over the children in the current node. */
 			int childrenLen = current_node.children.size();
@@ -84,8 +96,8 @@ int main(){
 
 			/* If the node has no children, then it is leaf node. */
 			if(current_node.children.size() == 0) {
-				cout<<name<<": "<<current_node.value()<<".\n";
-				//Need to put the plugins code here. Should be just one line or something.
+				cout<<name<<": "<<current_node.value()<<".\n"; /* Print the lead node value. */
+				plugins.displayAnswers(sentence,name,false); /* Print plugins answer, if any. */
 				cout<<"\n";
 				break;
 			}

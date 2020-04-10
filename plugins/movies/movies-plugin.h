@@ -1,11 +1,4 @@
-#include<iostream>
-#include<string>
-#include<cstring>
-#include<vector>
-#include<fstream>
-using namespace std;
-
-#include"plugin.h"
+#include"../../include/plugins/plugin.h"
 
 class Movies: Plugin {
 
@@ -31,7 +24,7 @@ class Movies: Plugin {
 
 			/* We format the starting according to the given mode. */
 			if(onlyPlugins) cout<<name<<": The top films in the ";
-			else cout<<name<<": Additionally, according to Rotten Tomatoes, these are the top films in the ";
+			else cout<<"\n"<<name<<": Additionally, according to Rotten Tomatoes, these are the top films in the ";
 
 			/* We fill in the genres. */
 			if(options[0] == 1) cout<<"'Adventure & Action'";
@@ -56,11 +49,7 @@ class Movies: Plugin {
 
 			cout<<" are shown below, along with the year of their release. Information is sourced live from Rotten Tomatoes.\n";
 
-			int noOfFilms = films.size();
-			for(int iter=0; iter<noOfFilms; iter++) {
-				cout<<endl<<films[iter];
-			}
-
+			formatTextIntoCols(2,films);
 			cout<<"\n";
 		}
 
@@ -196,24 +185,40 @@ class Movies: Plugin {
 		}
 	}
 
+	void formatTextIntoCols(int columns, vector<string> input) {
+
+		/* We declare the largestLengths and init to 0. */
+		int* largestLengths = new int[columns];
+		for(int iter=0; iter<columns; iter++) largestLengths[iter] = 0;
+
+		int colIter = 0;
+		int size = input.size();
+
+		/* We get the largest lengths for all the columns. */
+		for(int iter=0; iter<size; iter++, colIter++) {
+			if(input[iter].length() > largestLengths[colIter]) largestLengths[colIter] = input[iter].length();
+			if(colIter == (columns-1)) colIter = -1;
+		}
+
+		/* We make every length larger by 2 for padding. */
+		for(int iter=0; iter<columns; iter++) largestLengths[iter] += 2;
+
+		/* We now do the printing. */
+		colIter = 0;
+		for(int iter=0; iter<size; iter++, colIter++) {
+			
+			cout<<" "<<input[iter]; /* We print the text. */
+			
+			int remainingSpaces = largestLengths[colIter] - input[iter].length();
+			for(int jiter=0; jiter<remainingSpaces; jiter++) cout<<" "; /* We print the spaces. */
+
+			if(colIter == (columns-1)) {
+				colIter = -1;
+				cout<<endl;
+			}
+		}
+
+		delete[] largestLengths;
+	}
+
 };
-
-int main() {
-
-	vector<string> input;
-	input.push_back("tell");
-	input.push_back("me");
-	input.push_back("some");
-	input.push_back("good");
-	input.push_back("action");
-	input.push_back("films");
-	/*input.push_back("");
-	input.push_back("");
-	input.push_back("");
-	input.push_back("");*/
-
-	Movies movies;
-	movies.displayAnswer(input,"Chanakya",true);
-	
-	return 0;
-}
