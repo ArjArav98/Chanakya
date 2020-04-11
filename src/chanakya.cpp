@@ -70,8 +70,20 @@ int main(){
 		/* The loop for searching for the node. */
 		while(true) {
 
-			/* If off-topic, then we break from loop. */
-			if(plugins.areOffTopic(sentence)) {
+			/* We check if there is any plugin activity or not. */
+			if(plugins.hasBeenMadeActive(sentence)) {
+				plugins.areMainTopic = true;
+				cout<<name<<": You have enabled the secondary topics. Ask me anything ";
+				cout<<"about movies, TV shows, the news and restaurants (and, hopefully, I can answer).\n\n";
+				break;
+			}
+			else if(plugins.hasBeenMadeInactive(sentence)) {
+				plugins.areMainTopic = false;
+				cout<<name<<": I've now updated my brain to the main topic, ";
+				cout<<"'"<<getConfigProperty("field")<<"', again. Let's do this!\n\n";
+				break;
+			}
+			else if(plugins.areMainTopic) {
 				plugins.displayAnswers(sentence,name,true);
 				cout<<"\n";
 				break;
@@ -109,6 +121,6 @@ int main(){
 
 	}
 
-	cout<<name<<": Bye!\n\n";
+	cout<<name<<": Okay, bye!\n\n";
 	return 0;
 }

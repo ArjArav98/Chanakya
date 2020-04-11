@@ -4,6 +4,10 @@
 class Movies: Plugin {
 
 	public:
+	string getName() {
+		return "Movies";
+	}
+
 	/***************/
 	/* We basically check whether this is the right plugin to be called. */
 	int getInputComparisonScore(vector<string> input) {
@@ -69,7 +73,8 @@ class Movies: Plugin {
 			formatTextIntoCols(-1,results); /* We format the movie titles into two columns. */
 		}
 	
-		cout<<"\n";
+		cout<<endl<<"Feel free to ask me more questions about movie recommendations ";
+		cout<<"(you can even specify the genre and year), individual movie details and even movie news!\n\n";
 
 	}
 
@@ -159,10 +164,10 @@ class Movies: Plugin {
 		string cmd = "curl -s " + url + " > data.txt";
 		system(cmd.c_str()); /* Downloading file from URL. */
 
-		cmd = "sed -i \"\" \"s/&quot;/\\\"/g\" data.txt";
+		cmd = " cat data.txt | sed 's/&quot;/\"/g' | sed \"s/&#039;/'/g\" > tempdata.txt";
 		system(cmd.c_str()); /* Replacing &quot; with ". */
 
-		cmd = "sed -i \"\" \"s/&#039;/'/g\" data.txt";
+		cmd = "cat tempdata.txt > data.txt; rm tempdata.txt";
 		system(cmd.c_str()); /* Replacing &#039; with '. */
 	}	
 

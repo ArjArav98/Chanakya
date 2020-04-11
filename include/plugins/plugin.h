@@ -1,5 +1,6 @@
 class Plugin {
 	public:
+	virtual string getName() = 0;
 	virtual int getInputComparisonScore(vector<string> input) = 0;
 	virtual void displayAnswer(vector<string> input, string name, bool pluginsOnly) = 0;
 

@@ -39,6 +39,8 @@ void menu() {
 	//We retrieve the field from the config file an print it.
 	cout<<endl<<name<<": Hey there! I'm "<<getConfigProperty("name")<<"!\n";
 	cout<<"Enter 'help' for assistance. Ask me anything about '"<<getConfigProperty("field")<<"'!\n\n";
+	cout<<name<<": For information about a host of secondary topics such as movies, TV shows, news updates and restaurants, enter 'offtopic'. To come back to the main topic, enter 'ontopic'.\n\n";
+	cout<<name<<": When you're done, enter 'bye'!\n\n";
 
 }
 
