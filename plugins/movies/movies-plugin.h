@@ -1,8 +1,10 @@
 #include"../../include/plugins/plugin.h"
 
+/* Movies implements the Plugin abstract class. */
 class Movies: Plugin {
 
 	public:
+	/***************/
 	/* We basically check whether this is the right plugin to be called. */
 	int getInputComparisonScore(vector<string> input) {
 		int length = input.size();
@@ -14,6 +16,7 @@ class Movies: Plugin {
 		return 0;
 	}
 
+	/***************/
 	/* Takes the data (movies vector) given and displays it in a formatted way. */
 	void displayAnswer(vector<string> input, string name, bool onlyPlugins) {
 
@@ -29,24 +32,28 @@ class Movies: Plugin {
 			else cout<<"\n"<<name<<": Additionally, according to Rotten Tomatoes, these are the top films in the ";
 
 			/* We fill in the genres. */
-			if(options[0] == 1) cout<<"'Adventure & Action'";
-			else if(options[0] == 2) cout<<"'Animation'";
-			else if(options[0] == 3) cout<<"'Comedy'";
-			else if(options[0] == 4) cout<<"'Drama'";
-			else if(options[0] == 5) cout<<"'Horror'";
-			else if(options[0] == 6) cout<<"'Kids & Family'";
-			else if(options[0] == 7) cout<<"'Music & Musicals'";
-			else if(options[0] == 8) cout<<"'Mystery'";
-			else if(options[0] == 9) cout<<"'Suspense & Thriller'";
-			else if(options[0] == 10) cout<<"'Romance'";
-			else if(options[0] == 11) cout<<"'Sci-Fi'";
-			else if(options[0] == 12) cout<<"'Sports'";
-			else if(options[0] == 13) cout<<"'War'";
-			else if(options[0] == 16) cout<<"'All'";
-			else if(options[0] == 14) cout<<"'Oscar-Winning - Best Feature Film' genre. These films would have won only the year later, as the Academy Awards mostly feature films made the previous year. Movies from this ";
-			else if(options[0] == 15) cout<<"'Kollywood/Tamil'";
-			else if(options[0] == 17) cout<<"'BAFTA-Winning - Best Feature Film'";
-			else;
+			switch(options[0]) {
+				case 1: cout<<"'Adventure & Action'"; break;
+				case 2: cout<<"'Animation'"; break;
+				case 3: cout<<"'Comedy'"; break;
+				case 4: cout<<"'Drama'"; break;
+				case 5: cout<<"'Horror'"; break;
+				case 6: cout<<"'Kids & Family'"; break;
+				case 7: cout<<"'Music & Musicals'"; break;
+				case 8: cout<<"'Mystery'"; break;
+				case 9: cout<<"'Suspense & Thriller'"; break;
+				case 10: cout<<"'Romance'"; break;
+				case 11: cout<<"'Sci-Fi'"; break;
+				case 12: cout<<"'Sports'"; break;
+				case 13: cout<<"'War'"; break;
+				case 16: cout<<"'All'"; break;
+				case 14: cout<<"'Oscar-Winning - Best Feature Film' genre. These films would have won only the year later, as the Academy Awards mostly feature films made the previous year. Movies from this "; break;
+				case 15: cout<<"'Kollywood/Tamil'"; break;
+				case 17: cout<<"'BAFTA-Winning - Best Feature Film'"; break;
+				case 18: cout<<"'Disney Original Movies'"; break;
+				case 19: cout<<"'Malayalam'"; break;
+			}
+			
 
 			/* If year is present, we fill in the year. */
 			if(options[1] != 0) cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
@@ -60,13 +67,15 @@ class Movies: Plugin {
 	}
 
 	private:
+	
+	/***************/
 	/* Given the vector input, we parse options (parameters) for the URL requests. */
 	vector<int> parseOptionsFromInput(vector<string> input) {
 
 		/* The first option is genre (awards are genres too). Second option is year. */
-		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","all","oscars","oscar","award","awards","tamil","kollywood","bafta"};
-		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,16,14,14,14,14,15,15,17};
-		int noOfGenres = 30;
+		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","all"};
+		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,16};
+		int noOfGenres = 35;
 
 		vector<int> options;
 
@@ -95,29 +104,33 @@ class Movies: Plugin {
 		return options;
 	}
 
+	/***************/
 	/* Using the options (parameters) given, we formulate the request URL. */
 	string getRequestURL(vector<int> options) {
 
 		string baseURL = "'https://www.criticker.com/films/?filter=";
 
-		if(options[0] == 1) baseURL.append("gy12x13zi1zf1900zt2030zor'"); //action
-		else if(options[0] == 2) baseURL.append("gy18zi1zf1900zt2030zor'"); //animated
-		else if(options[0] == 3) baseURL.append("gy2zi1zf1900zt2030zor'"); //comedy
-		else if(options[0] == 4) baseURL.append("gy3zi1zf1900zt2030zor'"); //drama
-		else if(options[0] == 5) baseURL.append("gy15zi1zf1900zt2030zor'"); //horror
-		else if(options[0] == 6) baseURL.append("gy10zi1zf1900zt2030zor'"); //kids
-		else if(options[0] == 7) baseURL.append("gy41x9zi1zf1900zt2030zor'"); //music
-		else if(options[0] == 8) baseURL.append("gy17zi1zf1900zt2030zor'"); //mystery
-		else if(options[0] == 9) baseURL.append("gy6zi1zf1900zt2030zor'"); //thriller/suspense
-		else if(options[0] == 10) baseURL.append("gy1zi1zf1900zt2030zor'"); //romance
-		else if(options[0] == 11) baseURL.append("gy5zi1zf1900zt2030zor'"); //scifi
-		else if(options[0] == 12) baseURL.append("gy34zi1zf1900zt2030zor'"); //sport
-		else if(options[0] == 13) baseURL.append("gy14zi1zf1900zt2030zor'"); //war
-		else if(options[0] == 14) baseURL.append("f1900zt2030ze3139zod'"); //oscar
-		else if(options[0] == 15) baseURL.append("f1900zt2030ze3075zor'"); //tamil
-		else if(options[0] == 16) baseURL.append("i1zf1900zt2030zor'"); //all
-		else if(options[0] == 17) baseURL.append("f1900zt2030ze10797zod'"); //bafta
-		else;
+		switch(options[0]) {
+			case 1: baseURL.append("gy12x13zi1zf1900zt2030zor'"); break; //action
+			case 2: baseURL.append("gy18zi1zf1900zt2030zor'"); break; //animated
+			case 3: baseURL.append("gy2zi1zf1900zt2030zor'"); break; //comedy
+			case 4: baseURL.append("gy3zi1zf1900zt2030zor'"); break; //drama
+			case 5: baseURL.append("gy15zi1zf1900zt2030zor'"); break; //horror
+			case 6: baseURL.append("gy10zi1zf1900zt2030zor'"); break; //kids
+			case 7: baseURL.append("gy41x9zi1zf1900zt2030zor'"); break; //music
+			case 8: baseURL.append("gy17zi1zf1900zt2030zor'"); break; //mystery
+			case 9: baseURL.append("gy6zi1zf1900zt2030zor'"); break; //thriller/suspense
+			case 10: baseURL.append("gy1zi1zf1900zt2030zor'"); break; //romance
+			case 11: baseURL.append("gy5zi1zf1900zt2030zor'"); break; //scifi
+			case 12: baseURL.append("gy34zi1zf1900zt2030zor'"); break; //sport
+			case 13: baseURL.append("gy14zi1zf1900zt2030zor'"); break; //war
+			case 14: baseURL.append("f1900zt2030ze3139zod'"); break; //oscar
+			case 15: baseURL.append("f1900zt2030ze3075zor'"); break; //tamil
+			case 16: baseURL.append("i1zf1900zt2030zor'"); break; //all
+			case 17: baseURL.append("f1900zt2030ze10797zod'"); break; //bafta
+			case 18: baseURL.append("f1900zt2030ze42853zor'"); break; //disney/disney+
+			case 19: baseURL.append("f1900zt2030ze2908zor'"); break; //malayalam
+		}
 
 		/* For year, we replace year in URL with our own. */
 		if(options[1] != 0 && options[0] == 14) {
@@ -132,12 +145,14 @@ class Movies: Plugin {
 		return baseURL;
 	}
 
+	/***************/
 	/* We save the request response HTML to a file. */
 	void saveHTMLFromURL(string url) {
 		string cmd = "curl -s " + url + " > data.txt";
 		system(cmd.c_str());
 	}	
 
+	/****************/
 	/* We parse the response HTML in the file to get our data (movie vectors). */
 	vector<string> getDataFromHTML() {
 		
