@@ -22,47 +22,54 @@ class Movies: Plugin {
 
 		vector<int> options = parseOptionsFromInput(input);
 		
-		if(options[0] != 20) { /* If there is a valid answer... */
-			
-			saveHTMLFromURL(getRequestURL(options));
-			vector<string> films = getDataFromHTML();
+		saveHTMLFromURL(getRequestURL(options));
+		vector<string> results = getDataFromHTML();
 
-			/* We format the starting according to the given mode. */
-			if(onlyPlugins) cout<<name<<": The top films in the ";
-			else cout<<"\n"<<name<<": Additionally, according to Rotten Tomatoes, these are the top films in the ";
+		/* We format the starting according to the given mode. */
+		if(onlyPlugins) cout<<name<<": The top films in the ";
+		else cout<<"\n"<<name<<": Additionally, according to Rotten Tomatoes, these are the top ";
 
-			/* We fill in the genres. */
-			switch(options[0]) {
-				case 1: cout<<"'Adventure & Action'"; break;
-				case 2: cout<<"'Animation'"; break;
-				case 3: cout<<"'Comedy'"; break;
-				case 4: cout<<"'Drama'"; break;
-				case 5: cout<<"'Horror'"; break;
-				case 6: cout<<"'Kids & Family'"; break;
-				case 7: cout<<"'Music & Musicals'"; break;
-				case 8: cout<<"'Mystery'"; break;
-				case 9: cout<<"'Suspense & Thriller'"; break;
-				case 10: cout<<"'Romance'"; break;
-				case 11: cout<<"'Sci-Fi'"; break;
-				case 12: cout<<"'Sports'"; break;
-				case 13: cout<<"'War'"; break;
-				case 16: cout<<"'All'"; break;
-				case 14: cout<<"'Oscar-Winning - Best Feature Film' genre. These films would have won only the year later, as the Academy Awards mostly feature films made the previous year. Movies from this "; break;
-				case 15: cout<<"'Kollywood/Tamil'"; break;
-				case 17: cout<<"'BAFTA-Winning - Best Feature Film'"; break;
-				case 18: cout<<"'Disney Original Movies'"; break;
-				case 19: cout<<"'Malayalam'"; break;
-			}
-			
-
-			/* If year is present, we fill in the year. */
-			if(options[1] != 0) cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
-			else cout<<" genre are shown below, along with the year of their release. ";
-
-			cout<<" Information is sourced live from criticker.com!\n";
-			formatTextIntoCols(2,films); //We format the movie titles into two columns.
-			cout<<"\n";
+		/* We fill in the genres. */
+		switch(options[0]) {
+			case 1: cout<<"'Adventure & Action'"; break;
+			case 2: cout<<"'Animation'"; break;
+			case 3: cout<<"'Comedy'"; break;
+			case 4: cout<<"'Drama'"; break;
+			case 5: cout<<"'Horror'"; break;
+			case 6: cout<<"'Kids & Family'"; break;
+			case 7: cout<<"'Music & Musicals'"; break;
+			case 8: cout<<"'Mystery'"; break;
+			case 9: cout<<"'Suspense & Thriller'"; break;
+			case 10: cout<<"'Romance'"; break;
+			case 11: cout<<"'Sci-Fi'"; break;
+			case 12: cout<<"'Sports'"; break;
+			case 13: cout<<"'War'"; break;
+			case 16: cout<<"'All'"; break;
+			case 14: cout<<"'Oscar-Winning - Best Feature Film' genre. These films would have won only the year later, as the Academy Awards mostly feature films made the previous year. Movies from this "; break;
+			case 15: cout<<"'Kollywood/Tamil'"; break;
+			case 17: cout<<"'BAFTA-Winning - Best Feature Film'"; break;
+			case 18: cout<<"'Disney Original Movies'"; break;
+			case 19: cout<<"'Malayalam'"; break;
 		}
+		
+		/* Further printing... */
+		if(options[1] != 0) { /* If a year is requested, then print that. */
+			cout<<" genre from the year "+to_string(options[1])+" are shown below. ";
+			cout<<" Information is sourced live from criticker.com!\n";
+			formatTextIntoCols(2,results); /* We format the movie titles into two columns. */
+		}
+		else if(options[0] != 20) { /* Every genre, other than news... */
+			cout<<" genre are shown below, along with the year of their release. ";
+			cout<<" Information is sourced live from criticker.com!\n";
+			formatTextIntoCols(2,results); /* We format the movie titles into two columns. */
+		}
+		else if(options[0] == 20) { /* The news genre... */
+			cout<<" updates and news from the world of movies and entertainment. ";
+			cout<<" Information is sources live from hollywoodreporter.com!\n\n";
+			formatTextIntoCols(-1,results); /* We format the movie titles into two columns. */
+		}
+	
+		cout<<"\n";
 
 	}
 
@@ -73,9 +80,9 @@ class Movies: Plugin {
 	vector<int> parseOptionsFromInput(vector<string> input) {
 
 		/* The first option is genre (awards are genres too). Second option is year. */
-		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","all"};
-		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,16};
-		int noOfGenres = 35;
+		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","news","updates","update","all"};
+		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,20,20,20,16};
+		int noOfGenres = 38;
 
 		vector<int> options;
 
@@ -130,14 +137,15 @@ class Movies: Plugin {
 			case 17: baseURL.append("f1900zt2030ze10797zod'"); break; //bafta
 			case 18: baseURL.append("f1900zt2030ze42853zor'"); break; //disney/disney+
 			case 19: baseURL.append("f1900zt2030ze2908zor'"); break; //malayalam
+			case 20: baseURL = "'https://www.hollywoodreporter.com/topic/movies'"; break; //news
 		}
 
 		/* For year, we replace year in URL with our own. */
-		if(options[1] != 0 && options[0] == 14) {
+		if(options[1] != 0 && options[0] == 14) { /* For Oscars, +1 year as award is presented next year only. */
 			baseURL.replace(baseURL.find("1900"),4,to_string(options[1]-1));
 			baseURL.replace(baseURL.find("2030"),4,to_string(options[1]-1));
 		}
-		else if(options[1] != 0) {
+		else if(options[1] != 0 && options[0] != 20) { /* No year replace for news results. */
 			baseURL.replace(baseURL.find("1900"),4,to_string(options[1]));
 			baseURL.replace(baseURL.find("2030"),4,to_string(options[1]));
 		}
@@ -149,7 +157,13 @@ class Movies: Plugin {
 	/* We save the request response HTML to a file. */
 	void saveHTMLFromURL(string url) {
 		string cmd = "curl -s " + url + " > data.txt";
-		system(cmd.c_str());
+		system(cmd.c_str()); /* Downloading file from URL. */
+
+		cmd = "sed -i \"\" \"s/&quot;/\\\"/g\" data.txt";
+		system(cmd.c_str()); /* Replacing &quot; with ". */
+
+		cmd = "sed -i \"\" \"s/&#039;/'/g\" data.txt";
+		system(cmd.c_str()); /* Replacing &#039; with '. */
 	}	
 
 	/****************/
@@ -164,7 +178,8 @@ class Movies: Plugin {
 
 		while(!file.eof()) {
 			file>>word;
-			
+		
+			/* Web-Scraping Movies from Criticker.com */
 			if(word == "class='fl_titlelist_link'") {
 
 				int flag = 0;
@@ -179,11 +194,28 @@ class Movies: Plugin {
 
 				movies.push_back(movie);
 				movie = "";
-			
 			}
+			/* Web-Scraping News from hollywoodreporter.com. */
+			if(word == "class=\"topic-card__headline") {
+				
+				int flag = 0;
+				char character;
 
+				while(true) {
+					file.get(character);
+					if(character == '<') break;
+					if(flag == 1) movie.push_back(character);
+					if(character == '>') {
+						flag = 1;
+						movie.append("--> ");
+					}
+				}
+
+				movies.push_back(movie);
+				movie = "";
+			}
 		}
-		
+
 		file.close();
 		return movies;
 	}

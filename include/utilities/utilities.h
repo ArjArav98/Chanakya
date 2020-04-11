@@ -75,6 +75,12 @@ string removeHTMLTagsFromText(string text) {
 /* We can display strings into a number of columns or a table. */
 void formatTextIntoCols(int columns, vector<string> input) {
 
+	if(columns == -1) { /* No formatting into columns. */
+		int size = input.size();
+		for(int iter=0; iter<size; iter++) cout<<input[iter]<<endl;
+		return;
+	}
+
 	/* We declare the largestLengths and init to 0. */
 	int* largestLengths = new int[columns];
 	for(int iter=0; iter<columns; iter++) largestLengths[iter] = 0;
