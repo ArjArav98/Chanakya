@@ -6,14 +6,21 @@ class Plugins {
 
 	public:
 	bool areMainTopic;
+	int previousTopic;
 
-	Plugins() { areMainTopic = false; }
+	Plugins() { areMainTopic = false; previousTopic = -1; }
 
 	void displayAnswers(vector<string> input, string name, bool pluginsOnly) {
 		/* Plugin functions go here. */
-		if(movies.getInputComparisonScore(input) == 1) movies.displayAnswer(input,name,pluginsOnly);
+		if(movies.canGiveAnAnswer(input) == 1) {
+			movies.displayAnswer(input,name,pluginsOnly);
+			previousTopic = 1;
+		}
 		else {
-			if(pluginsOnly) cout<<name<<": Sorry, I couldn't find anything related to that!\n";
+			if(previousTopic == 1) movies.displayAnswer(input,name,pluginsOnly);
+			else {
+				if(pluginsOnly) cout<<name<<": Sorry, I couldn't find anything related to that!\n";
+			}
 		}
 	}
 

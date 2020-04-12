@@ -11,13 +11,14 @@ class InputScanner {
 	
 			/* We remove punctuation and redundant spaces. */
 			if(current == ' ' && original_question[iter-1] == ' ');
+			else if(current == '"') new_question.push_back(current);
 			else if(current >= '!' && current <= '/');
 			else if(current >= ':' && current <= '@');
 			else if(current >= '[' && current <= '`');
 			else if(current >= '{' && current <= '~');
 			else new_question.push_back(current);
 		}
-
+		
 		return new_question;
 	}
 

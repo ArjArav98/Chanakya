@@ -3,31 +3,50 @@
 /* Movies implements the Plugin abstract class. */
 class Movies: Plugin {
 
+	private:
+	string movieName;
+
 	public:
 	string getName() {
 		return "Movies";
 	}
 
 	/***************/
-	/* We basically check whether this is the right plugin to be called. */
-	int getInputComparisonScore(vector<string> input) {
+	/* We basically check whether this plugin can give an answer or not. */
+	bool canGiveAnAnswer(vector<string> input) {
 		int length = input.size();
 
 		for(int iter=0; iter<length; iter++) {
-			if(input[iter] == "movies" || input[iter] == "movie") return 1;
-			else if(input[iter] == "films" || input[iter] == "film") return 1;
+			if(input[iter] == "movies" || input[iter] == "movie") return true;
+			else if(input[iter] == "films" || input[iter] == "film") return true;
 		}
-		return 0;
+		return false;
 	}
 
 	/***************/
 	/* Takes the data (movies vector) given and displays it in a formatted way. */
 	void displayAnswer(vector<string> input, string name, bool onlyPlugins) {
 
+		/* We get the parameter options from the input. */
 		vector<int> options = parseOptionsFromInput(input);
-		
+	
+		/* We firct check if an answer is possible. */
+		if(!canGiveAnAnswer(input) && options[1]==0 && options[2]==0)
+			cout<<name<<": Sorry, I'm not able to answer that. Try to give more details.\n\n";
+
+		/* If yes, then we download the data and all that. */
 		saveHTMLFromURL(getRequestURL(options));
 		vector<string> results = getDataFromHTML();
+
+		/* We check if it is a question about a movie. */
+		if(options[2] > 0) {
+			if(options[2] == 1) {
+				cout<<name<<": The details of the movie you asked for are as follows:-\n\n";
+				formatTextIntoCols(-1,results); /* No formatting here. */				
+			}
+			else if(options[2] == 2) cout<<name<<" If you were trying to search for details about a particular movie, make sure you enclose the name of the movie in doublequotes (\").\n\n";
+			return;
+		}	
 
 		/* We format the starting according to the given mode. */
 		if(onlyPlugins) cout<<name<<": The top films in the ";
@@ -70,12 +89,11 @@ class Movies: Plugin {
 		else if(options[0] == 20) { /* The news genre... */
 			cout<<" updates and news from the world of movies and entertainment. ";
 			cout<<" Information is sources live from hollywoodreporter.com!\n\n";
-			formatTextIntoCols(-1,results); /* We format the movie titles into two columns. */
+			formatTextIntoCols(-1,results); /* No formatting here. */
 		}
 	
 		cout<<endl<<"Feel free to ask me more questions about movie recommendations ";
 		cout<<"(you can even specify the genre and year), individual movie details and even movie news!\n\n";
-
 	}
 
 	private:
@@ -84,6 +102,7 @@ class Movies: Plugin {
 	/* Given the vector input, we parse options (parameters) for the URL requests. */
 	vector<int> parseOptionsFromInput(vector<string> input) {
 
+		/*------*/
 		/* The first option is genre (awards are genres too). Second option is year. */
 		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","news","updates","update","all"};
 		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,20,20,20,16};
@@ -104,15 +123,44 @@ class Movies: Plugin {
 		}
 		if(options.size() == 0) options.push_back(16); /* If no genres, then we suggest 'all'. */
 
-		/* If no genre existed, then we search for the year. */
+		/*-----*/
+		/* We now search to see if a year exists. */
 		for(int iter=0; iter<size; iter++) {
 			if(isYear(input[iter])) {
 				options.push_back(stoi(input[iter]));
-				return options;
 			}
 		}
 		if(options.size() == 1) options.push_back(0); /* If no year, then we suggest all. */
+	
+		/*-----*/
+		/* We now search to see if a movie name exists in between doublequotes. */
+		int flag = 0;
+		options.push_back(0); /* We first assume there is no movie name. */
+
+		// We search for doublequotes.
+		for(int iter=0; iter<size; iter++) {
+			// We iterate over the string characters themselves.
+			for(int jiter=0; jiter<input[iter].length(); jiter++) {
+				if(input[iter][jiter]=='"' && flag==0) flag = 1;
+				else if(input[iter][jiter]=='"' && flag==1) {
+					options[2] = 1;
+					flag = 0;
+					break;
+				}
+				else if(flag == 1) movieName.push_back(input[iter][jiter]);	
+			}
+			if(flag == 1) movieName.push_back('+');
+		}
 		
+		// If no doublequotes and if user is asking about a movie maybe, we record this.
+		if(options[2] == 0) {
+			for(int iter=0; iter<size; iter++) {
+				if(input[iter]=="plot" || input[iter]=="story" || input[iter]=="details") options[2]=2;
+				else if(input[iter]=="detail" || input[iter]=="details" || input[iter]=="info") options[2]=2;
+				else if(input[iter]=="information") options[2]=2;
+			}
+		}
+
 		return options;
 	}
 
@@ -121,6 +169,8 @@ class Movies: Plugin {
 	string getRequestURL(vector<int> options) {
 
 		string baseURL = "'https://www.criticker.com/films/?filter=";
+
+		if(options[2] == 1) return "'https://www.criticker.com/?search="+movieName+"&type=films'";
 
 		switch(options[0]) {
 			case 1: baseURL.append("gy12x13zi1zf1900zt2030zor'"); break; //action
@@ -154,7 +204,7 @@ class Movies: Plugin {
 			baseURL.replace(baseURL.find("1900"),4,to_string(options[1]));
 			baseURL.replace(baseURL.find("2030"),4,to_string(options[1]));
 		}
-		
+
 		return baseURL;
 	}
 
@@ -178,6 +228,7 @@ class Movies: Plugin {
 		ifstream file("data.txt");
 		string word;
 		string movie = "";
+		movieName = "";
 
 		vector<string> movies;
 
@@ -201,7 +252,7 @@ class Movies: Plugin {
 				movie = "";
 			}
 			/* Web-Scraping News from hollywoodreporter.com. */
-			if(word == "class=\"topic-card__headline") {
+			else if(word == "class=\"topic-card__headline") {
 				
 				int flag = 0;
 				char character;
@@ -218,6 +269,37 @@ class Movies: Plugin {
 
 				movies.push_back(movie);
 				movie = "";
+			}
+			/* Web-Scraping movie name from criticker.com search. */
+			else if(word == "class='titlerow_name'><a") {
+				int flag = 0;
+				char character;
+
+				while(true) {
+					file.get(character);
+					if(character == '<') break;
+					if(flag == 1) movie.push_back(character);
+					if(character == '>') flag = 1;	
+				}
+
+				movie.push_back('\n');
+				movie.append("Summary: ");
+			}
+			/* Web-Scraping movie summary from criticker.com search. */
+			else if(word == "class='titlerow_summary'") {
+				int flag = 0;
+				char character;
+
+				while(true) {
+					file.get(character);
+					if(character == '<') break;
+					if(flag == 1) movie.push_back(character);
+					if(character == '>') flag = 1;	
+				}
+
+				movies.push_back(movie);
+				movie="";
+				break;
 			}
 		}
 
