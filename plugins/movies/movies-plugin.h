@@ -104,38 +104,36 @@ class Movies: Plugin {
 
 		/*------*/
 		/* The first option is genre (awards are genres too). Second option is year. */
-		string genres[] = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","news","updates","update","all"};
-		int genreOptions[] = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,20,20,20,16};
-		int noOfGenres = 38;
+		array<string,38> genres = {"adventure","action", "animation","comedy","drama","horror","kids","family","musical","music","mystery","suspense","thriller","romance","romantic","science","sci","fantasy","sports","fitness","game","war","oscars","oscar","award","awards","tamil","kollywood","bafta","disney","plus","malayalam","mallu","mollywood","news","updates","update","all"};
+		array<int,38> genreOptions = {1,1,2,3,4,5,6,6,7,7,8,9,9,10,10,11,11,11,12,12,12,13,14,14,14,14,15,15,17,18,18,19,19,19,20,20,20,16};
+		int noOfGenres = genreOptions.size();
 
-		vector<int> options;
+		vector<int> options(3,0); /* 3 elements with value 0. */
 
 		/* We shall first try and see if a genre exists in the sentence. */
 		int size = input.size();
 		for(int iter=0; iter<size; iter++) {
 			for(int jiter=0; jiter<noOfGenres; jiter++) {
 				if(input[iter].find(genres[jiter]) != string::npos){ 
-					options.push_back(genreOptions[jiter]);
+					options[0] = genreOptions[jiter];
 					break;
 				}
 			}
-			if (options.size() != 0) break; /* If a genre exists, then break. */
+			if (options[0] != 0) break; /* If a genre exists, then break. */
 		}
-		if(options.size() == 0) options.push_back(16); /* If no genres, then we suggest 'all'. */
+		if(options[0] == 0) options[0] = 16; /* If no genres, then we suggest 'all'. */
 
 		/*-----*/
 		/* We now search to see if a year exists. */
 		for(int iter=0; iter<size; iter++) {
 			if(isYear(input[iter])) {
-				options.push_back(stoi(input[iter]));
+				options[1] = stoi(input[iter]);
 			}
 		}
-		if(options.size() == 1) options.push_back(0); /* If no year, then we suggest all. */
 	
 		/*-----*/
 		/* We now search to see if a movie name exists in between doublequotes. */
 		int flag = 0;
-		options.push_back(0); /* We first assume there is no movie name. */
 
 		// We search for doublequotes.
 		for(int iter=0; iter<size; iter++) {
