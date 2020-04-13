@@ -2,6 +2,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<array>
 #include<fstream>
 #include<regex>
 using namespace std;
@@ -59,6 +60,7 @@ int main(){
 
 		/* We get the sentence as a vector of strings. */
 		InputScanner in;
+		cout<<"......\n\n";
 		vector<string> sentence = in.getLine("You: ");
 
 		/* If nothing is entered, we 'continue'. */
@@ -73,7 +75,7 @@ int main(){
 			/* We check if there is any plugin activity or not. */
 			if(plugins.hasBeenMadeActive(sentence)) {
 				plugins.areMainTopic = true;
-				cout<<name<<": You have enabled the secondary topics. Ask me anything ";
+				cout<<name<<": You have enabled the secondary topics.\n"<<name<<": Ask me anything ";
 				cout<<"about movies, TV shows, the news and restaurants (and, hopefully, I can answer).\n\n";
 				break;
 			}
