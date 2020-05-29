@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<sstream>
 #include<fstream>
 #include<string>
 using namespace std;
@@ -94,7 +95,6 @@ class JsonValidator {
     /* We check if the given range is preceded by quotes. */
     bool stringNotEnclosedByQuotes(string filename, int start, int length) {
         ifstream file(filename);
-        cout<<extractFromFile(filename, start, length)<<endl;
 
         file.seekg(start-1);
         if(file.get() != 34) return true;
