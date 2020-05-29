@@ -47,22 +47,23 @@ class JsonValidator {
     bool stringsAreFormattedProperly(string filename) {
 
         ifstream jsonFile(filename);
-        int start, length = 0;
+
+        long start, length = 0;
         bool stringHasStarted = false;
         bool quotesIsNotOpen = true;
 
         while(true) {
-            char character;
-            jsonFile >> character;
+            char character = jsonFile.get();
 
             if(jsonFile.eof()) {
-                if(stringHasStarted && stringNotEnclosedByQuotes(filename, start-1, length))
-                    return false;
+                if(stringHasStarted) {
+                    length = jsonFile.tellg() - start;
+                    if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
+                }
                 break;
             }
 
             if(character == '\\' && stringHasStarted) { /* Escaping characters. */
-                length+=2;
                 jsonFile >> character;
                 continue;
             }
@@ -73,16 +74,17 @@ class JsonValidator {
 
                 if(stringHasStarted) {
                     stringHasStarted = false;
+                    length = jsonFile.tellg() - start;
                     if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
                     length = 0;
                 }
             }
             else { /* Literally anything else. */
-                if(!stringHasStarted) {
+                if(character == ' ' || character == '\n' || character == '\r');
+                else if(!stringHasStarted) {
                     stringHasStarted = true;
                     start = jsonFile.tellg();
                 }
-                length++;
             }
         }
 
@@ -92,13 +94,13 @@ class JsonValidator {
     /* We check if the given range is preceded by quotes. */
     bool stringNotEnclosedByQuotes(string filename, int start, int length) {
         ifstream file(filename);
-        char character;
+        cout<<extractFromFile(filename, start, length)<<endl;
 
         file.seekg(start-1);
         if(file.get() != 34) return true;
 
-        for(int iter=start; iter<(start+length+1); iter++) file >> character;
-        if(character != '"') return true;
+        file.seekg(start+length);
+        if(file.get() != 34) return true;
 
         return false;
     }
@@ -127,9 +129,7 @@ class JsonValidator {
         string str = "";
 
         for(int iter=0; iter<length; iter++) {
-            char character;
-            file >> character;
-
+            char character = file.get();
             if(file.eof())  break;
 
             str += character;
