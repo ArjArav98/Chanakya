@@ -9,7 +9,7 @@ class JsonValidator {
 
 	public:
     JsonValidator(string filename) {
-        cout<<stringsAreFormattedProperly(filename);
+        cout<<arraysAreFormattedProperly(filename);
     }
 
     private:
@@ -102,6 +102,51 @@ class JsonValidator {
         return true;
     }
 
+    bool arraysAreFormattedProperly(string filename) {
+        ifstream jsonFile(filename);
+
+        bool arrayHasStarted = false;
+        bool stringHasStarted = false;
+        bool commaNotEncountered = false; // Default value for first element.
+
+        while(true) {
+            char character = jsonFile.get();
+            if(jsonFile.eof()) {
+                if(arrayHasStarted) return false;
+                break;
+            }
+
+            if(character == '\\') character = jsonFile.get();
+            else if(character == '[') {
+                if(!arrayHasStarted) arrayHasStarted = true;
+                else if(arrayHasStarted) return false;
+            }
+            else if(character == '"') {
+                if(arrayHasStarted) {
+                    if(commaNotEncountered && !stringHasStarted) return false;
+                    else if(!stringHasStarted) stringHasStarted = true;
+                    else if(stringHasStarted) {
+                        stringHasStarted = false;
+                        commaNotEncountered = true;
+                    }
+                }
+            }
+            else if(character == ',') {
+                if(!commaNotEncountered) return false;
+                else if(arrayHasStarted && !stringHasStarted) commaNotEncountered = false;
+            }
+            else if(character == ']') {
+                if(arrayHasStarted) arrayHasStarted = false;
+                else if(!arrayHasStarted) return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    /* SUPPORTING FUNCTIONS */
+
     /* We check if the given range is preceded by quotes. */
     bool stringNotEnclosedByQuotes(string filename, int start, int length) {
         ifstream file(filename);
@@ -115,7 +160,6 @@ class JsonValidator {
         return false;
     }
 
-    private:
     /* Extracts the requisite string from the filename given. */
     string extractFromFile(string filename, int start, int length) {
         ifstream file(filename);
@@ -133,6 +177,17 @@ class JsonValidator {
         return str;
     }
 
+    bool stringIsEmpty(string input) {
+        int length = input.length();
+        
+        for(int iter=0; iter<length; iter++) {
+            if(!(input[iter] == ' ' || input[iter] == '\n' || input[iter] == '\r'))
+                return false;
+        }
+
+        return true;
+    }
+
     bool isANumber(string input) {
         int length = input.length();
         for(int iter=0; iter<length; iter++) {
@@ -147,20 +202,9 @@ class JsonValidator {
         else return false;
     }
 
-    bool stringIsEmpty(string input) {
-        int length = input.length();
-        
-        for(int iter=0; iter<length; iter++) {
-            if(!(input[iter] == ' ' || input[iter] == '\n' || input[iter] == '\r'))
-                return false;
-        }
-
-        return true;
-    }
 };
 
 int main() {
 	JsonValidator json("test.json");
     return 0;
-
 }
