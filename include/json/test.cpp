@@ -8,6 +8,12 @@ using namespace std;
 class JsonValidator {
 
 	public:
+    JsonValidator(string filename) {
+        cout<<stringsAreFormattedProperly(filename);
+    }
+
+    private:
+
 	/* Checks if the [ and { have matching brackets. */
 	bool bracketsAreMatched(string filename) {
 
@@ -59,7 +65,9 @@ class JsonValidator {
             if(jsonFile.eof()) {
                 if(stringHasStarted) {
                     length = jsonFile.tellg() - start;
-                    if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
+
+                    if(stringIsEmpty(extractFromFile(filename,start-1,length)));
+                    else if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
                 }
                 break;
             }
@@ -76,13 +84,15 @@ class JsonValidator {
                 if(stringHasStarted) {
                     stringHasStarted = false;
                     length = jsonFile.tellg() - start;
-                    if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
+
+                    if(stringIsEmpty(extractFromFile(filename,start-1,length)));
+                    else if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
+                    
                     length = 0;
                 }
             }
             else { /* Literally anything else. */
-                if(character == ' ' || character == '\n' || character == '\r');
-                else if(!stringHasStarted) {
+                if(!stringHasStarted) {
                     stringHasStarted = true;
                     start = jsonFile.tellg();
                 }
@@ -106,21 +116,6 @@ class JsonValidator {
     }
 
     private:
-    bool isANumber(string input) {
-        int length = input.length();
-        for(int iter=0; iter<length; iter++) {
-            if(input[iter] >= '0' && input[iter] <= '9');
-            else return false;
-        }
-        return true;
-    }
-
-    bool isABoolean(string input) {
-        if(input == "true" || input=="false") return true;
-        else return false;
-    }
-
-    private:
     /* Extracts the requisite string from the filename given. */
     string extractFromFile(string filename, int start, int length) {
         ifstream file(filename);
@@ -137,12 +132,35 @@ class JsonValidator {
         
         return str;
     }
+
+    bool isANumber(string input) {
+        int length = input.length();
+        for(int iter=0; iter<length; iter++) {
+            if(input[iter] >= '0' && input[iter] <= '9');
+            else return false;
+        }
+        return true;
+    }
+
+    bool isABoolean(string input) {
+        if(input == "true" || input=="false") return true;
+        else return false;
+    }
+
+    bool stringIsEmpty(string input) {
+        int length = input.length();
+        
+        for(int iter=0; iter<length; iter++) {
+            if(!(input[iter] == ' ' || input[iter] == '\n' || input[iter] == '\r'))
+                return false;
+        }
+
+        return true;
+    }
 };
 
 int main() {
-	JsonValidator json;
-    cout<<json.stringsAreFormattedProperly("test.json")<<endl;
-
+	JsonValidator json("test.json");
     return 0;
 
 }
