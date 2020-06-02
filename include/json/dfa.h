@@ -1,10 +1,3 @@
-#include<iostream>
-#include<vector>
-#include<map>
-#include<string>
-#include<fstream>
-using namespace std;
-
 class DfaNode {
 
 	string nodeName;
@@ -30,6 +23,7 @@ class DfaNode {
         }
         else if(length == 2) {
             if(dfaPattern[0] == '!' && dfaPattern[0] != character) return true;
+            if(dfaPattern[0] == '!' && dfaPattern[0] == '*') return true;
             if(character >= dfaPattern[0] && character <= dfaPattern[1]) return true;
             else return false;
         }
@@ -45,9 +39,9 @@ class DfaNode {
         }
         else if(length % 2 != 0) {
             for(int iter=0; iter<length; iter+=2) {
-                if(character < dfaPattern[1] || character > dfaPattern[2]) return true;
+                if(character >= dfaPattern[iter] && character <= dfaPattern[iter+1]) return false;
             }
-            return false;
+            return true;
         }
         else return false;
 
@@ -105,8 +99,9 @@ class Dfa {
 		endNodes.push_back(name);
 	}
 
-	bool matches(string filename) {
+	bool matches(string filename, int cursor) {
 		ifstream file(filename);
+        file.seekg(cursor);
 		string currentNode = startNode;
 
 		while(true) {
@@ -137,6 +132,7 @@ class Dfa {
 			}
 
 			if(!matchFlag) break;
+            cout<<"The character is "<<character<<" and the node is "<<currentNode<<endl;
 		}
 
 		vector<string>::iterator iter;
