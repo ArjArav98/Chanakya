@@ -7,9 +7,12 @@ using namespace std;
 
 class JsonValidator {
 
+    ifstream jsonFile;
+
 	public:
     JsonValidator(string filename) {
-        cout<<arraysAreFormattedProperly(filename);
+        jsonFile.open(filename);
+        cout<<arraysAreFormattedProperly(0);
     }
 
     private:
@@ -64,7 +67,7 @@ class JsonValidator {
 
             if(jsonFile.eof()) {
                 if(stringHasStarted) {
-                    length = jsonFile.tellg() - start;
+                    length = jsonFile.tellg() - (long long) start;
 
                     if(stringIsEmpty(extractFromFile(filename,start-1,length)));
                     else if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
@@ -83,7 +86,7 @@ class JsonValidator {
 
                 if(stringHasStarted) {
                     stringHasStarted = false;
-                    length = jsonFile.tellg() - start;
+                    length = jsonFile.tellg() - (long long) start;
 
                     if(stringIsEmpty(extractFromFile(filename,start-1,length)));
                     else if(stringNotEnclosedByQuotes(filename, start-1, length)) return false;
@@ -102,8 +105,8 @@ class JsonValidator {
         return true;
     }
 
-    bool arraysAreFormattedProperly(string filename) {
-        ifstream jsonFile(filename);
+    bool arraysAreFormattedProperly(long long cursor) {
+        jsonFile.seekg(cursor);
 
         bool arrayHasStarted = false;
         bool stringHasStarted = false;
@@ -118,8 +121,13 @@ class JsonValidator {
 
             if(character == '\\') character = jsonFile.get();
             else if(character == '[') {
-                if(!arrayHasStarted) arrayHasStarted = true;
-                else if(arrayHasStarted) return false;
+                if(!arrayHasStarted) {
+                    arrayHasStarted = true;
+                }
+                else if(arrayHasStarted) {
+                    if(arraysAreFormattedProperly(jsonFile.tellg() - (long long) 1) == 0)
+                        return false;
+                }
             }
             else if(character == '"') {
                 if(arrayHasStarted) {
@@ -136,7 +144,11 @@ class JsonValidator {
                 else if(arrayHasStarted && !stringHasStarted) commaNotEncountered = false;
             }
             else if(character == ']') {
-                if(arrayHasStarted) arrayHasStarted = false;
+                if(arrayHasStarted) {
+                    if(stringHasStarted) return false;
+                    arrayHasStarted = false;
+                    return true;
+                }
                 else if(!arrayHasStarted) return false;
             }
 
