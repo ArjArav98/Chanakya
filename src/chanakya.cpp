@@ -1,5 +1,6 @@
 /* Pre-defined libraries. */
 #include<iostream>
+#include<stack>
 #include<string>
 #include<vector>
 #include<array>
@@ -12,7 +13,8 @@ using namespace std;
 #include"../include/knowledge-tree/infotrees.h"
 #include"../include/knowledge-tree/stringmatcher.h"
 #include"../include/knowledge-tree/treebuilder.h"
-#include"../include/file-validation/inputvalidate.h"
+#include"../include/file-validation/knowledge-base/validate.h"
+#include"../include/file-validation/config/validate.h"
 #include"../include/user-input/inputscanner.h"
 #include"../include/plugins/plugins.h"
 
@@ -22,20 +24,20 @@ int main(){
 	/* We validate the config file syntax. */
 	ConfigValidate cf;
 
-	if(!cf.configIsValid) { /* If invalid, we display an error. */
+	if(!cf.successfullyValidates()) { /* If invalid, we display an error. */
 		cout<<"Error: Syntax for config file is wrong ";
-		cout<<"(Line "<<cf.config_line<<").\n";
+		cout<<"(Line "<<cf.getLine()<<").\n";
 		return 0;
 	}
 
 	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
 	string knowledge_file = getConfigProperty("knowledge_file");
-	KnowledgeValidate ip(knowledge_file);
+	KnowledgeBaseValidator kbv(knowledge_file);
 
-	if(!ip.knowledgeIsValid) { /* If not valid, we display an error. */
+	if(!kbv.successfullyValidates()) { /* If not valid, we display an error. */
 		cout<<"Error: Syntax for knowledge base is wrong ";
-		cout<<"(Line "<<ip.file_line<<").\n";
+		cout<<"(Line "<<kbv.getLine()<<").\n";
 		return 0;
 	}
 	
