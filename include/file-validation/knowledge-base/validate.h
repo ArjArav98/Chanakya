@@ -59,16 +59,16 @@ class ChatValidator {
 /* Class which validates a .json file.  */
 class JsonValidator {
 
-    ifstream jsonFile;
-    string filenamestring;
+	ifstream jsonFile;
+	string filenamestring;
 
-    int file_line;
+	int file_line;
 
 	public:
-    JsonValidator(string filename) {
+	JsonValidator(string filename) {
 		file_line = 1;
 		filenamestring = filename;
-    }
+	}
 
 	bool knowledgeBaseValid(string filename) {
 		if( bracketsAreMatched() == false ) return false;
@@ -88,39 +88,39 @@ class JsonValidator {
 		return file_line;
 	}
 
-    private:
-    /*************/
-    /* FUNCTIONS */
-    /*************/
+	private:
+	/*************/
+	/* FUNCTIONS */
+	/*************/
 
 	/* Validates whether all brackets in file are matching. */
 	bool bracketsAreMatched() {
 
 		stack<char> bracketStack;
-        bool quotesNotOpen = true;
+		bool quotesNotOpen = true;
 
 		while(true) {
 			char character = jsonFile.get();
 
 			if(jsonFile.eof() ) break;
-            if( character == '"' ) quotesNotOpen = !quotesNotOpen;
+			if( character == '"' ) quotesNotOpen = !quotesNotOpen;
 
-            {
-                if( (character == '{' || character == '[') && quotesNotOpen) {
-                    bracketStack.push(character);
-                }
-                else if ( (character == '}' || character == ']') && quotesNotOpen ) {
-                    if(bracketStack.size() == 0) return false;
+			{
+				if( (character == '{' || character == '[') && quotesNotOpen) {
+					bracketStack.push(character);
+				}
+				else if ( (character == '}' || character == ']') && quotesNotOpen ) {
+					if(bracketStack.size() == 0) return false;
 
-                    char topSymbol = bracketStack.top();
-                    bracketStack.pop();
+					char topSymbol = bracketStack.top();
+					bracketStack.pop();
 
-                    if(character == '}' && topSymbol == '{');
-                    else if(character == ']' && topSymbol == '[');
-                    else return false;
-                }
+					if(character == '}' && topSymbol == '{');
+					else if(character == ']' && topSymbol == '[');
+					else return false;
+				}
 				else if( character == '\n' || character == '\r' ) file_line++;
-            }
+			}
 		}
 
 		if(bracketStack.size() != 0) return false;
@@ -128,239 +128,239 @@ class JsonValidator {
 		return true;
 	}
 
-    /* Validates whether each string is formatted properly. */
-    bool stringsAreFormattedProperly() {
+	/* Validates whether each string is formatted properly. */
+	bool stringsAreFormattedProperly() {
 
-        long start, length = 0;
-        bool stringHasStarted = false;
-        bool quotesIsNotOpen = true;
+		long start, length = 0;
+		bool stringHasStarted = false;
+		bool quotesIsNotOpen = true;
 
-        while(true) {
-            char character = jsonFile.get();
+		while(true) {
+			char character = jsonFile.get();
 
-            if(jsonFile.eof()) {
-                if(stringHasStarted) {
-                    length = jsonFile.tellg() - (long long) start;
+			if(jsonFile.eof()) {
+				if(stringHasStarted) {
+					length = jsonFile.tellg() - (long long) start;
 
-                    if(stringIsEmpty(extractFromFile(start-1,length)));
-                    else if(stringNotEnclosedByQuotes(start-1, length)) return false;
-                }
-                break;
-            }
-            else if( character == '\\' && stringHasStarted ) { /* Escaping characters. */
-                character = jsonFile.get();
-                continue;
-            }
-            else if( character == '"' || character == ',' ||
-                character == ':' || character == '[' ||
-                character == ']' || character == '{' || 
-                character == '}' ) { /* Structural characters */
+					if(stringIsEmpty(extractFromFile(start-1,length)));
+					else if(stringNotEnclosedByQuotes(start-1, length)) return false;
+				}
+				break;
+			}
+			else if( character == '\\' && stringHasStarted ) { /* Escaping characters. */
+				character = jsonFile.get();
+				continue;
+			}
+			else if( character == '"' || character == ',' ||
+				character == ':' || character == '[' ||
+				character == ']' || character == '{' || 
+				character == '}' ) { /* Structural characters */
 
-                if(stringHasStarted) {
-                    stringHasStarted = false;
-                    length = jsonFile.tellg() - (long long) start;
+				if(stringHasStarted) {
+					stringHasStarted = false;
+					length = jsonFile.tellg() - (long long) start;
 
-                    if(stringIsEmpty(extractFromFile(start-1,length)));
-                    else if(stringNotEnclosedByQuotes(start-1, length)) return false;
-                    
-                    length = 0;
-                }
-            }
+					if(stringIsEmpty(extractFromFile(start-1,length)));
+					else if(stringNotEnclosedByQuotes(start-1, length)) return false;
+					
+					length = 0;
+				}
+			}
 			else if( character == '\n' || character == '\r' ) file_line++;
-            else { /* Literally anything else. */
-                if(!stringHasStarted) {
-                    stringHasStarted = true;
-                    start = jsonFile.tellg();
-                }
-            }
-        }
+			else { /* Literally anything else. */
+				if(!stringHasStarted) {
+					stringHasStarted = true;
+					start = jsonFile.tellg();
+				}
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /* Validates whether every array in the file is formatted properly. */
-    bool arraysAreFormattedProperly(long long cursor) {
-        jsonFile.seekg(cursor);
+	/* Validates whether every array in the file is formatted properly. */
+	bool arraysAreFormattedProperly(long long cursor) {
+		jsonFile.seekg(cursor);
 
-        bool arrayHasStarted = false;
-        bool stringHasStarted = false;
-        bool commaNotEncountered = false; // Default value for first element.
+		bool arrayHasStarted = false;
+		bool stringHasStarted = false;
+		bool commaNotEncountered = false; // Default value for first element.
 
-        while(true) {
-            char character = jsonFile.get();
-            if(jsonFile.eof()) {
-                if(arrayHasStarted) return false;
-                break;
-            }
+		while(true) {
+			char character = jsonFile.get();
+			if(jsonFile.eof()) {
+				if(arrayHasStarted) return false;
+				break;
+			}
 
-            if( character == '\\' ) {
-                if(stringHasStarted) character = jsonFile.get();
-                else return false;
-            }
-            else if( character == '[' ) {
-                if(!arrayHasStarted) {
-                    arrayHasStarted = true;
-                }
-                else if( arrayHasStarted ) {
-                    if( arraysAreFormattedProperly(jsonFile.tellg() - (long long) 1) ) 
-                        commaNotEncountered = true;
-                    else return false;
-                }
-            }
-            else if( character == '"' ) {
-                if( arrayHasStarted ) {
-                    if( commaNotEncountered && !stringHasStarted ) return false;
-                    else if( !stringHasStarted ) stringHasStarted = true;
-                    else if( stringHasStarted ) {
-                        stringHasStarted = false;
-                        commaNotEncountered = true;
-                    }
-                }
-            } 
-            else if( character == ',' ) {
-                if( !commaNotEncountered ) return false;
-                else if( arrayHasStarted && !stringHasStarted ) commaNotEncountered = false;
-            }
-            else if( character == ']' ) {
-                if( arrayHasStarted ) {
-                    if( stringHasStarted ) return false;
-                    arrayHasStarted = false;
-                    return true;
-                }
-                else return false;
-            }
-            else if( character == '{' ){
-                return mapsAreFormattedProperly(jsonFile.tellg() - (long long) 1);
-            }
+			if( character == '\\' ) {
+				if(stringHasStarted) character = jsonFile.get();
+				else return false;
+			}
+			else if( character == '[' ) {
+				if(!arrayHasStarted) {
+					arrayHasStarted = true;
+				}
+				else if( arrayHasStarted ) {
+					if( arraysAreFormattedProperly(jsonFile.tellg() - (long long) 1) ) 
+						commaNotEncountered = true;
+					else return false;
+				}
+			}
+			else if( character == '"' ) {
+				if( arrayHasStarted ) {
+					if( commaNotEncountered && !stringHasStarted ) return false;
+					else if( !stringHasStarted ) stringHasStarted = true;
+					else if( stringHasStarted ) {
+						stringHasStarted = false;
+						commaNotEncountered = true;
+					}
+				}
+			} 
+			else if( character == ',' ) {
+				if( !commaNotEncountered ) return false;
+				else if( arrayHasStarted && !stringHasStarted ) commaNotEncountered = false;
+			}
+			else if( character == ']' ) {
+				if( arrayHasStarted ) {
+					if( stringHasStarted ) return false;
+					arrayHasStarted = false;
+					return true;
+				}
+				else return false;
+			}
+			else if( character == '{' ){
+				return mapsAreFormattedProperly(jsonFile.tellg() - (long long) 1);
+			}
 			else if(character == '\n' || character == '\r') file_line++;
-            else {
-                if( character == ' ' );
-                else return false;
-            }
+			else {
+				if( character == ' ' );
+				else return false;
+			}
 
-        }
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /* Validates whether every map in the array is formatted properly. */
-    bool mapsAreFormattedProperly(long long cursor) {
-        jsonFile.seekg(cursor);
+	/* Validates whether every map in the array is formatted properly. */
+	bool mapsAreFormattedProperly(long long cursor) {
+		jsonFile.seekg(cursor);
 
-        bool mapHasStarted = false;
-        bool stringHasStarted = false;
-        bool commaEncountered = true;
-        bool colonEncountered = false;
-        int stringNum = 0;
+		bool mapHasStarted = false;
+		bool stringHasStarted = false;
+		bool commaEncountered = true;
+		bool colonEncountered = false;
+		int stringNum = 0;
 
-        while(true) {
-            char character = jsonFile.get();
-            if(jsonFile.eof()) break;
-            
-            if( character == '\\' ) {
-                if(stringHasStarted) character = jsonFile.get();
-                else return false;
-            }
-            else if( character == '{' ) {
-                if( !mapHasStarted ) mapHasStarted = true;
-                else {
-                    if( stringNum == 0 ) return false;
+		while(true) {
+			char character = jsonFile.get();
+			if(jsonFile.eof()) break;
+			
+			if( character == '\\' ) {
+				if(stringHasStarted) character = jsonFile.get();
+				else return false;
+			}
+			else if( character == '{' ) {
+				if( !mapHasStarted ) mapHasStarted = true;
+				else {
+					if( stringNum == 0 ) return false;
 
-                    bool dummy = true;
-                    if( mapsAreFormattedProperly(jsonFile.tellg() - (long long) 1) ) stringNum = 2;
-                    else return false;
+					bool dummy = true;
+					if( mapsAreFormattedProperly(jsonFile.tellg() - (long long) 1) ) stringNum = 2;
+					else return false;
 
-                }
-            }
-            else if(character == '"') {
-                if( !stringHasStarted ) {
-                    stringHasStarted = true;
-                    if( stringNum == 0 && commaEncountered ) commaEncountered = false;
-                    else if( stringNum == 1 && !colonEncountered ) return false;
-                    else if( stringNum >= 2 ) return false;
-                }
-                else {
-                    stringHasStarted = false;
-                    stringNum++;
-                }
-            }
-            else if( character == ':' ) {
-                if( !stringHasStarted && stringNum == 1 ) {
-                    if( !colonEncountered ) colonEncountered = true;
-                    else return false;
-                }
-                else return false;
-            }
-            else if( character == ',' ) {
-                if( !stringHasStarted && stringNum == 2 ) {
-                    commaEncountered = true;
-                    stringNum = 0;
-                    colonEncountered = false;
-                }
-                else return false;
-            }
-            else if( character == '}' ) {
-                if( mapHasStarted && stringNum == 2 && !commaEncountered ) break;
-                else return false;
-            }
-            else if( character == '[' ) {
-                return arraysAreFormattedProperly(jsonFile.tellg() - (long long) 1);
-            }
+				}
+			}
+			else if(character == '"') {
+				if( !stringHasStarted ) {
+					stringHasStarted = true;
+					if( stringNum == 0 && commaEncountered ) commaEncountered = false;
+					else if( stringNum == 1 && !colonEncountered ) return false;
+					else if( stringNum >= 2 ) return false;
+				}
+				else {
+					stringHasStarted = false;
+					stringNum++;
+				}
+			}
+			else if( character == ':' ) {
+				if( !stringHasStarted && stringNum == 1 ) {
+					if( !colonEncountered ) colonEncountered = true;
+					else return false;
+				}
+				else return false;
+			}
+			else if( character == ',' ) {
+				if( !stringHasStarted && stringNum == 2 ) {
+					commaEncountered = true;
+					stringNum = 0;
+					colonEncountered = false;
+				}
+				else return false;
+			}
+			else if( character == '}' ) {
+				if( mapHasStarted && stringNum == 2 && !commaEncountered ) break;
+				else return false;
+			}
+			else if( character == '[' ) {
+				return arraysAreFormattedProperly(jsonFile.tellg() - (long long) 1);
+			}
 			else if( character == '\n' || character == '\r') file_line++;
-            else {
-                if( character == ' ' );
-                else return false;
-            }
-        }
+			else {
+				if( character == ' ' );
+				else return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
 	/************************/
-    /* SUPPORTING FUNCTIONS */
+	/* SUPPORTING FUNCTIONS */
 	/************************/
 
-    /* We check if the given range is preceded by quotes. */
-    bool stringNotEnclosedByQuotes(int start, int length) {
-        ifstream file(filenamestring);
+	/* We check if the given range is preceded by quotes. */
+	bool stringNotEnclosedByQuotes(int start, int length) {
+		ifstream file(filenamestring);
 
-        file.seekg(start-1);
-        if(file.get() != 34) return true;
+		file.seekg(start-1);
+		if(file.get() != 34) return true;
 
-        file.seekg(start+length);
-        if(file.get() != 34) return true;
+		file.seekg(start+length);
+		if(file.get() != 34) return true;
 
-        return false;
-    }
+		return false;
+	}
 
-    /* Extracts the requisite string from the filename given. */
-    string extractFromFile(int start, int length) {
-        ifstream file(filenamestring);
-        file.seekg(start);
+	/* Extracts the requisite string from the filename given. */
+	string extractFromFile(int start, int length) {
+		ifstream file(filenamestring);
+		file.seekg(start);
 
-        string str = "";
+		string str = "";
 
-        for(int iter=0; iter<length; iter++) {
-            char character = file.get();
-            if(file.eof())  break;
+		for(int iter=0; iter<length; iter++) {
+			char character = file.get();
+			if(file.eof())  break;
 
-            str += character;
-        }
-        
-        return str;
-    }
+			str += character;
+		}
+		
+		return str;
+	}
 
-    /* Checks whether a string is empty (contains only space characters). */
-    bool stringIsEmpty(string input) {
-        int length = input.length();
-        
-        for(int iter=0; iter<length; iter++) {
-            if(!(input[iter] == ' ' || input[iter] == '\n' || input[iter] == '\r'))
-                return false;
-        }
+	/* Checks whether a string is empty (contains only space characters). */
+	bool stringIsEmpty(string input) {
+		int length = input.length();
+		
+		for(int iter=0; iter<length; iter++) {
+			if(!(input[iter] == ' ' || input[iter] == '\n' || input[iter] == '\r'))
+				return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
 };
 
@@ -370,7 +370,7 @@ class KnowledgeBaseValidator {
 	string filename;
 	int file_line;
 
-public:
+	public:
 	bool knowledgeIsValid;
 
 	KnowledgeBaseValidator(string passed_filename) {
