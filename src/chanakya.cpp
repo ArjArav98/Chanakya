@@ -22,7 +22,7 @@ int main(){
 
 	/*-------------*/
 	/* We validate the config file syntax. */
-	ConfigValidate cf;
+	ConfigValidator cf;
 
 	if(!cf.successfullyValidates()) { /* If invalid, we display an error. */
 		cout<<"Error: Syntax for config file is wrong ";

@@ -18,7 +18,7 @@ string getConfigProperty(string property) {
 			int len = temp.length();
 
 			for(int iter=0; iter<len; iter++) {
-				if(temp[iter]=='=') return temp.substr(iter+2, (len-2-(iter+2)));
+				if(temp[iter] == '=') return temp.substr(iter+2, (len-(iter+2)));
 			}
 
 		}

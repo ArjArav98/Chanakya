@@ -4,21 +4,21 @@ class ConfigValidator {
 public:
 	int config_line;
 
-	ConfigValidate() {
+	ConfigValidator() {
 		config_line = 1;
 	}
 
-private:
+public:
 	/*===========*/
 	/* FUNCTIONS */
 	/*===========*/
 
 	/* For logic explanation, refer knowledgeLinesAreValid() in KnowledgeValidate class. */
 	bool successfullyValidates() {
-		fstream filename("../config/prog.config");
+		ifstream filename("../config/prog.config");
 		string line;
 
-		regex expression("(.)+( )+=( )+(.)+( )+\\.");
+		regex expression("(.)+( )+=( )+(.)+( )*");
 		regex expression_two("( )*");
 
 		getline(filename, line);
