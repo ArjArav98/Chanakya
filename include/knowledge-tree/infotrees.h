@@ -36,6 +36,7 @@ public:
 
 		/* We get the name of the knowledge file from the config file. */
 		string filename = getConfigProperty("knowledge_file");
+		string filetype = getConfigProperty("knowledge_type");
 		fstream file(filename.c_str());
 		
 		/* One string for storing values and another for reading. */
@@ -44,18 +45,18 @@ public:
 
 		/* The cursor is set at position where value is present in file.*/
 		file.seekg(valuePosition);
-		file >> keyword;
 
 		/* The loop iterates until a dot is read. */
-		while(true) {
+		while(true && filetype == "chat") {
 			file >> keyword;
-			if(keyword == ".") break;
+			if(keyword == ".") {
+				values.pop_back();
+				break;
+			}
 
 			values.append(keyword); /* String appended to values string. */
 			values.push_back(' '); /* We add a space after each word. */
 		}
-
-		values.pop_back(); /* We pop out trailing space character. */
 
 		file.close();
 		return values; 

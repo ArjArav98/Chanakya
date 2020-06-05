@@ -60,7 +60,7 @@ public:
 				/* We read file from this pos when retrieving values. */
 				/* This saves memory! */
 
-				int position = file.tellg();
+				int position = file.tellg() + (long long) 2;
 				infotree.setValuePosition(current_node, position-1);
 
 				/* We then have to navigate to the end of the line. */
