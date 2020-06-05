@@ -37,29 +37,10 @@ public:
 		/* We get the name of the knowledge file from the config file. */
 		string filename = getConfigProperty("knowledge_file");
 		string filetype = getConfigProperty("knowledge_type");
-		fstream file(filename.c_str());
 		
-		/* One string for storing values and another for reading. */
-		string values = "";
-		string keyword;
-
-		/* The cursor is set at position where value is present in file.*/
-		file.seekg(valuePosition);
-
-		/* The loop iterates until a dot is read. */
-		while(true && filetype == "chat") {
-			file >> keyword;
-			if(keyword == ".") {
-				values.pop_back();
-				break;
-			}
-
-			values.append(keyword); /* String appended to values string. */
-			values.push_back(' '); /* We add a space after each word. */
-		}
-
-		file.close();
-		return values; 
+		if(filetype == "chat") return getValueFromChatFile(filename);
+		else if(filetype == "json") return getValueFromJsonFile(filename);
+		else return "";
 
 	}
 
@@ -88,6 +69,56 @@ public:
 		file.close();
 		return node_keywords;
 
+	}
+
+private:
+
+	/* We extract the value from a .chat file. */
+	string getValueFromChatFile(string filename) {
+		
+		fstream file(filename.c_str());
+		
+		/* One string for storing values and another for reading. */
+		string values = "";
+		string keyword;
+		
+		/* The cursor is set at position where value is present in file.*/
+		file.seekg(valuePosition);
+
+		/* The loop iterates until a dot is read. */
+		while(true && filetype == "chat") {
+			file >> keyword;
+			if(keyword == ".") {
+				values.pop_back();
+				break;
+			}
+
+			values.append(keyword); /* String appended to values string. */
+			values.push_back(' '); /* We add a space after each word. */
+		}
+
+		file.close();
+		return values; 
+	}
+
+	/* We extract the value from a .json file. */
+	string getValueFromJsonFile(long long cursor) {
+
+		/* The cursor starts from the first character. */
+		ifstream file("test.txt");
+		file.seekg(cursor);
+
+		string word = "";
+
+		while(true) {
+			char character = file.get();
+			
+			if(file.eof()) break;
+			else if(character == '\"') break; /* We break when " is met. */
+			else word += character;
+		}
+
+		return word;
 	}
 
 };
