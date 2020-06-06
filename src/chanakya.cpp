@@ -43,8 +43,7 @@ int main(){
 	
 	/*-------------*/
 	/* We build the tree using the knowledge file. */
-	TreeBuilder tbuilder(knowledge_file);
-	InformationTree infotree = tbuilder.generateTree();
+	InformationTree infotree = TreeBuilder::generateTree();
 	TreeNode current_node = infotree.root;
 
 	/*-------------*/

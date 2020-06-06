@@ -2,8 +2,8 @@
 class TreeNode {
 
 public:
-	int valuePosition; //Position of value in file.
-	int keywordPosition; //Position of keywords in file.
+	long long valuePosition; //Position of value in file.
+	long long keywordPosition; //Position of keywords in file.
 
 	string id; //ID of this node.
 	vector<TreeNode> children;	
@@ -48,32 +48,16 @@ public:
 
 		/* We get the name of the knowledge file from the config file. */
 		string filename = getConfigProperty("knowledge_file");
-		fstream file(filename.c_str());
-		
-		/* Vector for storing values and string for reading. */
-		vector<string> node_keywords;
-		string keyword;
+		string filetype = getConfigProperty("knowledge_type");
 
-		/* The cursor is set at position where value is present in file.*/
-		file.seekg(keywordPosition);
-		file >> keyword;
-
-		/* The loop iterates until a dot is read. */
-		while(true) {
-			file >> keyword;
-			if(keyword == ".") break;
-
-			node_keywords.push_back(keyword);
-		}
-
-		file.close();
-		return node_keywords;
+		if(filetype == "json") return getKeywordsFromChatFile(filename);
+		else return vector<string>();
 
 	}
 
 private:
 
-	/* We extract the value from a .chat file. */
+	/* We extract the node value from a .chat file. */
 	string getValueFromChatFile(string filename) {
 		
 		fstream file(filename.c_str());
@@ -86,7 +70,7 @@ private:
 		file.seekg(valuePosition);
 
 		/* The loop iterates until a dot is read. */
-		while(true && filetype == "chat") {
+		while(true) {
 			file >> keyword;
 			if(keyword == ".") {
 				values.pop_back();
@@ -98,15 +82,41 @@ private:
 		}
 
 		file.close();
-		return values; 
+		return values;
+
 	}
 
-	/* We extract the value from a .json file. */
-	string getValueFromJsonFile(long long cursor) {
+	/* We extract node keywords from a .chat file. */
+	vector<string> getKeywordsFromChatFile(string filename) {
+		
+		/* The cursor is set at position where value is present in file.*/
+		fstream file(filename.c_str());
+		file.seekg(keywordPosition);
+		
+		/* Vector for storing values and string for reading. */
+		vector<string> node_keywords;
+		string keyword;
 
-		/* The cursor starts from the first character. */
-		ifstream file("test.txt");
-		file.seekg(cursor);
+		/* The loop iterates until a dot is read. */
+		while(true) {
+			file >> keyword;
+			cout<<keyword<<endl;
+			if(keyword == ".") break;
+
+			node_keywords.push_back(keyword);
+		}
+
+		file.close();
+		return node_keywords;
+
+	}
+
+	/* We extract the node value from a .json file. */
+	string getValueFromJsonFile(string filename) {
+
+		/* The cursor starts from the given position. */
+		ifstream file(filename);
+		file.seekg(valuePosition);
 
 		string word = "";
 
@@ -114,11 +124,41 @@ private:
 			char character = file.get();
 			
 			if(file.eof()) break;
-			else if(character == '\"') break; /* We break when " is met. */
+			else if(character == '"') break; /* We break when " is met. */
+			else if(character == '\\') character = file.get();
 			else word += character;
 		}
 
 		return word;
+	}
+
+	/* We extract node keywords from a .json file. */
+	vector<string> getKeywordsFromJsonFile(string filename) {
+
+		ifstream file(filename);
+		file.seekg(keywordPosition);
+
+		vector<string> keywords;
+		string keyword = "";
+
+		while(true) {
+			char character = file.get();
+
+			if(file.eof()) break;
+			else if(character == ' ') {
+				keywords.push_back(keyword);
+				keyword = "";
+			}
+			else if(character == '"') {
+				keywords.push_back(keyword);
+				break;
+			}
+			else if(character == '\\') character = file.get();
+			else keyword.push_back(character);
+		}
+
+		return keywords;
+
 	}
 
 };

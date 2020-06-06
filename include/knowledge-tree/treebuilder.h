@@ -1,25 +1,21 @@
 /* Reads data from knowledge file and builds the tree.*/
 class TreeBuilder {
-	
-	string filename;
-	InformationTree infotree;
 
 public:
-
-	TreeBuilder(string passed_filename) {
-		filename = passed_filename;
-	}
-
 
 	/*================*/
 	/* USER FUNCTIONS */
 	/*================*/
 
 	/* Reads input file, generates tree with values and returns the tree. */
-	InformationTree generateTree() {
+	static InformationTree generateTree() {
 
 		/* We open the file in a filestream. */
-		fstream file(filename.c_str());
+		string filename = getConfigProperty("knowledge_file");
+		string filetype = getConfigProperty("knowledge_type");
+
+		ifstream file(filename.c_str());
+		InformationTree infotree;
 
 		/* Loop until file ends. */
 		while(!file.eof()) {
@@ -44,7 +40,7 @@ public:
 				/* We read file from this pos when retrieving keywords. */
 				/* This saves memory! */
 
-				int position = file.tellg();
+				int position = file.tellg() + (long long) 2;
 				infotree.setKeywordPosition(current_node, position-1);
 
 				/* We then have to navigate to the end of the line. */
@@ -73,6 +69,7 @@ public:
 		}
 
 		file.close();
+		cout<<"it ame here"<<endl;
 		return infotree;
 
 	}
