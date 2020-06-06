@@ -3,7 +3,7 @@ team < root
 stats < root
 help < root
 
-matches : who|whom|when|where|much|many won|lost|happened|happen|vs|score motm|man|match kkr|rcb|srh|dc|mi|rr|kxip mumbai|delhi|kolkata|rajasthan|punjab|hyderabad|bangalore playoffs|playoff|qualifier|qualifiers|final|finals .
+matches : who|whom|when|where|much|many won|lost|happened|happen|vs|score|result motm|man|match kkr|rcb|srh|dc|mi|rr|kxip|csk mumbai|delhi|kolkata|rajasthan|punjab|hyderabad|bangalore playoffs|playoff|qualifier|qualifiers|final|finals .
 team : who|whom|which captain|vice|owner|coach|home|team|squad|players|overseas|foreign chinna|thala|chepauk company|sponsor|partner|ground tech|main|shirt|food|drinks .
 stats : who|whom highest|leading|most run|runs wicket|wickets score|scorer|take|taker 2019|season .
 help : help|h|helpme .
@@ -55,7 +55,7 @@ kkrfi : score|hit|scoreboard|runs|wickets .
 kkrfi = KKR - 109/9 (Russell 50*, Chahar 3/20) and CSK - 111/3 (Plessis 43*, Narine 2/24) .
 
 kkr1result < kkr1
-kkr1result : won|result|lost|happened|vs .
+kkr1result : won|result|lost|happened|vs of the .
 kkr1result = CSK won the match by 6 wickets .
 
 kkr1venue < kkr1
@@ -75,7 +75,7 @@ kkr2fi : score|hit|scoreboard|runs|wickets .
 kkr2fi = KKR - 161/8 (Lynn 82, Tahir 4/27) and CSK - 162/5 (Raina 58*, Narine 2/19) .
 
 kkr2result < kkr2
-kkr2result : won|result|lost|happened|vs .
+kkr2result : won|result|lost|happened|vs of the .
 kkr2result = CSK won the match by 5 wickets .
 
 kkr2venue < kkr2
@@ -95,7 +95,7 @@ rcb1fi : score|hit|scoreboard|runs|wickets .
 rcb1fi = RCB - 70 (Parthiv 29, Tahir 3/9) and CSK - 71/3 (Rayudu 28, Siraj 1/5) .
 
 rcb1result < rcb1
-rcb1result : won|result|lost|happened|vs .
+rcb1result : won|result|lost|happened|vs of the .
 rcb1result = CSK won the match by 7 wickets .
 
 rcb1venue < rcb1
@@ -115,7 +115,7 @@ rcb2fi : score|hit|scoreboard|runs|wickets .
 rcb2fi = RCB - 161/7 (Parthiv 53, Chahar 2/25) and CSK - 160/8 (Dhoni 84*, Steyn 2/24) .
 
 rcb2result < rcb2
-rcb2result : won|result|lost|happened|vs .
+rcb2result : won|result|lost|happened|vs of the .
 rcb2result = RCB won the match by 1 run .
 
 rcb2venue < rcb2
@@ -139,7 +139,7 @@ srh1date : when|date|month|day .
 srh1date = 17th April, 2019 .
 
 srh1result < srh1
-srh1result : won|result|lost|happened|vs .
+srh1result : won|result|lost|happened|vs of the .
 srh1result = SRH won the match by 7 wickets .
 
 srh1venue < srh1
@@ -159,7 +159,7 @@ srh2date : when|date|month|day .
 srh2date = 23rd April, 2019 .
 
 srh2result < srh2
-srh2result : won|result|lost|happened|vs .
+srh2result : won|result|lost|happened|vs of the .
 srh2result = CSK won the match by 6 wickets .
 
 srh2venue < srh2
@@ -175,7 +175,7 @@ dc1fi : score|hit|scoreboard|runs|wickets .
 dc1fi = DC - 147/6 (Dhawan 51, Bravo 3/33) and CSK - 150/4 (Watson 44, Mishra 2/35) .
 
 dc1result < dc1
-dc1result : won|result|lost|happened|vs .
+dc1result : won|result|lost|happened|vs of the .
 dc1result = CSK won the match by 6 wickets .
 
 dc1venue < dc1
@@ -195,7 +195,7 @@ dc2fi : score|hit|scoreboard|runs|wickets .
 dc2fi = CSK - 179/4 (Raina 59, Suchith 2/28) and DC - 99 (Iyer 44, Tahir 4/12) .
 
 dc2result < dc2
-dc2result : won|result|lost|happened|vs .
+dc2result : won|result|lost|happened|vs of the .
 dc2result = CSK won the match by 80 runs .
 
 dc2venue < dc2
@@ -215,7 +215,7 @@ rr1fi : score|hit|scoreboard|runs|wickets .
 rr1fi = CSK - 175/5 (Dhoni 75*, Archer 2/17) and RR - 167/8 (Stokes 46, Chahar 2/19) .
 
 rr1result < rr1
-rr1result : won|result|lost|happened|vs .
+rr1result : won|result|lost|happened|vs of the .
 rr1result = CSK won the match by 8 runs .
 
 rr1venue < rr1
@@ -235,7 +235,7 @@ rr2fi : score|hit|scoreboard|runs|wickets .
 rr2fi = RR - 151/7 (Stokes 28, Jadeja 2/20) and CSK - 155/6 (Dhoni 58, Stokes 2/39) .
 
 rr2result < rr2
-rr2result : won|result|lost|happened|vs .
+rr2result : won|result|lost|happened|vs of the .
 rr2result = CSK won the match by 4 wickets .
 
 rr2venue < rr2
@@ -259,7 +259,7 @@ kxip1date : when|date|month|day .
 kxip1date = 6th April, 2019 .
 
 kxip1result < kxip1
-kxip1result : won|result|lost|happened|vs .
+kxip1result : won|result|lost|happened|vs of the .
 kxip1result = CSK won by 22 runs .
 
 kxip1venue < kxip1
@@ -279,7 +279,7 @@ kxip2date : when|date|month|day .
 kxip2date = 5th May, 2019 .
 
 kxip2result < kxip2
-kxip2result : won|result|lost|happened|vs .
+kxip2result : won|result|lost|happened|vs of the .
 kxip2result = KXIP won by 6 wickets .
 
 kxip2venue < kxip2
@@ -299,7 +299,7 @@ mi1date : when|date|month|day .
 mi1date = 3rd April, 2019 .
 
 mi1result < mi1
-mi1result : won|result|lost|happened|vs .
+mi1result : won|result|lost|happened|vs of the .
 mi1result = MI won by 37 runs .
 
 mi1venue < mi1
@@ -319,7 +319,7 @@ mi2date : when|date|month|day .
 mi2date = 26th April, 2019 .
 
 mi2result < mi2
-mi2result : won|result|lost|happened|vs .
+mi2result : won|result|lost|happened|vs of the .
 mi2result = MI won by 46 runs .
 
 mi2venue < mi2
@@ -335,7 +335,7 @@ q1fi : score|hit|scoreboard|runs|wickets .
 q1fi = CSK - 131/4 (Rayudu 42*, Chahar 2/14) and MI - 132/4 (Yadav 71*, Tahir 2/33) .
 
 q1result < q1
-q1result : won|result|lost|happened|vs .
+q1result : won|result|lost|happened|vs of the .
 q1result = MI won by 6 wickets .
 
 q1venue < q1
@@ -355,7 +355,7 @@ q2fi : score|hit|scoreboard|runs|wickets .
 q2fi = DC - 147/9 (Pant 38, Bravo 2/19) and CSK - 151/4 (Watson 50, Boult 1/20) .
 
 q2result < q2
-q2result : won|result|lost|happened|vs .
+q2result : won|result|lost|happened|vs of the .
 q2result = CSK won by 6 wickets .
 
 q2venue < q2
@@ -375,7 +375,7 @@ finfi : score|hit|scoreboard|runs|wickets .
 finfi = MI - 149/8 (Pollard 41, Chahar 3/26) and CSK - 148/7 (Watson 80, Bumrah 2/14) .
 
 finalresult < final
-finalresult : won|result|lost|happened|vs .
+finalresult : won|result|lost|happened|vs of the .
 finalresult = MI won by 1 run and lifted the trophy for the 4th time .
 
 finalvenue < final

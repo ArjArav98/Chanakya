@@ -50,12 +50,16 @@ public:
 		string filename = getConfigProperty("knowledge_file");
 		string filetype = getConfigProperty("knowledge_type");
 
-		if(filetype == "json") return getKeywordsFromChatFile(filename);
+		if(filetype == "chat") return getKeywordsFromChatFile(filename);
 		else return vector<string>();
 
 	}
 
 private:
+
+	/********************/
+	/* HELPER FUNCTIONS */
+	/********************/
 
 	/* We extract the node value from a .chat file. */
 	string getValueFromChatFile(string filename) {
@@ -100,9 +104,8 @@ private:
 		/* The loop iterates until a dot is read. */
 		while(true) {
 			file >> keyword;
-			cout<<keyword<<endl;
-			if(keyword == ".") break;
 
+			if(keyword == ".") break;
 			node_keywords.push_back(keyword);
 		}
 

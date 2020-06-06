@@ -69,7 +69,6 @@ public:
 		}
 
 		file.close();
-		cout<<"it ame here"<<endl;
 		return infotree;
 
 	}
