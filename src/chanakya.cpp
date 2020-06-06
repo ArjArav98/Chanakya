@@ -33,11 +33,10 @@ int main(){
 	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
 	string knowledge_file = getConfigProperty("knowledge_file");
-	KnowledgeBaseValidator kbv(knowledge_file);
 
-	if(!kbv.successfullyValidates()) { /* If not valid, we display an error. */
+	if(!KnowledgeBaseValidator::successfullyValidated()) { /* If not valid, we display an error. */
 		cout<<"Error: Syntax for knowledge base is wrong ";
-		cout<<"(Line "<<kbv.getLine()<<").\n";
+		cout<<"(Line "<<KnowledgeBaseValidator::error_line<<").\n";
 		return 0;
 	}
 	

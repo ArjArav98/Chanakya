@@ -70,17 +70,29 @@ class JsonValidator {
 		filenamestring = filename;
 	}
 
-	bool knowledgeBaseValid(string filename) {
-		if( bracketsAreMatched() == false ) return false;
+	bool knowledgeBaseValid() {
+		jsonFile.open(filenamestring);
+
+		if( bracketsAreMatched() == false ) {
+			jsonFile.close();
+			return false;
+		}
 		file_line = 1;
 		jsonFile.seekg(0);
 
-		if( stringsAreFormattedProperly() == false ) return false;
+		if( stringsAreFormattedProperly() == false ) {
+			jsonFile.close();
+			return false;
+		}
 		file_line = 1;
 		jsonFile.seekg(0);
 
-		if( mapsAreFormattedProperly(0) == false ) return false;
+		if( mapsAreFormattedProperly(0) == false ) {
+			jsonFile.close();
+			return false;
+		}
 
+		jsonFile.close();
 		return true;
 	}
 
@@ -367,27 +379,33 @@ class JsonValidator {
 /* Class which validates knowledge file syntax. */
 class KnowledgeBaseValidator {
 
-	string filename;
-	int file_line;
+public:
 
-	public:
-	bool knowledgeIsValid;
+	static int error_line;
 
-	KnowledgeBaseValidator(string passed_filename) {
-		filename = passed_filename;
-	}
+	static bool successfullyValidated() {
+		
+		string filename = getConfigProperty("knowledge_file");
+		string filetype = getConfigProperty("knowledge_type");
+		
+		if(filetype == "chat") {
+			ChatValidator chatfile(filename);
+			bool valid = chatfile.knowledgeBaseValid();
+			error_line = chatfile.getLine();
 
-	bool successfullyValidates() {
-		ChatValidator chatfile(filename);
+			return valid;
+		}
+		if(filetype == "json") {
+			JsonValidator jsonfile(filename);
+			bool valid = jsonfile.knowledgeBaseValid();
+			error_line = jsonfile.getLine();
 
-		bool valid = chatfile.knowledgeBaseValid();
-		file_line = chatfile.getLine();
+			return valid;
+		}
+		else return false;
 
-		return valid;
-	}
-
-	int getLine() {
-		return file_line;
 	}
 
 };
+
+int KnowledgeBaseValidator::error_line = 1;
