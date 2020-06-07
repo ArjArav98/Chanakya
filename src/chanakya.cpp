@@ -22,22 +22,18 @@ int main(){
 
 	/*-------------*/
 	/* We validate the config file syntax. */
-	ConfigValidator cf;
-
-	if(!cf.successfullyValidates()) { /* If invalid, we display an error. */
-		cout<<"Error: Syntax for config file is wrong ";
-		cout<<"(Line "<<cf.getLine()<<").\n";
-		return 0;
+	if(!ConfigValidator::successfullyValidated()) { /* If invalid, we display an error. */
+		cout<<"Error: "<<ConfigValidator::errorMsg()<<" ";
+		cout<<"(Line "<<ConfigValidator::errorLine()<<").\n";
+		return -1;
 	}
 
 	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
-	string knowledge_file = getConfigProperty("knowledge_file");
-
 	if(!KnowledgeBaseValidator::successfullyValidated()) { /* If not valid, we display an error. */
-		cout<<"Error: Syntax for knowledge base is wrong ";
-		cout<<"(Line "<<KnowledgeBaseValidator::error_line<<").\n";
-		return 0;
+		cout<<"Error: "<<KnowledgeBaseValidator::errorMsg()<<" ";
+		cout<<"(Line "<<KnowledgeBaseValidator::errorLine()<<").\n";
+		return -1;
 	}
 	
 	/*-------------*/

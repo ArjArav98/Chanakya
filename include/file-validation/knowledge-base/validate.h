@@ -382,6 +382,7 @@ class KnowledgeBaseValidator {
 public:
 
 	static int error_line;
+	static string error_msg;
 
 	static bool successfullyValidated() {
 		
@@ -406,6 +407,10 @@ public:
 
 	}
 
+	static int errorLine() { return error_line; }
+	static string errorMsg() { return error_msg; }
+
 };
 
 int KnowledgeBaseValidator::error_line = 1;
+string KnowledgeBaseValidator::error_msg = "";
