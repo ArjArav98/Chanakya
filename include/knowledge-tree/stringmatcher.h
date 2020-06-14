@@ -4,34 +4,8 @@ typedef vector<string> Words;
 class StringMatcher {
 
 public:
-	/* Returns whether the param contains a '|' (alt.) or not. */
-	bool keywordHasAlternative(const string &keyword) {
-		int len = keyword.length();
-		for(int iter=0; iter<len; iter++) {
-			if(keyword[iter]=='|') return true;
-		}
-		return false;
-	}
-
-	/* Returns all alternatives from a given keyword. */
-	Words extractAlternatives(const string &keyword) {
-		Words alternatives;
-		int len = keyword.length();
-		int start = 0;
-
-		for(int iter=0; iter<len; iter++) {
-			if(keyword[iter]=='|') {
-				alternatives.push_back( keyword.substr(start,iter-start) );
-				start = iter+1;
-			}
-		}
-
-		alternatives.push_back( keyword.substr(start,len-start) );
-		return alternatives;	
-	}
-
 	/* Compares the user sentence input with a node and returns a comparison score. */
-	int getComparisonScore(const Words &node_keywords, const Words &sentence_words) {	
+	static int getComparisonScore(const Words &node_keywords, const Words &sentence_words) {	
 		int score = 0;
 
 		int sentenceLen = sentence_words.size();
@@ -101,6 +75,33 @@ public:
 
 		return score;
 
+	}
+
+private:
+	/* Returns whether the param contains a '|' (alt.) or not. */
+	static bool keywordHasAlternative(const string &keyword) {
+		int len = keyword.length();
+		for(int iter=0; iter<len; iter++) {
+			if(keyword[iter]=='|') return true;
+		}
+		return false;
+	}
+
+	/* Returns all alternatives from a given keyword. */
+	static Words extractAlternatives(const string &keyword) {
+		Words alternatives;
+		int len = keyword.length();
+		int start = 0;
+
+		for(int iter=0; iter<len; iter++) {
+			if(keyword[iter]=='|') {
+				alternatives.push_back( keyword.substr(start,iter-start) );
+				start = iter+1;
+			}
+		}
+
+		alternatives.push_back( keyword.substr(start,len-start) );
+		return alternatives;	
 	}
 
 };

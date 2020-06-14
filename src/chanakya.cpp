@@ -94,8 +94,7 @@ int main(){
 
 			/* We get the comparisonScore for each node's keywords and the sentence. */
 			for(int iter=0; iter<childrenLen; iter++) {
-				StringMatcher sm;
-				int score = sm.getComparisonScore(current_node.children[iter].keywords(), sentence);
+				int score = StringMatcher::getComparisonScore(current_node.children[iter].keywords(), sentence);
 				if(score > maxScore) { 
 					temp_node = current_node.children[iter];
 					maxScore = score;
