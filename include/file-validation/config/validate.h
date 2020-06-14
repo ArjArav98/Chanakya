@@ -13,6 +13,7 @@ public:
 	static bool successfullyValidated() {
 		if(!syntaxIsValid()) return false;
 		else if(!allPropertiesPresent()) return false;
+		else  if(!knowledgeFilePresent()) return false;
 		else return true;
 	}
 
@@ -56,6 +57,22 @@ public:
 		error_msg = "Required properties are missing";
 		return false;
 
+	}
+
+	/* Checks if knowledge file is present at path specified. */
+	static bool knowledgeFilePresent() {
+		try {
+			ifstream file(getConfigProperty("knowledge_file"));
+			if(!file.is_open()) throw -1;
+			file.close();
+		} 
+		catch (const int exception) {
+			error_line = 3;
+			error_msg = "Cannot find knowledge file matching the name provided";
+			return false;
+		}
+
+		return true;
 	}
 
 	static int errorLine() { return error_line; }
