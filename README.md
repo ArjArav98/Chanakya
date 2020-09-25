@@ -55,7 +55,7 @@
 A sample exchange between the user and Chanakya with a **'Star Wars'** knowledge base. We can see that Chanakya **doesn't need perfect grammar** to understand what the user is asking.
 
 ## Where can it be used?
-Right now, Chanakya isn't really a production-grade application. However, I am planning to develop a web API which will be able to take questions from a webpage and then return a result. In any case, Chanakya has a wide variety of use-cases in day-to-day life.
+Right now, Chanakya isn't really a production-grade application. It is still a work-in-progress. However, I am planning to develop a web API which will be able to take questions from a webpage and then return a result. In any case, Chanakya has a wide variety of use-cases in day-to-day life.
 
 * A fun personal assistant or chatbot to talk to!
 * An **educational** and interactive bot for children to learn about various topics and subjects. For example, the 'Bengal Tiger' knowledge base which I've created could be used to let children learn more about the animal and its eating and living habits.
