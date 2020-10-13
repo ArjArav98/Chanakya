@@ -30,6 +30,10 @@ string getConfigProperty(string property) {
 
 }
 
+string getKnowledgeBaseFileName() {
+	return "../data/knowledgebase.chat";
+}
+
 /* Prints a menu with the name, field of chatbot. */
 void menu() {
 

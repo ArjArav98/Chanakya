@@ -1,0 +1,21 @@
+{
+	"root": {
+		"children": {
+			
+			"what-chennai": {
+				"keywords": "what|ennadhu is chennai|madras",
+				"value": "Chennai is a coastal city on the Indian Coromandel coast."
+			},
+			"when-chennai": {
+				"keywords": "when founded|found|start chennai|madras",
+				"value": "Chennai was established by the British on 22nd August, 1639."
+			},
+			"who-chennai": {
+				"keywords": "who start|founded|found chennai|madras",
+				"value": "The city was founded by the British."
+			}
+
+		},
+		"keywords": ""
+	}
+}
