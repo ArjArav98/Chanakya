@@ -9,7 +9,7 @@
 ## What is Chanakya?
 **New**: Chanakya now features plugins!
 
-**Chanakya is a simple yet completely customisable, scalable and lightweight chatbot.** It is written wholly in C++ and is inspired by the AI concept of 'Expert Systems'. Chanakya has a simple mechanism:- It takes questions from the user, consults a local knowledge base and returns a result. I've listed down some of Chanakya's major features and differences from other chatbots.
+**Chanakya is a simple yet completely customisable, scalable and lightweight chatbot.** It is written wholly in C++ and is inspired by the AI concept of 'Expert Systems'. Chanakya has a simple mechanism:- It takes questions from the user, consults a local knowledge base and returns a result. I've listed down some of Chanakya's major features and differences from other chatbots. Chanakya is a work in progress.
 
 * Chanakya's field of expertise can be ***completely customised*** by you, the user! Using a simple syntax that I created for this purpose, you can create knowledge bases for Chanakya on any topic. 
 * It is ***extremely scalable***. The knowledge base can be increased or decreased with very little impact on performance.
