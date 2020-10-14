@@ -1,43 +1,29 @@
 #include<iostream>
-#include<fstream>
-#include<string>
-#include<algorithm>
-#include<array>
-#include<stack>
+#include<vector>
+#include<utility>
 using namespace std;
 
-//let's implement just the brackets and the quote checking 
+class JsonValidator {
 
-bool jsonValidator(string filename) {
-	fstream jsonFile(filename);
-	stack<char> bracketsStack;
-	
-	while(!jsonFile.eof()) {
-		char character = jsonFile.get();
+	struct Neighbour {
+		vector<pair<char,char>> conditions;
+		int id;
+	};
 
-		if(character=='{' || character=='[') {
-			bracketsStack.push(character);
-		}
-		else if(character=='}' || character==']') {	
-			if(bracketsStack.top() != (character-2)) return false;
-			bracketsStack.pop();
-		}
-		else if(character=='"') {
-			if(bracketsStack.top() != '"') bracketsStack.push('"');
-			else bracketsStack.pop();
-		}
-		else if(character==':') {
-			if(bracketsStack.top() != ',')
-		}
+	struct GraphNode {
+		int id;
+		vector<Neighbour> neighbours;
+	};
+
+	vector<GraphNode> dfa;
+
+	JsonValidator() {
+		dfa.
 	}
 
-	if(bracketsStack.size() != 0) return false;
-
-	return true;
-}
+};
 
 int main() {
-	cout<<jsonValidator("test1.json");
 
 	return 0;
 }
