@@ -23,16 +23,16 @@ int main(){
 	/*-------------*/
 	/* We validate the config file syntax. */
 	if(!ConfigValidator::successfullyValidated()) { /* If invalid, we display an error. */
-		cout<<"Error: "<<ConfigValidator::errorMsg()<<" ";
-		cout<<"(Line "<<ConfigValidator::errorLine()<<").\n";
+		cout	<<"Error: "<<ConfigValidator::errorMsg()<<" "
+			<<"(Line "<<ConfigValidator::errorLine()<<").\n";
 		return -1;
 	}
 
 	/*-------------*/
 	/* We get the knowledge file and validate the syntax. */
 	if(!KnowledgeBaseValidator::successfullyValidated()) { /* If not valid, we display an error. */
-		cout<<"Error: "<<KnowledgeBaseValidator::errorMsg()<<" ";
-		cout<<"(Line "<<KnowledgeBaseValidator::errorLine()<<").\n";
+		cout	<<"Error: "<<KnowledgeBaseValidator::errorMsg()<<" "
+			<<"(Line "<<KnowledgeBaseValidator::errorLine()<<").\n";
 		return -1;
 	}
 	
@@ -71,19 +71,19 @@ int main(){
 			/* We check if there is any plugin activity or not. */
 			if(plugins.hasBeenMadeActive(sentence)) {
 				plugins.areMainTopic = true;
-				cout<<name<<": You have enabled the secondary topics.\n"<<name<<": Ask me anything ";
-				cout<<"about movies, TV shows, the news and restaurants (and, hopefully, I can answer).\n\n";
+				cout	<<name<<": You have enabled the secondary topics.\n"<<name<<": Ask me anything "
+					<<"about movies, TV shows, the news and restaurants (and, hopefully, I can answer).\n\n";
 				break;
 			}
 			else if(plugins.hasBeenMadeInactive(sentence)) {
 				plugins.areMainTopic = false;
-				cout<<name<<": I've now updated my brain to the main topic, ";
-				cout<<"'"<<getConfigProperty("field")<<"', again. Let's do this!\n\n";
+				cout	<<name<<": I've now updated my brain to the main topic, "
+					<<"'"<<getConfigProperty("field")<<"', again. Let's do this!\n\n";
 				break;
 			}
 			else if(plugins.areMainTopic) {
 				plugins.displayAnswers(sentence,name,true);
-				cout<<"\n";
+				cout<<endl;
 				break;
 			}
 
@@ -107,7 +107,7 @@ int main(){
 			if(current_node.children.size() == 0) {
 				cout<<name<<": "<<current_node.value()<<".\n"; /* Print the lead node value. */
 				plugins.displayAnswers(sentence,name,false); /* Print plugins answer, if any. */
-				cout<<"\n";
+				cout<<endl;
 				break;
 			}
 
