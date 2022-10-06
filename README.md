@@ -105,6 +105,8 @@ Right now, Chanakya isn't really a production-grade application. It is still a w
 ## Any planned features?
 Here's a list of some of the features I'd like to implement in the future in no particular order.
 
+Since the project is something that I'm doing for fun, I'd ideally like to implement all of the following features from scratch, ie, without the use of any external libraries.
+
 * **Word Stemming** - This might help conserve space when adding keywords for a particular branch in the knowledge base.
 * **Web API** - An API which can help webpages utilise Chanakya with a simple function call.
 * **Approximate Spellings** - In case the spelling of a word is wrong, then an approximation of what the correct word might be can be done.
